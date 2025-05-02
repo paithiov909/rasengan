@@ -4,8 +4,8 @@
 using namespace cpp11;
 
 [[cpp11::register]]
-doubles_matrix<> es_spiral_cpp(const doubles start,  // 長さ3: [startX, startY]
-                               const doubles end,    // 長さ3: [endX, endY]
+doubles_matrix<> es_spiral_cpp(const doubles start,  // 長さ3: [startX, startY, theta]
+                               const doubles end,    // 長さ3: [endX, endY, theta]
                                const std::size_t num_iter, double max_n) {
   const es::SpiralPoint st{start[0], start[1], start[2]};
   const es::SpiralPoint ed{end[0], end[1], end[2]};
@@ -29,8 +29,8 @@ doubles_matrix<> es_spiral_cpp(const doubles start,  // 長さ3: [startX, startY
 }
 
 [[cpp11::register]]
-doubles_matrix<> es_biarc_cpp(const doubles start,  // 長さ3: [startX, startY]
-                              const doubles end,    // 長さ3: [endX, endY]
+doubles_matrix<> es_biarc_cpp(const doubles start,  // 長さ3: [startX, startY, theta]
+                              const doubles end,    // 長さ3: [endX, endY, theta]
                               double max_n) {
   const es::SpiralPoint st{start[0], start[1], start[2]};
   const es::SpiralPoint ed{end[0], end[1], end[2]};

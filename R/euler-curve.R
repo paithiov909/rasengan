@@ -41,7 +41,8 @@ euler_curve <- function(start = c(0, 0, pi / 4),
                         biarch = TRUE) {
   stopifnot(
     length(start) == 3,
-    length(end) == 3
+    length(end) == 3,
+    max_n > 0, max_iter_num > 0
   )
   if (biarch) {
     ret <- es_biarc_cpp(start, end, max_n)
