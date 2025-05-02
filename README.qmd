@@ -1,20 +1,29 @@
-# rasengan
-
+---
+title: rasengan
+format: gfm
+fig-width: 8
+fig-height: 4.5
+knitr:
+  opts_chunk:
+    dev: "ragg_png"
+    collapse: true
+    comment: "#>"
+    fig.path: "man/figures/README-"
+    out.width: "100%"
+---
 
 <!-- README.md is generated from README.qmd. Please edit that file -->
 
 <!-- badges: start -->
-
 <!-- badges: end -->
 
-The code and documentation in this package was written using AI. Please
-note that the content may be inaccurate!
+The code and documentation in this package was written using AI.
+Please note that the content may be inaccurate!
 
 ## Usage
 
-``` r
+```{r euler-curve}
 pkgload::load_all(export_all = FALSE)
-#> ℹ Loading rasengan
 op <- par(mfrow = c(1, 3), mar = c(2, 2, 2, 2))
 
 # `euler_curve()` generates a clothoid between two points if possible
@@ -24,32 +33,22 @@ path <- euler_curve(start = c(-1, 1, -1 * pi / 2), end = c(1, 1, pi))
 plot(path$x, path$y, type = "l", asp = 1, col = "darkgreen")
 path <- euler_curve(start = c(-1, 1, pi / 16), end = c(15, 50, pi), biarch = FALSE)
 plot(path$x, path$y, type = "l", asp = 1, col = "blue")
-```
-
-<img src="man/figures/README-euler-curve-1.png" style="width:100.0%" />
-
-``` r
 
 par(op)
 ```
 
-``` r
+```{r twist-curve}
 op <- par(mfrow = c(1, 3), mar = c(2, 2, 2, 2))
 
 # `twist_curve()` creates a smooth, looped 2D curve
 plot(twist_curve(amplitude = 0.1), type = "l", asp = 1, col = "blue", main = "Amplitude = 0.1")
 plot(twist_curve(amplitude = 0.4), type = "l", asp = 1, col = "darkgreen", main = "Amplitude = 0.4")
 plot(twist_curve(amplitude = 0.4, frequency = 6), type = "l", asp = 1, col = "red", main = "Amp=0.4 Freq=6")
-```
-
-<img src="man/figures/README-twist-curve-1.png" style="width:100.0%" />
-
-``` r
 
 par(op)
 ```
 
-``` r
+```{r wind-mouse}
 # `wind_mouse()` creates a human-like mouse trajectory between two points
 path <-
   rbind(
@@ -58,5 +57,3 @@ path <-
   )
 plot(path$x, path$y, type = "l", asp = 1, main = "WindMouse Path")
 ```
-
-<img src="man/figures/README-wind-mouse-1.png" style="width:100.0%" />

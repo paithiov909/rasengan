@@ -4,12 +4,17 @@
 \name{rasengan-package}
 \alias{rasengan}
 \alias{rasengan-package}
-\title{rasengan: What the Package Does (One Line, Title Case)}
+\title{rasengan: Generation of Geometric Curves}
 \description{
-What the package does (one paragraph).
+Provides functions to generate and sample geometric curves. Each function returns a data frame of 2D coordinates, suitable for visualization or further geometric processing.
 }
 \author{
 \strong{Maintainer}: Akiru Kato \email{paithiov909@gmail.com}
+
+Other contributors:
+\itemize{
+  \item Kohei Kumazaki [copyright holder]
+}
 
 }
 \keyword{internal}

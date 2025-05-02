@@ -1,4 +1,4 @@
-#' Generate a Smooth Twisted Curve in 2D from a 3D Spiral Projection
+#' Generate a smooth twisted curve in 2D from a 3D spiral projection
 #'
 #' This function creates a smooth, looped 2D curve
 #' by generating a 3D twisted curve and projecting it onto 2D using PCA.
@@ -33,7 +33,7 @@
 #' @param t_range Numeric vector of length 2.
 #' The range of the parameter `t`, which controls how far along the spiral to travel.
 #' Larger ranges yield longer, more twisted curves.
-#' @returns A numeric matrix with two columns ("x", "y") and `n` rows,
+#' @returns A data frame with two columns ("x", "y") and `n` rows,
 #' representing the 2D coordinates of the projected curve.
 #' @export
 #' @examples
@@ -79,5 +79,5 @@ twist_curve <- function(n = 300,
   path_final <- sweep(path_transformed, 2, -origin, "+")
 
   colnames(path_final) <- c("x", "y")
-  path_final
+  as.data.frame(path_final)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/twist-curve.R
 \name{twist_curve}
 \alias{twist_curve}
-\title{Generate a Smooth Twisted Curve in 2D from a 3D Spiral Projection}
+\title{Generate a smooth twisted curve in 2D from a 3D spiral projection}
 \usage{
 twist_curve(
   n = 300,
@@ -37,7 +37,7 @@ The range of the parameter \code{t}, which controls how far along the spiral to 
 Larger ranges yield longer, more twisted curves.}
 }
 \value{
-A numeric matrix with two columns ("x", "y") and \code{n} rows,
+A data frame with two columns ("x", "y") and \code{n} rows,
 representing the 2D coordinates of the projected curve.
 }
 \description{

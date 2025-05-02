@@ -6,15 +6,31 @@
 #include <R_ext/Visibility.h>
 
 // code.cpp
-doubles_matrix<> wind_mouse_cpp(doubles start, doubles end, double gravity, double wind, double min_wait, double max_wait, double max_step, double target_area, double mouse_speed, int seed);
+doubles_matrix<> es_spiral_cpp(const doubles start, const doubles end, const std::size_t num_iter, double max_n);
+extern "C" SEXP _rasengan_es_spiral_cpp(SEXP start, SEXP end, SEXP num_iter, SEXP max_n) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(es_spiral_cpp(cpp11::as_cpp<cpp11::decay_t<const doubles>>(start), cpp11::as_cpp<cpp11::decay_t<const doubles>>(end), cpp11::as_cpp<cpp11::decay_t<const std::size_t>>(num_iter), cpp11::as_cpp<cpp11::decay_t<double>>(max_n)));
+  END_CPP11
+}
+// code.cpp
+doubles_matrix<> es_biarc_cpp(const doubles start, const doubles end, double max_n);
+extern "C" SEXP _rasengan_es_biarc_cpp(SEXP start, SEXP end, SEXP max_n) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(es_biarc_cpp(cpp11::as_cpp<cpp11::decay_t<const doubles>>(start), cpp11::as_cpp<cpp11::decay_t<const doubles>>(end), cpp11::as_cpp<cpp11::decay_t<double>>(max_n)));
+  END_CPP11
+}
+// code.cpp
+doubles_matrix<> wind_mouse_cpp(const doubles start, const doubles end, double gravity, double wind, double min_wait, double max_wait, double max_step, double target_area, double mouse_speed, int seed);
 extern "C" SEXP _rasengan_wind_mouse_cpp(SEXP start, SEXP end, SEXP gravity, SEXP wind, SEXP min_wait, SEXP max_wait, SEXP max_step, SEXP target_area, SEXP mouse_speed, SEXP seed) {
   BEGIN_CPP11
-    return cpp11::as_sexp(wind_mouse_cpp(cpp11::as_cpp<cpp11::decay_t<doubles>>(start), cpp11::as_cpp<cpp11::decay_t<doubles>>(end), cpp11::as_cpp<cpp11::decay_t<double>>(gravity), cpp11::as_cpp<cpp11::decay_t<double>>(wind), cpp11::as_cpp<cpp11::decay_t<double>>(min_wait), cpp11::as_cpp<cpp11::decay_t<double>>(max_wait), cpp11::as_cpp<cpp11::decay_t<double>>(max_step), cpp11::as_cpp<cpp11::decay_t<double>>(target_area), cpp11::as_cpp<cpp11::decay_t<double>>(mouse_speed), cpp11::as_cpp<cpp11::decay_t<int>>(seed)));
+    return cpp11::as_sexp(wind_mouse_cpp(cpp11::as_cpp<cpp11::decay_t<const doubles>>(start), cpp11::as_cpp<cpp11::decay_t<const doubles>>(end), cpp11::as_cpp<cpp11::decay_t<double>>(gravity), cpp11::as_cpp<cpp11::decay_t<double>>(wind), cpp11::as_cpp<cpp11::decay_t<double>>(min_wait), cpp11::as_cpp<cpp11::decay_t<double>>(max_wait), cpp11::as_cpp<cpp11::decay_t<double>>(max_step), cpp11::as_cpp<cpp11::decay_t<double>>(target_area), cpp11::as_cpp<cpp11::decay_t<double>>(mouse_speed), cpp11::as_cpp<cpp11::decay_t<int>>(seed)));
   END_CPP11
 }
 
 extern "C" {
 static const R_CallMethodDef CallEntries[] = {
+    {"_rasengan_es_biarc_cpp",   (DL_FUNC) &_rasengan_es_biarc_cpp,    3},
+    {"_rasengan_es_spiral_cpp",  (DL_FUNC) &_rasengan_es_spiral_cpp,   4},
     {"_rasengan_wind_mouse_cpp", (DL_FUNC) &_rasengan_wind_mouse_cpp, 10},
     {NULL, NULL, 0}
 };

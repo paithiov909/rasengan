@@ -1,9 +1,13 @@
 Package: rasengan
-Title: What the Package Does (One Line, Title Case)
+Title: Generation of Geometric Curves
 Version: 0.0.1
-Authors@R: 
-    person("Akiru", "Kato", , "paithiov909@gmail.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Authors@R: c(
+    person("Akiru", "Kato", , "paithiov909@gmail.com", role = c("aut", "cre")),
+    person("Kohei", "Kumazaki", role = "cph")
+  )
+Description: Provides functions to generate and sample geometric curves.
+    Each function returns a data frame of 2D coordinates, suitable for
+    visualization or further geometric processing.
 License: MIT + file LICENSE
 LinkingTo:
     cpp11
