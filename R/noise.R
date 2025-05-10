@@ -1,12 +1,12 @@
 #' Create a noise generator
 #'
-#' Creates a noise generator function that wraps 'FastNoiseLite'.
+#' Creates a noise generator function that wraps [FastNoiseLite](https://github.com/Auburn/FastNoiseLite).
 #'
 #' @seealso
 #' [Documentation · Auburn/FastNoiseLite Wiki](https://github.com/Auburn/FastNoiseLite/wiki/Documentation)
 #'
 #' @param noise_type Noise type to use.
-#' @param freq Frequency.
+#' @param frequency Frequency.
 #' @param fractal_type Fractal type.
 #' @param octaves Number of octaves.
 #' @param lacunarity Lacunarity (the frequency multiplier between each octave).
@@ -20,8 +20,10 @@
 #' @param rotation_type Rotation type for 3D noise.
 #' @returns
 #' A function that takes arguments:
+#'
 #' * `x`, `y`, (or just `data`) and `seed` for 2D noise
 #' * `x`, `y`, `z`, (or just `data`) and `seed` for 3D noise
+#'
 #' and returns noise values.
 #' Note that `seed` is set to a random value by default,
 #' so if you want to use the same seed for multiple calls, you need to explicitly set it.
@@ -43,7 +45,7 @@ noise_2d <- function(
       "ValueCubic",
       "Value"
     ),
-    freq = 0.01,
+    frequency = 0.01,
     fractal_type = c(
       "None",
       "FBm",
@@ -108,7 +110,7 @@ noise_2d <- function(
         as.matrix(expand.grid(x, y))
       }
     noise_2d_cpp(
-      noise_type, seed, freq,
+      noise_type, seed, frequency,
       fractal_type, octaves, lacunarity, gain,
       weighted_strength, ping_pong_strength,
       distance_function, return_type, jitter,
@@ -128,7 +130,7 @@ noise_3d <- function(
       "ValueCubic",
       "Value"
     ),
-    freq = 0.01,
+    frequency = 0.01,
     fractal_type = c(
       "None",
       "FBm",
@@ -203,7 +205,7 @@ noise_3d <- function(
         as.matrix(expand.grid(x, y, z))
       }
     noise_3d_cpp(
-      noise_type, seed, freq,
+      noise_type, seed, frequency,
       fractal_type, octaves, lacunarity, gain,
       weighted_strength, ping_pong_strength,
       distance_function, return_type, jitter,

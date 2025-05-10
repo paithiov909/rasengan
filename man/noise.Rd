@@ -9,7 +9,7 @@
 noise_2d(
   noise_type = c("OpenSimplex2", "OpenSimplex2S", "Cellular", "Perlin", "ValueCubic",
     "Value"),
-  freq = 0.01,
+  frequency = 0.01,
   fractal_type = c("None", "FBm", "Rigid", "PingPong"),
   octaves = 3,
   lacunarity = 2,
@@ -25,7 +25,7 @@ noise_2d(
 noise_3d(
   noise_type = c("OpenSimplex2", "OpenSimplex2S", "Cellular", "Perlin", "ValueCubic",
     "Value"),
-  freq = 0.01,
+  frequency = 0.01,
   fractal_type = c("None", "FBm", "Rigid", "PingPong"),
   octaves = 3,
   lacunarity = 2,
@@ -42,7 +42,7 @@ noise_3d(
 \arguments{
 \item{noise_type}{Noise type to use.}
 
-\item{freq}{Frequency.}
+\item{frequency}{Frequency.}
 
 \item{fractal_type}{Fractal type.}
 
@@ -70,13 +70,14 @@ A function that takes arguments:
 \itemize{
 \item \code{x}, \code{y}, (or just \code{data}) and \code{seed} for 2D noise
 \item \code{x}, \code{y}, \code{z}, (or just \code{data}) and \code{seed} for 3D noise
+}
+
 and returns noise values.
 Note that \code{seed} is set to a random value by default,
 so if you want to use the same seed for multiple calls, you need to explicitly set it.
 }
-}
 \description{
-Creates a noise generator function that wraps 'FastNoiseLite'.
+Creates a noise generator function that wraps \href{https://github.com/Auburn/FastNoiseLite}{FastNoiseLite}.
 }
 \examples{
 noise_2d()(1:10, 1)
