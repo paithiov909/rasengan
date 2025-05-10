@@ -5,6 +5,7 @@
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/paithiov909/rasengan/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/paithiov909/rasengan/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The code and documentation in this package was written using AI. Please
@@ -19,11 +20,11 @@ op <- par(mfrow = c(1, 3), mar = c(2, 2, 2, 2))
 
 # `euler_curve()` generates a clothoid between two points if possible
 path <- euler_curve(start = c(-1, 1, 0), end = c(1, 1, pi))
-plot(path$x, path$y, type = "l", asp = 1, col = "red")
+with(path, plot(x, y, type = "l", asp = 1, col = "red"))
 path <- euler_curve(start = c(-1, 1, -1 * pi / 2), end = c(1, 1, pi))
-plot(path$x, path$y, type = "l", asp = 1, col = "darkgreen")
+with(path, plot(x, y, type = "l", asp = 1, col = "darkgreen"))
 path <- euler_curve(start = c(-1, 1, pi / 16), end = c(15, 50, pi), biarch = FALSE)
-plot(path$x, path$y, type = "l", asp = 1, col = "blue")
+with(path, plot(x, y, type = "l", asp = 1, col = "blue"))
 ```
 
 <img src="man/figures/README-euler-curve-1.png" style="width:100.0%" />
@@ -56,7 +57,7 @@ path <-
     wind_mouse(end = c(100, 50), seed = 123),
     wind_mouse(start = c(100, 50), end = c(30, 200), seed = 123)
   )
-plot(path$x, path$y, type = "l", asp = 1, main = "WindMouse Path")
+with(path, plot(x, y, type = "l", asp = 1, main = "WindMouse Path"))
 ```
 
 <img src="man/figures/README-wind-mouse-1.png" style="width:100.0%" />
