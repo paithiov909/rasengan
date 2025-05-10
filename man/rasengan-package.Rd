@@ -13,6 +13,8 @@ Provides functions to generate and sample geometric curves. Each function return
 
 Other contributors:
 \itemize{
+  \item Jordan Peck [copyright holder]
+  \item Kjetil Olsen Lye [copyright holder]
   \item Kohei Kumazaki [copyright holder]
 }
 

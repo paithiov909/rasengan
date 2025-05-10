@@ -3,6 +3,6 @@
 
 ## usethis namespace: start
 #' @useDynLib rasengan, .registration = TRUE
-#' @importFrom stats prcomp
+#' @importFrom stats predict
 ## usethis namespace: end
 NULL

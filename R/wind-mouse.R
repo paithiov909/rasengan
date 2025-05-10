@@ -24,7 +24,7 @@
 #' @export
 #' @examples
 #' path <- wind_mouse(start = c(0, 0), end = c(300, 200), seed = 123)
-#' plot(path$x, path$y, type = "l", asp = 1, main = "WindMouse Path")
+#' with(path, plot(x, y, type = "l", asp = 1, main = "WindMouse Path"))
 wind_mouse <- function(
   start = c(0, 0),
   end = c(100, 100),
@@ -35,7 +35,7 @@ wind_mouse <- function(
   max_wait = 15,
   max_step = 10,
   target_area = 10,
-  seed = sample.int(1e4, 1)
+  seed = sample.int(1337, 1)
 ) {
   stopifnot(
     length(start) == 2,

@@ -34,6 +34,9 @@
 #' @seealso
 #' [CoffeeKumazaki/euler_spiral: The c++ implementation for Euler spiral (clothoid).](https://github.com/CoffeeKumazaki/euler_spiral)
 #' @export
+#' @examples
+#' curve <- euler_curve()
+#' with(curve, plot(x, y, type = "l", asp = 1))
 euler_curve <- function(start = c(0, 0, pi / 4),
                         end = c(25, 10, pi),
                         max_n = 1e2,

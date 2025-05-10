@@ -51,6 +51,10 @@ When \code{biarch = FALSE}, the function attempts to compute a single Euler spir
 interpolates between the two endpoints and their respective directions. This may fail to converge
 in some configurations.
 }
+\examples{
+curve <- euler_curve()
+with(curve, plot(x, y, type = "l", asp = 1))
+}
 \seealso{
 \href{https://github.com/CoffeeKumazaki/euler_spiral}{CoffeeKumazaki/euler_spiral: The c++ implementation for Euler spiral (clothoid).}
 }

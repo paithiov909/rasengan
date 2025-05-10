@@ -60,7 +60,7 @@ twist_curve <- function(n = 300,
     r * sin(t),
     t
   )
-  m <- prcomp(d, center = TRUE, scale. = FALSE)
+  m <- stats::prcomp(d, center = TRUE, scale. = FALSE)
   path <- m$x[, 2:3]
 
   from <- path[1, ]

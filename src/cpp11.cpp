@@ -5,21 +5,70 @@
 #include "cpp11/declarations.hpp"
 #include <R_ext/Visibility.h>
 
-// code.cpp
+// code_fbm.cpp
+doubles fbm_1d_cpp(double hurst_idx, const std::vector<double>& X);
+extern "C" SEXP _rasengan_fbm_1d_cpp(SEXP hurst_idx, SEXP X) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(fbm_1d_cpp(cpp11::as_cpp<cpp11::decay_t<double>>(hurst_idx), cpp11::as_cpp<cpp11::decay_t<const std::vector<double>&>>(X)));
+  END_CPP11
+}
+// code_fbm.cpp
+doubles fbr_1d_cpp(double hurst_idx, const std::vector<double>& X);
+extern "C" SEXP _rasengan_fbr_1d_cpp(SEXP hurst_idx, SEXP X) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(fbr_1d_cpp(cpp11::as_cpp<cpp11::decay_t<double>>(hurst_idx), cpp11::as_cpp<cpp11::decay_t<const std::vector<double>&>>(X)));
+  END_CPP11
+}
+// code_fbm.cpp
+doubles fbr_2d_cpp(double hurst_idx, const std::vector<double>& X);
+extern "C" SEXP _rasengan_fbr_2d_cpp(SEXP hurst_idx, SEXP X) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(fbr_2d_cpp(cpp11::as_cpp<cpp11::decay_t<double>>(hurst_idx), cpp11::as_cpp<cpp11::decay_t<const std::vector<double>&>>(X)));
+  END_CPP11
+}
+// code_noise.cpp
+doubles noise_2d_cpp(int type, int seed, float freq, int fractals, int octaves, float lacunarity, float gain, float weighted_strength, float ping_pong_strength, int distance_function, int return_type, float jitter, doubles_matrix<> d);
+extern "C" SEXP _rasengan_noise_2d_cpp(SEXP type, SEXP seed, SEXP freq, SEXP fractals, SEXP octaves, SEXP lacunarity, SEXP gain, SEXP weighted_strength, SEXP ping_pong_strength, SEXP distance_function, SEXP return_type, SEXP jitter, SEXP d) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(noise_2d_cpp(cpp11::as_cpp<cpp11::decay_t<int>>(type), cpp11::as_cpp<cpp11::decay_t<int>>(seed), cpp11::as_cpp<cpp11::decay_t<float>>(freq), cpp11::as_cpp<cpp11::decay_t<int>>(fractals), cpp11::as_cpp<cpp11::decay_t<int>>(octaves), cpp11::as_cpp<cpp11::decay_t<float>>(lacunarity), cpp11::as_cpp<cpp11::decay_t<float>>(gain), cpp11::as_cpp<cpp11::decay_t<float>>(weighted_strength), cpp11::as_cpp<cpp11::decay_t<float>>(ping_pong_strength), cpp11::as_cpp<cpp11::decay_t<int>>(distance_function), cpp11::as_cpp<cpp11::decay_t<int>>(return_type), cpp11::as_cpp<cpp11::decay_t<float>>(jitter), cpp11::as_cpp<cpp11::decay_t<doubles_matrix<>>>(d)));
+  END_CPP11
+}
+// code_noise.cpp
+doubles noise_3d_cpp(int type, int seed, float freq, int fractals, int octaves, float lacunarity, float gain, float weighted_strength, float ping_pong_strength, int distance_function, int return_type, float jitter, int rotation_type, doubles_matrix<> d);
+extern "C" SEXP _rasengan_noise_3d_cpp(SEXP type, SEXP seed, SEXP freq, SEXP fractals, SEXP octaves, SEXP lacunarity, SEXP gain, SEXP weighted_strength, SEXP ping_pong_strength, SEXP distance_function, SEXP return_type, SEXP jitter, SEXP rotation_type, SEXP d) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(noise_3d_cpp(cpp11::as_cpp<cpp11::decay_t<int>>(type), cpp11::as_cpp<cpp11::decay_t<int>>(seed), cpp11::as_cpp<cpp11::decay_t<float>>(freq), cpp11::as_cpp<cpp11::decay_t<int>>(fractals), cpp11::as_cpp<cpp11::decay_t<int>>(octaves), cpp11::as_cpp<cpp11::decay_t<float>>(lacunarity), cpp11::as_cpp<cpp11::decay_t<float>>(gain), cpp11::as_cpp<cpp11::decay_t<float>>(weighted_strength), cpp11::as_cpp<cpp11::decay_t<float>>(ping_pong_strength), cpp11::as_cpp<cpp11::decay_t<int>>(distance_function), cpp11::as_cpp<cpp11::decay_t<int>>(return_type), cpp11::as_cpp<cpp11::decay_t<float>>(jitter), cpp11::as_cpp<cpp11::decay_t<int>>(rotation_type), cpp11::as_cpp<cpp11::decay_t<doubles_matrix<>>>(d)));
+  END_CPP11
+}
+// code_noise.cpp
+doubles_matrix<> domain_warp_2d_cpp(int dtype, int seed, float amplitude, int fractals, int octaves, float lacunarity, float gain, doubles_matrix<> d);
+extern "C" SEXP _rasengan_domain_warp_2d_cpp(SEXP dtype, SEXP seed, SEXP amplitude, SEXP fractals, SEXP octaves, SEXP lacunarity, SEXP gain, SEXP d) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(domain_warp_2d_cpp(cpp11::as_cpp<cpp11::decay_t<int>>(dtype), cpp11::as_cpp<cpp11::decay_t<int>>(seed), cpp11::as_cpp<cpp11::decay_t<float>>(amplitude), cpp11::as_cpp<cpp11::decay_t<int>>(fractals), cpp11::as_cpp<cpp11::decay_t<int>>(octaves), cpp11::as_cpp<cpp11::decay_t<float>>(lacunarity), cpp11::as_cpp<cpp11::decay_t<float>>(gain), cpp11::as_cpp<cpp11::decay_t<doubles_matrix<>>>(d)));
+  END_CPP11
+}
+// code_noise.cpp
+doubles_matrix<> domain_warp_3d_cpp(int dtype, int seed, float amplitude, int fractals, int octaves, float lacunarity, float gain, int rotation_type, doubles_matrix<> d);
+extern "C" SEXP _rasengan_domain_warp_3d_cpp(SEXP dtype, SEXP seed, SEXP amplitude, SEXP fractals, SEXP octaves, SEXP lacunarity, SEXP gain, SEXP rotation_type, SEXP d) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(domain_warp_3d_cpp(cpp11::as_cpp<cpp11::decay_t<int>>(dtype), cpp11::as_cpp<cpp11::decay_t<int>>(seed), cpp11::as_cpp<cpp11::decay_t<float>>(amplitude), cpp11::as_cpp<cpp11::decay_t<int>>(fractals), cpp11::as_cpp<cpp11::decay_t<int>>(octaves), cpp11::as_cpp<cpp11::decay_t<float>>(lacunarity), cpp11::as_cpp<cpp11::decay_t<float>>(gain), cpp11::as_cpp<cpp11::decay_t<int>>(rotation_type), cpp11::as_cpp<cpp11::decay_t<doubles_matrix<>>>(d)));
+  END_CPP11
+}
+// code_path.cpp
 doubles_matrix<> es_spiral_cpp(const doubles start, const doubles end, const std::size_t num_iter, double max_n);
 extern "C" SEXP _rasengan_es_spiral_cpp(SEXP start, SEXP end, SEXP num_iter, SEXP max_n) {
   BEGIN_CPP11
     return cpp11::as_sexp(es_spiral_cpp(cpp11::as_cpp<cpp11::decay_t<const doubles>>(start), cpp11::as_cpp<cpp11::decay_t<const doubles>>(end), cpp11::as_cpp<cpp11::decay_t<const std::size_t>>(num_iter), cpp11::as_cpp<cpp11::decay_t<double>>(max_n)));
   END_CPP11
 }
-// code.cpp
+// code_path.cpp
 doubles_matrix<> es_biarc_cpp(const doubles start, const doubles end, double max_n);
 extern "C" SEXP _rasengan_es_biarc_cpp(SEXP start, SEXP end, SEXP max_n) {
   BEGIN_CPP11
     return cpp11::as_sexp(es_biarc_cpp(cpp11::as_cpp<cpp11::decay_t<const doubles>>(start), cpp11::as_cpp<cpp11::decay_t<const doubles>>(end), cpp11::as_cpp<cpp11::decay_t<double>>(max_n)));
   END_CPP11
 }
-// code.cpp
+// code_path.cpp
 doubles_matrix<> wind_mouse_cpp(const doubles start, const doubles end, double gravity, double wind, double min_wait, double max_wait, double max_step, double target_area, double mouse_speed, int seed);
 extern "C" SEXP _rasengan_wind_mouse_cpp(SEXP start, SEXP end, SEXP gravity, SEXP wind, SEXP min_wait, SEXP max_wait, SEXP max_step, SEXP target_area, SEXP mouse_speed, SEXP seed) {
   BEGIN_CPP11
@@ -29,9 +78,16 @@ extern "C" SEXP _rasengan_wind_mouse_cpp(SEXP start, SEXP end, SEXP gravity, SEX
 
 extern "C" {
 static const R_CallMethodDef CallEntries[] = {
-    {"_rasengan_es_biarc_cpp",   (DL_FUNC) &_rasengan_es_biarc_cpp,    3},
-    {"_rasengan_es_spiral_cpp",  (DL_FUNC) &_rasengan_es_spiral_cpp,   4},
-    {"_rasengan_wind_mouse_cpp", (DL_FUNC) &_rasengan_wind_mouse_cpp, 10},
+    {"_rasengan_domain_warp_2d_cpp", (DL_FUNC) &_rasengan_domain_warp_2d_cpp,  8},
+    {"_rasengan_domain_warp_3d_cpp", (DL_FUNC) &_rasengan_domain_warp_3d_cpp,  9},
+    {"_rasengan_es_biarc_cpp",       (DL_FUNC) &_rasengan_es_biarc_cpp,        3},
+    {"_rasengan_es_spiral_cpp",      (DL_FUNC) &_rasengan_es_spiral_cpp,       4},
+    {"_rasengan_fbm_1d_cpp",         (DL_FUNC) &_rasengan_fbm_1d_cpp,          2},
+    {"_rasengan_fbr_1d_cpp",         (DL_FUNC) &_rasengan_fbr_1d_cpp,          2},
+    {"_rasengan_fbr_2d_cpp",         (DL_FUNC) &_rasengan_fbr_2d_cpp,          2},
+    {"_rasengan_noise_2d_cpp",       (DL_FUNC) &_rasengan_noise_2d_cpp,       13},
+    {"_rasengan_noise_3d_cpp",       (DL_FUNC) &_rasengan_noise_3d_cpp,       14},
+    {"_rasengan_wind_mouse_cpp",     (DL_FUNC) &_rasengan_wind_mouse_cpp,     10},
     {NULL, NULL, 0}
 };
 }

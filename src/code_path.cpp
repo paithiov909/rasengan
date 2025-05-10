@@ -1,5 +1,5 @@
 #include <cpp11.hpp>
-#include "euler_spiral.hpp"
+#include "es/euler_spiral.hpp"
 
 using namespace cpp11;
 

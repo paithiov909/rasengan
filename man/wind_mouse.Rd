@@ -14,7 +14,7 @@ wind_mouse(
   max_wait = 15,
   max_step = 10,
   target_area = 10,
-  seed = sample.int(10000, 1)
+  seed = sample.int(1337, 1)
 )
 }
 \arguments{
@@ -57,5 +57,5 @@ It is a port from \href{https://github.com/arevi/wind-mouse}{arevi/wind-mouse}.
 }
 \examples{
 path <- wind_mouse(start = c(0, 0), end = c(300, 200), seed = 123)
-plot(path$x, path$y, type = "l", asp = 1, main = "WindMouse Path")
+with(path, plot(x, y, type = "l", asp = 1, main = "WindMouse Path"))
 }
