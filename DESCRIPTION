@@ -1,6 +1,6 @@
 Package: rasengan
 Title: Generation of Geometric Curves
-Version: 0.0.2
+Version: 0.0.3
 Authors@R: c(
     person("Akiru", "Kato", , "paithiov909@gmail.com", role = c("aut", "cre")),
     person("Jordan", "Peck", role = "cph"),
