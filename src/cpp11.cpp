@@ -6,10 +6,220 @@
 #include <R_ext/Visibility.h>
 
 // code_bounce.cpp
-cpp11::doubles bounce_cpp(int n, double init, double velocity, double damping, double min, double max);
+doubles bounce_cpp(int n, double init, double velocity, double damping, double min, double max);
 extern "C" SEXP _rasengan_bounce_cpp(SEXP n, SEXP init, SEXP velocity, SEXP damping, SEXP min, SEXP max) {
   BEGIN_CPP11
     return cpp11::as_sexp(bounce_cpp(cpp11::as_cpp<cpp11::decay_t<int>>(n), cpp11::as_cpp<cpp11::decay_t<double>>(init), cpp11::as_cpp<cpp11::decay_t<double>>(velocity), cpp11::as_cpp<cpp11::decay_t<double>>(damping), cpp11::as_cpp<cpp11::decay_t<double>>(min), cpp11::as_cpp<cpp11::decay_t<double>>(max)));
+  END_CPP11
+}
+// code_ease.cpp
+doubles in_quad(const doubles time);
+extern "C" SEXP _rasengan_in_quad(SEXP time) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(in_quad(cpp11::as_cpp<cpp11::decay_t<const doubles>>(time)));
+  END_CPP11
+}
+// code_ease.cpp
+doubles out_quad(const doubles time);
+extern "C" SEXP _rasengan_out_quad(SEXP time) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(out_quad(cpp11::as_cpp<cpp11::decay_t<const doubles>>(time)));
+  END_CPP11
+}
+// code_ease.cpp
+doubles in_out_quad(const doubles time);
+extern "C" SEXP _rasengan_in_out_quad(SEXP time) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(in_out_quad(cpp11::as_cpp<cpp11::decay_t<const doubles>>(time)));
+  END_CPP11
+}
+// code_ease.cpp
+doubles in_cubic(const doubles time);
+extern "C" SEXP _rasengan_in_cubic(SEXP time) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(in_cubic(cpp11::as_cpp<cpp11::decay_t<const doubles>>(time)));
+  END_CPP11
+}
+// code_ease.cpp
+doubles out_cubic(const doubles time);
+extern "C" SEXP _rasengan_out_cubic(SEXP time) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(out_cubic(cpp11::as_cpp<cpp11::decay_t<const doubles>>(time)));
+  END_CPP11
+}
+// code_ease.cpp
+doubles in_out_cubic(const doubles time);
+extern "C" SEXP _rasengan_in_out_cubic(SEXP time) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(in_out_cubic(cpp11::as_cpp<cpp11::decay_t<const doubles>>(time)));
+  END_CPP11
+}
+// code_ease.cpp
+doubles in_quart(const doubles time);
+extern "C" SEXP _rasengan_in_quart(SEXP time) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(in_quart(cpp11::as_cpp<cpp11::decay_t<const doubles>>(time)));
+  END_CPP11
+}
+// code_ease.cpp
+doubles out_quart(const doubles time);
+extern "C" SEXP _rasengan_out_quart(SEXP time) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(out_quart(cpp11::as_cpp<cpp11::decay_t<const doubles>>(time)));
+  END_CPP11
+}
+// code_ease.cpp
+doubles in_out_quart(const doubles time);
+extern "C" SEXP _rasengan_in_out_quart(SEXP time) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(in_out_quart(cpp11::as_cpp<cpp11::decay_t<const doubles>>(time)));
+  END_CPP11
+}
+// code_ease.cpp
+doubles in_quint(const doubles time);
+extern "C" SEXP _rasengan_in_quint(SEXP time) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(in_quint(cpp11::as_cpp<cpp11::decay_t<const doubles>>(time)));
+  END_CPP11
+}
+// code_ease.cpp
+doubles out_quint(const doubles time);
+extern "C" SEXP _rasengan_out_quint(SEXP time) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(out_quint(cpp11::as_cpp<cpp11::decay_t<const doubles>>(time)));
+  END_CPP11
+}
+// code_ease.cpp
+doubles in_out_quint(const doubles time);
+extern "C" SEXP _rasengan_in_out_quint(SEXP time) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(in_out_quint(cpp11::as_cpp<cpp11::decay_t<const doubles>>(time)));
+  END_CPP11
+}
+// code_ease.cpp
+doubles in_sine(const doubles time);
+extern "C" SEXP _rasengan_in_sine(SEXP time) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(in_sine(cpp11::as_cpp<cpp11::decay_t<const doubles>>(time)));
+  END_CPP11
+}
+// code_ease.cpp
+doubles out_sine(const doubles time);
+extern "C" SEXP _rasengan_out_sine(SEXP time) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(out_sine(cpp11::as_cpp<cpp11::decay_t<const doubles>>(time)));
+  END_CPP11
+}
+// code_ease.cpp
+doubles in_out_sine(const doubles time);
+extern "C" SEXP _rasengan_in_out_sine(SEXP time) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(in_out_sine(cpp11::as_cpp<cpp11::decay_t<const doubles>>(time)));
+  END_CPP11
+}
+// code_ease.cpp
+doubles in_exp(const doubles time);
+extern "C" SEXP _rasengan_in_exp(SEXP time) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(in_exp(cpp11::as_cpp<cpp11::decay_t<const doubles>>(time)));
+  END_CPP11
+}
+// code_ease.cpp
+doubles out_exp(const doubles time);
+extern "C" SEXP _rasengan_out_exp(SEXP time) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(out_exp(cpp11::as_cpp<cpp11::decay_t<const doubles>>(time)));
+  END_CPP11
+}
+// code_ease.cpp
+doubles in_out_exp(const doubles time);
+extern "C" SEXP _rasengan_in_out_exp(SEXP time) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(in_out_exp(cpp11::as_cpp<cpp11::decay_t<const doubles>>(time)));
+  END_CPP11
+}
+// code_ease.cpp
+doubles in_circ(const doubles time);
+extern "C" SEXP _rasengan_in_circ(SEXP time) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(in_circ(cpp11::as_cpp<cpp11::decay_t<const doubles>>(time)));
+  END_CPP11
+}
+// code_ease.cpp
+doubles out_circ(const doubles time);
+extern "C" SEXP _rasengan_out_circ(SEXP time) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(out_circ(cpp11::as_cpp<cpp11::decay_t<const doubles>>(time)));
+  END_CPP11
+}
+// code_ease.cpp
+doubles in_out_circ(const doubles time);
+extern "C" SEXP _rasengan_in_out_circ(SEXP time) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(in_out_circ(cpp11::as_cpp<cpp11::decay_t<const doubles>>(time)));
+  END_CPP11
+}
+// code_ease.cpp
+doubles in_elastic(const doubles time);
+extern "C" SEXP _rasengan_in_elastic(SEXP time) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(in_elastic(cpp11::as_cpp<cpp11::decay_t<const doubles>>(time)));
+  END_CPP11
+}
+// code_ease.cpp
+doubles out_elastic(const doubles time);
+extern "C" SEXP _rasengan_out_elastic(SEXP time) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(out_elastic(cpp11::as_cpp<cpp11::decay_t<const doubles>>(time)));
+  END_CPP11
+}
+// code_ease.cpp
+doubles in_out_elastic(const doubles time);
+extern "C" SEXP _rasengan_in_out_elastic(SEXP time) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(in_out_elastic(cpp11::as_cpp<cpp11::decay_t<const doubles>>(time)));
+  END_CPP11
+}
+// code_ease.cpp
+doubles in_back(const doubles time);
+extern "C" SEXP _rasengan_in_back(SEXP time) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(in_back(cpp11::as_cpp<cpp11::decay_t<const doubles>>(time)));
+  END_CPP11
+}
+// code_ease.cpp
+doubles out_back(const doubles time);
+extern "C" SEXP _rasengan_out_back(SEXP time) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(out_back(cpp11::as_cpp<cpp11::decay_t<const doubles>>(time)));
+  END_CPP11
+}
+// code_ease.cpp
+doubles in_out_back(const doubles time);
+extern "C" SEXP _rasengan_in_out_back(SEXP time) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(in_out_back(cpp11::as_cpp<cpp11::decay_t<const doubles>>(time)));
+  END_CPP11
+}
+// code_ease.cpp
+doubles in_bounce(const doubles time);
+extern "C" SEXP _rasengan_in_bounce(SEXP time) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(in_bounce(cpp11::as_cpp<cpp11::decay_t<const doubles>>(time)));
+  END_CPP11
+}
+// code_ease.cpp
+doubles out_bounce(const doubles time);
+extern "C" SEXP _rasengan_out_bounce(SEXP time) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(out_bounce(cpp11::as_cpp<cpp11::decay_t<const doubles>>(time)));
+  END_CPP11
+}
+// code_ease.cpp
+doubles in_out_bounce(const doubles time);
+extern "C" SEXP _rasengan_in_out_bounce(SEXP time) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(in_out_bounce(cpp11::as_cpp<cpp11::decay_t<const doubles>>(time)));
   END_CPP11
 }
 // code_fbm.cpp
@@ -93,8 +303,38 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rasengan_fbm_1d_cpp",         (DL_FUNC) &_rasengan_fbm_1d_cpp,          2},
     {"_rasengan_fbr_1d_cpp",         (DL_FUNC) &_rasengan_fbr_1d_cpp,          2},
     {"_rasengan_fbr_2d_cpp",         (DL_FUNC) &_rasengan_fbr_2d_cpp,          2},
+    {"_rasengan_in_back",            (DL_FUNC) &_rasengan_in_back,             1},
+    {"_rasengan_in_bounce",          (DL_FUNC) &_rasengan_in_bounce,           1},
+    {"_rasengan_in_circ",            (DL_FUNC) &_rasengan_in_circ,             1},
+    {"_rasengan_in_cubic",           (DL_FUNC) &_rasengan_in_cubic,            1},
+    {"_rasengan_in_elastic",         (DL_FUNC) &_rasengan_in_elastic,          1},
+    {"_rasengan_in_exp",             (DL_FUNC) &_rasengan_in_exp,              1},
+    {"_rasengan_in_out_back",        (DL_FUNC) &_rasengan_in_out_back,         1},
+    {"_rasengan_in_out_bounce",      (DL_FUNC) &_rasengan_in_out_bounce,       1},
+    {"_rasengan_in_out_circ",        (DL_FUNC) &_rasengan_in_out_circ,         1},
+    {"_rasengan_in_out_cubic",       (DL_FUNC) &_rasengan_in_out_cubic,        1},
+    {"_rasengan_in_out_elastic",     (DL_FUNC) &_rasengan_in_out_elastic,      1},
+    {"_rasengan_in_out_exp",         (DL_FUNC) &_rasengan_in_out_exp,          1},
+    {"_rasengan_in_out_quad",        (DL_FUNC) &_rasengan_in_out_quad,         1},
+    {"_rasengan_in_out_quart",       (DL_FUNC) &_rasengan_in_out_quart,        1},
+    {"_rasengan_in_out_quint",       (DL_FUNC) &_rasengan_in_out_quint,        1},
+    {"_rasengan_in_out_sine",        (DL_FUNC) &_rasengan_in_out_sine,         1},
+    {"_rasengan_in_quad",            (DL_FUNC) &_rasengan_in_quad,             1},
+    {"_rasengan_in_quart",           (DL_FUNC) &_rasengan_in_quart,            1},
+    {"_rasengan_in_quint",           (DL_FUNC) &_rasengan_in_quint,            1},
+    {"_rasengan_in_sine",            (DL_FUNC) &_rasengan_in_sine,             1},
     {"_rasengan_noise_2d_cpp",       (DL_FUNC) &_rasengan_noise_2d_cpp,       13},
     {"_rasengan_noise_3d_cpp",       (DL_FUNC) &_rasengan_noise_3d_cpp,       14},
+    {"_rasengan_out_back",           (DL_FUNC) &_rasengan_out_back,            1},
+    {"_rasengan_out_bounce",         (DL_FUNC) &_rasengan_out_bounce,          1},
+    {"_rasengan_out_circ",           (DL_FUNC) &_rasengan_out_circ,            1},
+    {"_rasengan_out_cubic",          (DL_FUNC) &_rasengan_out_cubic,           1},
+    {"_rasengan_out_elastic",        (DL_FUNC) &_rasengan_out_elastic,         1},
+    {"_rasengan_out_exp",            (DL_FUNC) &_rasengan_out_exp,             1},
+    {"_rasengan_out_quad",           (DL_FUNC) &_rasengan_out_quad,            1},
+    {"_rasengan_out_quart",          (DL_FUNC) &_rasengan_out_quart,           1},
+    {"_rasengan_out_quint",          (DL_FUNC) &_rasengan_out_quint,           1},
+    {"_rasengan_out_sine",           (DL_FUNC) &_rasengan_out_sine,            1},
     {"_rasengan_wind_mouse_cpp",     (DL_FUNC) &_rasengan_wind_mouse_cpp,     10},
     {NULL, NULL, 0}
 };

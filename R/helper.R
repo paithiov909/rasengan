@@ -1,22 +1,48 @@
-#' Convert degrees and radians
+#' Miscellaneous functions
 #'
-#' @param deg Degrees.
-#' @param rad Radians.
+#' @param x A numeric vector.
+#' @param origin A numeric vector of length 2.
 #' @returns A numeric vector.
-#' @rdname deg-rad
-#' @name deg-rad
+#' @rdname misc
+#' @name misc
 NULL
 
-#' @rdname deg-rad
+#' @rdname misc
 #' @export
-deg2rad <- function(deg) {
-  deg * (pi / 180)
+deg2rad <- function(x) {
+  x * (pi / 180)
 }
 
-#' @rdname deg-rad
+#' @rdname misc
 #' @export
-rad2deg <- function(rad) {
-  rad * (180 / pi)
+rad2deg <- function(x) {
+  x * (180 / pi)
+}
+
+#' @rdname misc
+#' @export
+fract <- function(x) {
+  x - floor(x)
+}
+
+#' @rdname misc
+#' @export
+mag <- function(x, origin = c(0, 0)) {
+  sqrt(rowSums((x - origin)^2))
+}
+
+#' Circular shift
+#'
+#' @param x Any type of vector.
+#' @param k An integer to shift `x` by.
+#' @importFrom utils head tail
+#' @export
+shift <- function(x, k) {
+  k <- as.integer(k %% length(x))
+  if (identical(k, 0L)) {
+    return(x)
+  }
+  c(tail(x, -k), head(x, k))
 }
 
 #' Argument matching helper
@@ -24,7 +50,8 @@ rad2deg <- function(rad) {
 #' @param x Argument to match.
 #' @param arg Argument name.
 #' @param values Possible values.
-#' @returns Integer.
+#' @returns An integer scalar.
+#' @keywords internal
 #' @noRd
 int_match <- function(x, arg, values) {
   tmp <- match(x[1], values) - 1L

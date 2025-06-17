@@ -10,15 +10,15 @@ attenuate(n, init, velocity, damping = 1)
 bounce_off(n, init, velocity, limits, damping = -1)
 }
 \arguments{
-\item{n}{Integer. The number of steps in the sequence.}
+\item{n}{An integer scalar. The number of steps in the sequence.}
 
-\item{init}{Numeric. The initial value of the sequence.}
+\item{init}{A numeric scalar. The initial value of the sequence.}
 
-\item{velocity}{Numeric. The velocity or change rate for each step.}
+\item{velocity}{A numeric scalar. The velocity or change rate for each step.}
 
-\item{damping}{Numeric. The damping factor applied to the velocity at each step.}
+\item{damping}{A numeric scalar. The damping factor applied to the velocity at each step.}
 
-\item{limits}{Numeric vector of length 2. The minimum and maximum values allowed in the sequence.}
+\item{limits}{A numeric vector of length 2. The minimum and maximum values allowed in the sequence.}
 }
 \value{
 A numeric vector.

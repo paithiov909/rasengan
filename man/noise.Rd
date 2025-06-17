@@ -40,30 +40,34 @@ noise_3d(
 )
 }
 \arguments{
-\item{noise_type}{Noise type to use.}
+\item{noise_type}{A string; Noise type to use.}
 
-\item{frequency}{Frequency.}
+\item{frequency}{A numeric scalar; Frequency.}
 
-\item{fractal_type}{Fractal type.}
+\item{fractal_type}{A string; Fractal type.}
 
-\item{octaves}{Number of octaves.}
+\item{octaves}{A numeric scalar; Number of octaves.}
 
-\item{lacunarity}{Lacunarity (the frequency multiplier between each octave).}
+\item{lacunarity}{A numeric scalar;
+Lacunarity (the frequency multiplier between each octave).}
 
-\item{gain}{Gain (the relative strength of noise from each layer when compared to the last).}
+\item{gain}{A numeric scalar;
+Gain (the relative strength of noise from each layer when compared to the last).}
 
-\item{weighted_strength}{Weighted strength for fractal noise.
+\item{weighted_strength}{A numeric scalar;
+Weighted strength for fractal noise.
 Keep between \code{0} and \code{1} to maintain \verb{[-1, 1]} output bounding.}
 
-\item{ping_pong_strength}{Ping-pong strength for 'PingPong' fractal noise.}
+\item{ping_pong_strength}{A numeric scalar;
+Ping-pong strength for 'PingPong' fractal noise.}
 
-\item{distance_function}{Distance function for cellular noise.}
+\item{distance_function}{A string; Distance function for cellular noise.}
 
-\item{return_type}{Return type for cellular noise.}
+\item{return_type}{A string; Return type for cellular noise.}
 
-\item{jitter}{Jitter for cellular noise.}
+\item{jitter}{A numeric scalar; Jitter for cellular noise.}
 
-\item{rotation_type}{Rotation type for 3D noise.}
+\item{rotation_type}{A string; Rotation type for 3D noise.}
 }
 \value{
 A function that takes arguments:
@@ -77,7 +81,8 @@ Note that \code{seed} is set to a random value by default,
 so if you want to use the same seed for multiple calls, you need to explicitly set it.
 }
 \description{
-Creates a noise generator function that wraps \href{https://github.com/Auburn/FastNoiseLite}{FastNoiseLite}.
+Creates a noise generator function that wraps
+\href{https://github.com/Auburn/FastNoiseLite}{FastNoiseLite}.
 }
 \examples{
 noise_2d()(1:10, 1)

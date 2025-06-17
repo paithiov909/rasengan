@@ -3,32 +3,40 @@
 \name{modifications}
 \alias{modifications}
 \alias{blend}
-\alias{normalise}
 \alias{normalize}
 \alias{cap}
+\alias{pulse}
+\alias{engamma}
+\alias{bias}
+\alias{gain}
 \title{Simply value modifications}
 \usage{
 blend(x, y, mask)
 
-normalise(x, from = range(x), to = c(0, 1))
-
 normalize(x, from = range(x), to = c(0, 1))
 
 cap(x, lower = 0, upper = 1)
+
+pulse(x, mask)
+
+engamma(x, mask)
+
+bias(x, mask)
+
+gain(x, mask)
 }
 \arguments{
-\item{x, y}{Values to modify}
+\item{x, y}{A numeric vector.}
 
-\item{mask}{A vector of the same length as \code{x} and \code{y}. Assumed to be between
-0 and 1 (values outside of this range is capped). The closer to 1 the more of
-\code{x} will be used and the closer to 0 the more of \code{y} will be used}
+\item{mask}{A numeric scalar, typically between \code{0} and \code{1}.}
 
-\item{from}{The range of \code{x} to use for normalisation}
+\item{from}{A numeric vector of length 2. The range of \code{x} to use for normalization.}
 
-\item{to}{The output domain to normalise to}
+\item{to}{A numeric vector of length 2. The output domain to normalize to.}
 
-\item{lower, upper}{The lower and upper bounds to cap to}
+\item{lower, upper}{A numeric scalar. The lower and upper bounds to cap to.}
 }
 \description{
-These functions are copied from the \href{https://github.com/thomasp85/ambient}{ambient} package.
+Some of these functions are copied
+from the \href{https://github.com/thomasp85/ambient}{ambient} package.
 }

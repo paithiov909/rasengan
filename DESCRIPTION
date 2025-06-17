@@ -1,6 +1,6 @@
 Package: rasengan
 Title: Generation of Geometric Curves
-Version: 0.0.3
+Version: 0.0.4
 Authors@R: c(
     person("Akiru", "Kato", , "paithiov909@gmail.com", role = c("aut", "cre")),
     person("Jordan", "Peck", role = "cph"),
@@ -20,3 +20,8 @@ LinkingTo:
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
+Suggests:
+    grDevices,
+    testthat (>= 3.0.0),
+    vdiffr
+Config/testthat/edition: 3

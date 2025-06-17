@@ -4,6 +4,126 @@ bounce_cpp <- function(n, init, velocity, damping, min, max) {
   .Call(`_rasengan_bounce_cpp`, n, init, velocity, damping, min, max)
 }
 
+in_quad <- function(time) {
+  .Call(`_rasengan_in_quad`, time)
+}
+
+out_quad <- function(time) {
+  .Call(`_rasengan_out_quad`, time)
+}
+
+in_out_quad <- function(time) {
+  .Call(`_rasengan_in_out_quad`, time)
+}
+
+in_cubic <- function(time) {
+  .Call(`_rasengan_in_cubic`, time)
+}
+
+out_cubic <- function(time) {
+  .Call(`_rasengan_out_cubic`, time)
+}
+
+in_out_cubic <- function(time) {
+  .Call(`_rasengan_in_out_cubic`, time)
+}
+
+in_quart <- function(time) {
+  .Call(`_rasengan_in_quart`, time)
+}
+
+out_quart <- function(time) {
+  .Call(`_rasengan_out_quart`, time)
+}
+
+in_out_quart <- function(time) {
+  .Call(`_rasengan_in_out_quart`, time)
+}
+
+in_quint <- function(time) {
+  .Call(`_rasengan_in_quint`, time)
+}
+
+out_quint <- function(time) {
+  .Call(`_rasengan_out_quint`, time)
+}
+
+in_out_quint <- function(time) {
+  .Call(`_rasengan_in_out_quint`, time)
+}
+
+in_sine <- function(time) {
+  .Call(`_rasengan_in_sine`, time)
+}
+
+out_sine <- function(time) {
+  .Call(`_rasengan_out_sine`, time)
+}
+
+in_out_sine <- function(time) {
+  .Call(`_rasengan_in_out_sine`, time)
+}
+
+in_exp <- function(time) {
+  .Call(`_rasengan_in_exp`, time)
+}
+
+out_exp <- function(time) {
+  .Call(`_rasengan_out_exp`, time)
+}
+
+in_out_exp <- function(time) {
+  .Call(`_rasengan_in_out_exp`, time)
+}
+
+in_circ <- function(time) {
+  .Call(`_rasengan_in_circ`, time)
+}
+
+out_circ <- function(time) {
+  .Call(`_rasengan_out_circ`, time)
+}
+
+in_out_circ <- function(time) {
+  .Call(`_rasengan_in_out_circ`, time)
+}
+
+in_elastic <- function(time) {
+  .Call(`_rasengan_in_elastic`, time)
+}
+
+out_elastic <- function(time) {
+  .Call(`_rasengan_out_elastic`, time)
+}
+
+in_out_elastic <- function(time) {
+  .Call(`_rasengan_in_out_elastic`, time)
+}
+
+in_back <- function(time) {
+  .Call(`_rasengan_in_back`, time)
+}
+
+out_back <- function(time) {
+  .Call(`_rasengan_out_back`, time)
+}
+
+in_out_back <- function(time) {
+  .Call(`_rasengan_in_out_back`, time)
+}
+
+in_bounce <- function(time) {
+  .Call(`_rasengan_in_bounce`, time)
+}
+
+out_bounce <- function(time) {
+  .Call(`_rasengan_out_bounce`, time)
+}
+
+in_out_bounce <- function(time) {
+  .Call(`_rasengan_in_out_bounce`, time)
+}
+
 fbm_1d_cpp <- function(hurst_idx, X) {
   .Call(`_rasengan_fbm_1d_cpp`, hurst_idx, X)
 }

@@ -1,23 +1,28 @@
 #' Create a noise generator
 #'
-#' Creates a noise generator function that wraps [FastNoiseLite](https://github.com/Auburn/FastNoiseLite).
+#' Creates a noise generator function that wraps
+#' [FastNoiseLite](https://github.com/Auburn/FastNoiseLite).
 #'
 #' @seealso
 #' [Documentation · Auburn/FastNoiseLite Wiki](https://github.com/Auburn/FastNoiseLite/wiki/Documentation)
 #'
-#' @param noise_type Noise type to use.
-#' @param frequency Frequency.
-#' @param fractal_type Fractal type.
-#' @param octaves Number of octaves.
-#' @param lacunarity Lacunarity (the frequency multiplier between each octave).
-#' @param gain Gain (the relative strength of noise from each layer when compared to the last).
-#' @param weighted_strength Weighted strength for fractal noise.
+#' @param noise_type A string; Noise type to use.
+#' @param frequency A numeric scalar; Frequency.
+#' @param fractal_type A string; Fractal type.
+#' @param octaves A numeric scalar; Number of octaves.
+#' @param lacunarity A numeric scalar;
+#' Lacunarity (the frequency multiplier between each octave).
+#' @param gain A numeric scalar;
+#' Gain (the relative strength of noise from each layer when compared to the last).
+#' @param weighted_strength A numeric scalar;
+#' Weighted strength for fractal noise.
 #' Keep between `0` and `1` to maintain `[-1, 1]` output bounding.
-#' @param ping_pong_strength Ping-pong strength for 'PingPong' fractal noise.
-#' @param distance_function Distance function for cellular noise.
-#' @param return_type Return type for cellular noise.
-#' @param jitter Jitter for cellular noise.
-#' @param rotation_type Rotation type for 3D noise.
+#' @param ping_pong_strength A numeric scalar;
+#' Ping-pong strength for 'PingPong' fractal noise.
+#' @param distance_function A string; Distance function for cellular noise.
+#' @param return_type A string; Return type for cellular noise.
+#' @param jitter A numeric scalar; Jitter for cellular noise.
+#' @param rotation_type A string; Rotation type for 3D noise.
 #' @returns
 #' A function that takes arguments:
 #'
@@ -107,13 +112,21 @@ noise_2d <- function(
       if (!is.null(data)) {
         data
       } else {
-        as.matrix(expand.grid(x, y))
+        as.double(as.matrix(expand.grid(x, y)))
       }
     noise_2d_cpp(
-      noise_type, seed, frequency,
-      fractal_type, octaves, lacunarity, gain,
-      weighted_strength, ping_pong_strength,
-      distance_function, return_type, jitter,
+      noise_type,
+      as.integer(seed),
+      as.double(frequency),
+      fractal_type,
+      as.integer(octaves),
+      as.double(lacunarity),
+      as.double(gain),
+      weighted_strength,
+      ping_pong_strength,
+      distance_function,
+      return_type,
+      as.double(jitter),
       d
     )
   }
@@ -202,13 +215,21 @@ noise_3d <- function(
       if (!is.null(data)) {
         data
       } else {
-        as.matrix(expand.grid(x, y, z))
+        as.double(as.matrix(expand.grid(x, y, z)))
       }
     noise_3d_cpp(
-      noise_type, seed, frequency,
-      fractal_type, octaves, lacunarity, gain,
-      weighted_strength, ping_pong_strength,
-      distance_function, return_type, jitter,
+      noise_type,
+      as.integer(seed),
+      as.double(frequency),
+      fractal_type,
+      as.integer(octaves),
+      as.double(lacunarity),
+      as.double(gain),
+      weighted_strength,
+      ping_pong_strength,
+      distance_function,
+      return_type,
+      as.double(jitter),
       rotation_type,
       d
     )
@@ -220,14 +241,14 @@ noise_3d <- function(
 #' Warps the position passed in with the x, y(, z) parameters.
 #'
 #' @param x,y,z Passed to `expand.grid()`.
-#' @param seed Random seed.
-#' @param warp_type Warp type.
-#' @param amplitude Amplitude (the maximum warp distance from original position).
-#' @param fractal_type Fractal type.
-#' @param octaves Number of octaves.
-#' @param lacunarity Lacunarity (the frequency multiplier between each octave).
-#' @param gain Gain (the relative strength of noise from each layer when compared to the last).
-#' @param rotation_type Rotation type for 3D noise.
+#' @param seed An integer scalar; Random seed.
+#' @param warp_type A string; Warp type.
+#' @param amplitude A numeric scalar; Amplitude (the maximum warp distance from original position).
+#' @param fractal_type A string; Fractal type.
+#' @param octaves A numeric scalar; Number of octaves.
+#' @param lacunarity A numeric scalar; Lacunarity (the frequency multiplier between each octave).
+#' @param gain A numeric scalar; Gain (the relative strength of noise from each layer when compared to the last).
+#' @param rotation_type A string; Rotation type for 3D noise.
 #' @returns A double matrix.
 #' @examples
 #' noise_3d()(data = domain_warp(1:16, 1:16, 1))
@@ -282,24 +303,24 @@ domain_warp <- function(
     d <- as.matrix(expand.grid(x, y))
     domain_warp_2d_cpp(
       warp_type,
-      seed,
-      amplitude,
+      as.integer(seed),
+      as.double(amplitude),
       fractal_type,
-      octaves,
-      lacunarity,
-      gain,
+      as.integer(octaves),
+      as.double(lacunarity),
+      as.double(gain),
       d
     )
   } else {
     d <- as.matrix(expand.grid(x, y, z))
     domain_warp_3d_cpp(
       warp_type,
-      seed,
-      amplitude,
+      as.integer(seed),
+      as.double(amplitude),
       fractal_type,
-      octaves,
-      lacunarity,
-      gain,
+      as.integer(octaves),
+      as.double(lacunarity),
+      as.double(gain),
       rotation_type,
       d
     )
