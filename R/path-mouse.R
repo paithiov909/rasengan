@@ -9,34 +9,38 @@
 #'
 #' @param start A numeric vector of length 2 giving the starting coordinates (x, y).
 #' @param end A numeric vector of length 2 giving the target coordinates (x, y).
-#' @param mouse_speed A base speed factor that affects the dynamics of movement.
-#' @param gravity Controls the strength of "pull" toward the target.
-#' @param wind Controls the random "wind-like" movement during the motion.
-#' @param min_wait Minimum wait time (ms) per step, affects timestamp `t`.
-#' @param max_wait Maximum wait time (ms) per step.
-#' @param max_step Maximum movement length per iteration.
-#' @param target_area Radius within which the movement slows down and stabilizes.
-#' @param seed Random seed for reproducible paths.
+#' @param mouse_speed A numeric scalar.
+#' The base speed factor that affects the dynamics of movement.
+#' @param gravity A numeric scalar
+#' that controls the strength of "pull" toward the target.
+#' @param wind A numeric scalar
+#' that controls the random "wind-like" movement during the motion.
+#' @param min_wait A numeric scalar. Minimum wait time (ms) per step, affects timestamp `t`.
+#' @param max_wait A numeric scalar. Maximum wait time (ms) per step.
+#' @param max_step A numeric scalar. Maximum movement length per iteration.
+#' @param target_area A numeric scalar.
+#' Radius within which the movement slows down and stabilizes.
+#' @param seed An integer scalar. Random seed for reproducible paths.
 #' @returns A data frame with columns:
 #' * `x`: X coordinate of the cursor.
 #' * `y`: Y coordinate of the cursor.
 #' * `t`: Cumulative time in milliseconds since the start.
+#' @family path
 #' @export
 #' @examples
-#' path <- wind_mouse(start = c(0, 0), end = c(300, 200), seed = 123)
+#' path <- path_mouse(start = c(0, 0), end = c(300, 200), seed = 123)
 #' with(path, plot(x, y, type = "l", asp = 1, main = "WindMouse Path"))
-wind_mouse <- function(
-  start = c(0, 0),
-  end = c(100, 100),
-  mouse_speed = 3.0,
-  gravity = 9.0,
-  wind = 3.0,
-  min_wait = 5,
-  max_wait = 15,
-  max_step = 10,
-  target_area = 10,
-  seed = sample.int(1337, 1)
-) {
+path_mouse <- function(
+    start = c(0, 0),
+    end = c(100, 100),
+    mouse_speed = 3.0,
+    gravity = 9.0,
+    wind = 3.0,
+    min_wait = 5,
+    max_wait = 15,
+    max_step = 10,
+    target_area = 10,
+    seed = sample.int(1337, 1)) {
   stopifnot(
     length(start) == 2,
     length(end) == 2
@@ -54,5 +58,9 @@ wind_mouse <- function(
       seed
     )
   colnames(ret) <- c("x", "y", "t")
-  as.data.frame(ret)
+  entbl(ret)
 }
+
+#' @rdname path_mouse
+#' @export
+wind_mouse <- path_mouse

@@ -1,7 +1,8 @@
 #' Miscellaneous functions
 #'
 #' @param x A numeric vector.
-#' @param origin A numeric vector of length 2.
+#' @param mat A numeric matrix or data frame.
+#' @param origin A numeric vector to be subtracted from `mat`.
 #' @returns A numeric vector.
 #' @rdname misc
 #' @name misc
@@ -27,8 +28,8 @@ fract <- function(x) {
 
 #' @rdname misc
 #' @export
-mag <- function(x, origin = c(0, 0)) {
-  sqrt(rowSums((x - origin)^2))
+mag <- function(mat, origin = c(0, 0)) {
+  sqrt(rowSums((mat - origin)^2))
 }
 
 #' Circular shift
@@ -62,4 +63,16 @@ int_match <- function(x, arg, values) {
     rlang::abort(msg)
   }
   tmp
+}
+
+#' Convert a matrix into a 'tbl_df'
+#'
+#' @param x A matrix.
+#' @returns A data frame.
+#' @keywords internal
+#' @noRd
+entbl <- function(x) {
+  x <- as.data.frame(x)
+  class(x) <- c("tbl_df", "tbl", class(x))
+  x
 }

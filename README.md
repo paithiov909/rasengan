@@ -18,16 +18,17 @@ pkgload::load_all(export_all = FALSE)
 #> ℹ Loading rasengan
 op <- par(mfrow = c(1, 3), mar = c(2, 2, 2, 2))
 
-# `euler_curve()` generates a clothoid between two points if possible
-path <- euler_curve(start = c(-1, 1, 0), end = c(1, 1, pi))
+# `path_clothoid()` generates a clothoid between two points if possible
+path <- path_clothoid(start = c(-1, 1, 0), end = c(1, 1, pi))
 with(path, plot(x, y, type = "l", asp = 1, col = "red"))
-path <- euler_curve(start = c(-1, 1, -1 * pi / 2), end = c(1, 1, pi))
+path <- path_clothoid(start = c(-1, 1, -1 * pi / 2), end = c(1, 1, pi))
 with(path, plot(x, y, type = "l", asp = 1, col = "darkgreen"))
-path <- euler_curve(start = c(-1, 1, pi / 16), end = c(15, 50, pi), biarch = FALSE)
+path <- path_clothoid(start = c(-1, 1, pi / 16), end = c(15, 50, pi), biarch = FALSE)
 with(path, plot(x, y, type = "l", asp = 1, col = "blue"))
 ```
 
-<img src="man/figures/README-euler-curve-1.png" style="width:100.0%" />
+<img src="man/figures/README-path-clothoid-1.png"
+style="width:100.0%" />
 
 ``` r
 
@@ -37,13 +38,13 @@ par(op)
 ``` r
 op <- par(mfrow = c(1, 3), mar = c(2, 2, 2, 2))
 
-# `twist_curve()` creates a smooth, looped 2D curve
-plot(twist_curve(amplitude = 0.1), type = "l", asp = 1, col = "blue", main = "Amplitude = 0.1")
-plot(twist_curve(amplitude = 0.4), type = "l", asp = 1, col = "darkgreen", main = "Amplitude = 0.4")
-plot(twist_curve(amplitude = 0.4, frequency = 6), type = "l", asp = 1, col = "red", main = "Amp=0.4 Freq=6")
+# `curve_twist()` creates a smooth, looped 2D curve
+plot(curve_twist(300, amplitude = 0.1), type = "l", asp = 1, col = "blue", main = "Amplitude = 0.1")
+plot(curve_twist(300, amplitude = 0.4), type = "l", asp = 1, col = "darkgreen", main = "Amplitude = 0.4")
+plot(curve_twist(300, amplitude = 0.4, frequency = 6), type = "l", asp = 1, col = "red", main = "Amp=0.4 Freq=6")
 ```
 
-<img src="man/figures/README-twist-curve-1.png" style="width:100.0%" />
+<img src="man/figures/README-curve-twist-1.png" style="width:100.0%" />
 
 ``` r
 
@@ -54,10 +55,10 @@ par(op)
 # `wind_mouse()` creates a human-like mouse trajectory between two points
 path <-
   rbind(
-    wind_mouse(end = c(100, 50), seed = 123),
-    wind_mouse(start = c(100, 50), end = c(30, 200), seed = 123)
+    path_mouse(end = c(100, 50), seed = 123),
+    path_mouse(start = c(100, 50), end = c(30, 200), seed = 123)
   )
 with(path, plot(x, y, type = "l", asp = 1, main = "WindMouse Path"))
 ```
 
-<img src="man/figures/README-wind-mouse-1.png" style="width:100.0%" />
+<img src="man/figures/README-path-mouse-1.png" style="width:100.0%" />

@@ -17,37 +17,37 @@
 #' and the non-linear nature of the projection,
 #' the endpoints may not exactly match.
 #'
-#' @param n Integer.
-#' Number of points to generate along the curve. Default is `300`.
-#' @param amplitude Numeric.
+#' @param n An integer scalar.
+#' Number of points to generate along the curve.
+#' @param amplitude A numeric scalar.
 #' Amplitude of the radial modulation in the 3D spiral.
 #' Controls how tightly the loop twists.
-#' @param frequency Numeric.
+#' @param frequency A numeric scalar.
 #' Frequency of the radial modulation (i.e., number of bumps per revolution).
-#' @param origin Numeric vector of length 2.
+#' @param origin A numeric vector of length 2.
 #' The desired starting position of the curve in 2D space.
-#' @param direction Numeric vector of length 2.
+#' @param direction A numeric vector of length 2.
 #' A target point indicating the overall orientation and extent of the curve.
 #' The curve will be transformed to point
 #' approximately from `origin` toward this vector.
-#' @param t_range Numeric vector of length 2.
+#' @param t_range A numeric vector of length 2.
 #' The range of the parameter `t`, which controls how far along the spiral to travel.
 #' Larger ranges yield longer, more twisted curves.
-#' @returns A data frame with two columns ("x", "y") and `n` rows,
-#' representing the 2D coordinates of the projected curve.
+#' @returns A data frame with columns `x` and `y`.
+#' @family curve
 #' @export
 #' @examples
-#' curve <- twist_curve()
+#' curve <- curve_twist()
 #' plot(curve, type = "l", asp = 1)
 #'
 #' # Change orientation
-#' curve2 <- twist_curve(origin = c(0, 0), direction = c(1, 1))
+#' curve2 <- curve_twist(origin = c(0, 0), direction = c(1, 1))
 #' lines(curve2, col = "red")
 #'
 #' # More dramatic twist
-#' curve3 <- twist_curve(amplitude = 0.5, frequency = 3)
+#' curve3 <- curve_twist(amplitude = 0.5, frequency = 3)
 #' lines(curve3, col = "blue")
-twist_curve <- function(n = 300,
+curve_twist <- function(n,
                         amplitude = 0.2,
                         frequency = 2,
                         origin = c(0, 0),
@@ -79,5 +79,5 @@ twist_curve <- function(n = 300,
   path_final <- sweep(path_transformed, 2, -origin, "+")
 
   colnames(path_final) <- c("x", "y")
-  as.data.frame(path_final)
+  entbl(path_final)
 }
