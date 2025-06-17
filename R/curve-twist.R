@@ -37,15 +37,15 @@
 #' @family curve
 #' @export
 #' @examples
-#' curve <- curve_twist()
+#' curve <- curve_twist(300)
 #' plot(curve, type = "l", asp = 1)
 #'
 #' # Change orientation
-#' curve2 <- curve_twist(origin = c(0, 0), direction = c(1, 1))
+#' curve2 <- curve_twist(300, origin = c(0, 0), direction = c(1, 1))
 #' lines(curve2, col = "red")
 #'
 #' # More dramatic twist
-#' curve3 <- curve_twist(amplitude = 0.5, frequency = 3)
+#' curve3 <- curve_twist(300, amplitude = 0.5, frequency = 3)
 #' lines(curve3, col = "blue")
 curve_twist <- function(n,
                         amplitude = 0.2,
