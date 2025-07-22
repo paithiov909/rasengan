@@ -7,7 +7,7 @@
 \usage{
 attenuate(n, init, velocity, damping = 1)
 
-bounce_off(n, init, velocity, limits, damping = -1)
+bounce_off(n, init, velocity, limits, damping = -1, mass = 0)
 }
 \arguments{
 \item{n}{An integer scalar. The number of steps in the sequence.}
@@ -19,6 +19,8 @@ bounce_off(n, init, velocity, limits, damping = -1)
 \item{damping}{A numeric scalar. The damping factor applied to the velocity at each step.}
 
 \item{limits}{A numeric vector of length 2. The minimum and maximum values allowed in the sequence.}
+
+\item{mass}{A numeric scalar. The mass of the object bouncing.}
 }
 \value{
 A numeric vector.

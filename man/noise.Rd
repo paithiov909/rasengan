@@ -84,10 +84,6 @@ so if you want to use the same seed for multiple calls, you need to explicitly s
 Creates a noise generator function that wraps
 \href{https://github.com/Auburn/FastNoiseLite}{FastNoiseLite}.
 }
-\examples{
-noise_2d()(1:10, 1)
-noise_3d()(1:16, 1:16, 1)
-}
 \seealso{
 \href{https://github.com/Auburn/FastNoiseLite/wiki/Documentation}{Documentation · Auburn/FastNoiseLite Wiki}
 }

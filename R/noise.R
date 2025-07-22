@@ -32,9 +32,6 @@
 #' and returns noise values.
 #' Note that `seed` is set to a random value by default,
 #' so if you want to use the same seed for multiple calls, you need to explicitly set it.
-#' @examples
-#' noise_2d()(1:10, 1)
-#' noise_3d()(1:16, 1:16, 1)
 #' @rdname noise
 #' @name noise
 NULL

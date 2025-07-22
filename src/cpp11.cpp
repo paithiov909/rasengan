@@ -6,10 +6,10 @@
 #include <R_ext/Visibility.h>
 
 // code_bounce.cpp
-doubles bounce_cpp(int n, double init, double velocity, double damping, double min, double max);
-extern "C" SEXP _rasengan_bounce_cpp(SEXP n, SEXP init, SEXP velocity, SEXP damping, SEXP min, SEXP max) {
+doubles bounce_cpp(int n, double init, double velocity, double damping, double mass, double min, double max);
+extern "C" SEXP _rasengan_bounce_cpp(SEXP n, SEXP init, SEXP velocity, SEXP damping, SEXP mass, SEXP min, SEXP max) {
   BEGIN_CPP11
-    return cpp11::as_sexp(bounce_cpp(cpp11::as_cpp<cpp11::decay_t<int>>(n), cpp11::as_cpp<cpp11::decay_t<double>>(init), cpp11::as_cpp<cpp11::decay_t<double>>(velocity), cpp11::as_cpp<cpp11::decay_t<double>>(damping), cpp11::as_cpp<cpp11::decay_t<double>>(min), cpp11::as_cpp<cpp11::decay_t<double>>(max)));
+    return cpp11::as_sexp(bounce_cpp(cpp11::as_cpp<cpp11::decay_t<int>>(n), cpp11::as_cpp<cpp11::decay_t<double>>(init), cpp11::as_cpp<cpp11::decay_t<double>>(velocity), cpp11::as_cpp<cpp11::decay_t<double>>(damping), cpp11::as_cpp<cpp11::decay_t<double>>(mass), cpp11::as_cpp<cpp11::decay_t<double>>(min), cpp11::as_cpp<cpp11::decay_t<double>>(max)));
   END_CPP11
 }
 // code_ease.cpp
@@ -295,7 +295,7 @@ extern "C" SEXP _rasengan_wind_mouse_cpp(SEXP start, SEXP end, SEXP gravity, SEX
 
 extern "C" {
 static const R_CallMethodDef CallEntries[] = {
-    {"_rasengan_bounce_cpp",         (DL_FUNC) &_rasengan_bounce_cpp,          6},
+    {"_rasengan_bounce_cpp",         (DL_FUNC) &_rasengan_bounce_cpp,          7},
     {"_rasengan_domain_warp_2d_cpp", (DL_FUNC) &_rasengan_domain_warp_2d_cpp,  8},
     {"_rasengan_domain_warp_3d_cpp", (DL_FUNC) &_rasengan_domain_warp_3d_cpp,  9},
     {"_rasengan_es_biarc_cpp",       (DL_FUNC) &_rasengan_es_biarc_cpp,        3},

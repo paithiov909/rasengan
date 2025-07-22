@@ -52,7 +52,7 @@ par(op)
 ```
 
 ``` r
-# `wind_mouse()` creates a human-like mouse trajectory between two points
+# `path_mouse()` creates a human-like mouse trajectory between two points
 path <-
   rbind(
     path_mouse(end = c(100, 50), seed = 123),
