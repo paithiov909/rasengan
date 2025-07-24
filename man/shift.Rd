@@ -7,7 +7,7 @@
 shift(x, k)
 }
 \arguments{
-\item{x}{Any type of vector.}
+\item{x}{A data.frame or vector.}
 
 \item{k}{An integer to shift \code{x} by.}
 }

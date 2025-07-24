@@ -34,17 +34,32 @@ mag <- function(mat, origin = c(0, 0)) {
 
 #' Circular shift
 #'
-#' @param x Any type of vector.
+#' @param x A data.frame or vector.
 #' @param k An integer to shift `x` by.
 #' @importFrom utils head tail
 #' @export
 shift <- function(x, k) {
+  UseMethod("shift")
+}
+
+#' @export
+shift.default <- function(x, k) {
   k <- as.integer(k %% length(x))
   if (identical(k, 0L)) {
     return(x)
   }
   c(tail(x, -k), head(x, k))
 }
+
+#' @export
+shift.data.frame <- function(x, k) {
+  k <- as.integer(k %% nrow(x))
+  if (identical(k, 0L)) {
+    return(x)
+  }
+  rbind(tail(x, -k), head(x, k), make.row.names = FALSE)
+}
+
 
 #' Argument matching helper
 #'
