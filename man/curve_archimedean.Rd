@@ -29,3 +29,11 @@ the normal Archimedean spiral occurs when \code{c = 1}.
 Other spirals falling into this group include the hyperbolic spiral (\code{c = -1}),
 Fermat's spiral (\code{c = 2}), and the lituus (\verb{c = −2}).
 }
+\seealso{
+Other curve: 
+\code{\link{curve_involute}()},
+\code{\link{curve_random}()},
+\code{\link{curve_spring}()},
+\code{\link{curve_twist}()}
+}
+\concept{curve}

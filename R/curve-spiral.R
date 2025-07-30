@@ -15,6 +15,7 @@
 #' @param a,b,c Numeric scalars; Parameters of the general Archimedean spiral.
 #' @param base A numeric scalar; Base of the logarithm used to compute the spacing between points.
 #' @returns A data frame with columns `x` and `y`.
+#' @family curve
 #' @export
 curve_archimedean <- function(n, a = 0, b = 1, c = 1, base = exp(1)) {
   theta <- seq(0, by = pi / log(n, base = base), length.out = n)
@@ -35,6 +36,7 @@ curve_archimedean <- function(n, a = 0, b = 1, c = 1, base = exp(1)) {
 #' @param scale A numeric scalar; Scaling factor for the curve.
 #' @param base A numeric scalar; Base of the logarithm used to compute the spacing between points.
 #' @returns A data frame with columns `x` and `y`.
+#' @family curve
 #' @export
 curve_spring <- function(n, k = 1, m = .1, scale = 1, base = exp(1)) {
   stopifnot(
@@ -49,7 +51,7 @@ curve_spring <- function(n, k = 1, m = .1, scale = 1, base = exp(1)) {
   entbl(ret)
 }
 
-#' Generate an involute curve
+#' Generate an involute
 #'
 #' Generates a 2D curve that is an involute curve.
 #'
@@ -57,6 +59,7 @@ curve_spring <- function(n, k = 1, m = .1, scale = 1, base = exp(1)) {
 #' @param scale A numeric scalar; Scaling factor for the curve.
 #' @param base A numeric scalar; Base of the logarithm used to compute the spacing between points.
 #' @returns A data frame with columns `x` and `y`.
+#' @family curve
 #' @export
 curve_involute <- function(n, scale = 1, base = exp(1)) {
   stopifnot(

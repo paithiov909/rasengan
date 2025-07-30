@@ -2,7 +2,7 @@
 % Please edit documentation in R/curve-spiral.R
 \name{curve_involute}
 \alias{curve_involute}
-\title{Generate an involute curve}
+\title{Generate an involute}
 \usage{
 curve_involute(n, scale = 1, base = exp(1))
 }
@@ -19,3 +19,11 @@ A data frame with columns \code{x} and \code{y}.
 \description{
 Generates a 2D curve that is an involute curve.
 }
+\seealso{
+Other curve: 
+\code{\link{curve_archimedean}()},
+\code{\link{curve_random}()},
+\code{\link{curve_spring}()},
+\code{\link{curve_twist}()}
+}
+\concept{curve}
