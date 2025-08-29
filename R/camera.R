@@ -15,7 +15,7 @@ vec3_cross <- function(a, b) {
 
 #' @noRd
 as_trans3d <- function(m) {
-  class(m) <- c("transform3d", "at_matrix", class(m))
+  class(m) <- unique(c("transform3d", "at_matrix", class(m)))
   m
 }
 
@@ -32,19 +32,19 @@ ndc_mul <- function(lhs, rhs) UseMethod("ndc_mul")
 
 #' @export
 ndc_mul.default <- function(lhs, rhs) {
-  if (all(lhs[, 4] != 0)) {
-    lhs[, 1:3] <- lhs[, 1:3] / lhs[, 4]
-  } else {
-    rlang::warn(
-      "`lhs` has zero values. Skipped normalization."
-    )
+  w <- lhs[, 4]
+  ok <- w != 0 & is.finite(w)
+  if (!all(ok)) {
+    rlang::warn("Some points had invalid w (0, NA, or Inf). They were dropped.")
   }
-  lhs %*% rhs
+  lhs[ok, 1:3] <- lhs[ok, 1:3] / w[ok]
+  lhs[ok, 4] <- 1
+  lhs[ok, ] %*% rhs
 }
 
 #' @export
 ndc_mul.transform3d <- function(lhs, rhs) {
-  NextMethod()
+  rlang::abort("`lhs` must be a numeric matrix")
 }
 
 #' @keywords internal
@@ -77,7 +77,7 @@ lookat3d <- function(eye, center, up = c(0, 1, 0)) {
     )
     rlang::abort(msg)
   }
-  z <- vec3_normalize(eye - center)
+  z <- vec3_normalize(center - eye)
   x <- vec3_normalize(vec3_cross(z, up))
   y <- vec3_normalize(vec3_cross(x, z))
   # fmt: skip
@@ -96,20 +96,20 @@ lookat3d <- function(eye, center, up = c(0, 1, 0)) {
 
 #' @rdname camera
 #' @export
-persp3d <- function(fovy, aspect, near = .1, far = 10) {
+persp3d <- function(fovy, aspect, near = 0.1, far = 10) {
   if (far <= near) {
     rlang::abort("`far` must be greater than `near`")
   }
   if (near <= 0) {
     rlang::abort("`near` must be greater than 0")
   }
-  f <- 1 / tan(fovy / 2)
+  f <- 1 / tan(fovy * .5)
   # fmt: skip
   out <- matrix(
     c(
       f / aspect, 0, 0, 0,
       0, f, 0, 0,
-      0, 0, -1 * (far + near) / (far - near), -2 * far * near / (far - near),
+      0, 0, (far + near) / (near - far), 2 * far * near / (near - far),
       0, 0, -1, 0
     ),
     ncol = 4,
@@ -127,7 +127,7 @@ viewport3d <- function(width, height, ox = 0, oy = 0) {
       c(
         width / 2, 0, 0, width / 2 + ox,
         0, -height / 2, 0, height / 2 + oy,
-        0, 0, 0.5, 0.5,
+        0, 0, .5, .5,
         0, 0, 0, 1
       ),
       ncol = 4,
