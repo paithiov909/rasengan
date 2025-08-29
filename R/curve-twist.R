@@ -47,12 +47,14 @@
 #' # More dramatic twist
 #' curve3 <- curve_twist(300, amplitude = 0.5, frequency = 3)
 #' lines(curve3, col = "blue")
-curve_twist <- function(n,
-                        amplitude = 0.2,
-                        frequency = 2,
-                        origin = c(0, 0),
-                        direction = c(1, 0),
-                        t_range = c(0, 2 * pi)) {
+curve_twist <- function(
+  n,
+  amplitude = 0.2,
+  frequency = 2,
+  origin = c(0, 0),
+  direction = c(1, 0),
+  t_range = c(0, 2 * pi)
+) {
   t <- seq(t_range[1], t_range[2], length.out = n)
   r <- 1 - amplitude * sin(frequency * t)
   d <- cbind(

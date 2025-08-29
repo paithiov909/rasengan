@@ -17,21 +17,25 @@ smootherstep <- function(t) {
 
 #' @rdname smoothing
 #' @export
-ease_in <- function(t, type = c(
-                      "sine",
-                      "quad",
-                      "cubic",
-                      "quart",
-                      "quint",
-                      "exp",
-                      "circle",
-                      "elastic",
-                      "back",
-                      "bounce"
-                    )) {
+ease_in <- function(
+  t,
+  type = c(
+    "sine",
+    "quad",
+    "cubic",
+    "quart",
+    "quint",
+    "exp",
+    "circle",
+    "elastic",
+    "back",
+    "bounce"
+  )
+) {
   type <- rlang::arg_match(type)
   t <- as.double(t)
-  switch(type,
+  switch(
+    type,
     sine = in_sine(t),
     quad = in_quad(t),
     cubic = in_cubic(t),
@@ -47,21 +51,25 @@ ease_in <- function(t, type = c(
 
 #' @rdname smoothing
 #' @export
-ease_out <- function(t, type = c(
-                       "sine",
-                       "quad",
-                       "cubic",
-                       "quart",
-                       "quint",
-                       "exp",
-                       "circle",
-                       "elastic",
-                       "back",
-                       "bounce"
-                     )) {
+ease_out <- function(
+  t,
+  type = c(
+    "sine",
+    "quad",
+    "cubic",
+    "quart",
+    "quint",
+    "exp",
+    "circle",
+    "elastic",
+    "back",
+    "bounce"
+  )
+) {
   type <- rlang::arg_match(type)
   t <- as.double(t)
-  switch(type,
+  switch(
+    type,
     sine = out_sine(t),
     quad = out_quad(t),
     cubic = out_cubic(t),
@@ -77,21 +85,25 @@ ease_out <- function(t, type = c(
 
 #' @rdname smoothing
 #' @export
-ease_in_out <- function(t, type = c(
-                          "sine",
-                          "quad",
-                          "cubic",
-                          "quart",
-                          "quint",
-                          "exp",
-                          "circle",
-                          "elastic",
-                          "back",
-                          "bounce"
-                        )) {
+ease_in_out <- function(
+  t,
+  type = c(
+    "sine",
+    "quad",
+    "cubic",
+    "quart",
+    "quint",
+    "exp",
+    "circle",
+    "elastic",
+    "back",
+    "bounce"
+  )
+) {
   type <- rlang::arg_match(type)
   t <- as.double(t)
-  switch(type,
+  switch(
+    type,
     sine = in_out_sine(t),
     quad = in_out_quad(t),
     cubic = in_out_cubic(t),

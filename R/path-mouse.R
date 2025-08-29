@@ -31,23 +31,25 @@
 #' path <- path_mouse(start = c(0, 0), end = c(300, 200), seed = 123)
 #' with(path, plot(x, y, type = "l", asp = 1, main = "WindMouse Path"))
 path_mouse <- function(
-    start = c(0, 0),
-    end = c(100, 100),
-    mouse_speed = 3.0,
-    gravity = 9.0,
-    wind = 3.0,
-    min_wait = 5,
-    max_wait = 15,
-    max_step = 10,
-    target_area = 10,
-    seed = sample.int(1337, 1)) {
+  start = c(0, 0),
+  end = c(100, 100),
+  mouse_speed = 3.0,
+  gravity = 9.0,
+  wind = 3.0,
+  min_wait = 5,
+  max_wait = 15,
+  max_step = 10,
+  target_area = 10,
+  seed = sample.int(1337, 1)
+) {
   stopifnot(
     length(start) == 2,
     length(end) == 2
   )
   ret <-
     wind_mouse_cpp(
-      start, end,
+      start,
+      end,
       gravity,
       wind,
       min_wait,
