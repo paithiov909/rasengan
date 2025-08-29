@@ -11,14 +11,14 @@ lookat3d(eye, center, up = c(0, 1, 0))
 
 persp3d(fovy, aspect, near = 0.1, far = 10)
 
-viewport3d(width, height)
+viewport3d(width, height, ox = 0, oy = 0)
 }
 \arguments{
 \item{eye}{A numeric vector of length 3 giving the position of the camera.}
 
-\item{center}{A numeric vector of length 3 giving the position of the target.}
+\item{center}{A numeric vector of length 3 giving the position where the camera is looking at.}
 
-\item{up}{A numeric vector of length 3 giving the direction of the "up" vector.}
+\item{up}{A numeric vector of length 3 giving the direction of the "up" vector for the camera.}
 
 \item{fovy}{A numeric scalar giving the field of view in radians.}
 
@@ -29,6 +29,8 @@ viewport3d(width, height)
 \item{far}{A numeric scalar giving the distance to the far plane.}
 
 \item{width, height}{A numeric scalar giving the width and height of the viewport.}
+
+\item{ox, oy}{A numeric scalar giving the offset of the viewport in pixels.}
 }
 \value{
 A \code{transform3d} object.

@@ -19,48 +19,50 @@ as_trans3d <- function(m) {
   m
 }
 
+#' Perspective division
+#'
+#' Multiplication of two matrices after normalizing the first one.
+#'
+#' @param lhs,rhs Numeric matrices.
+#' @returns A numeric matrix.
 #' @keywords internal
 #' @export
-as_ndc_mul <- function(lhs, rhs) UseMethod("as_ndc_mul")
+#' @rdname ndc_mul
+ndc_mul <- function(lhs, rhs) UseMethod("ndc_mul")
 
-#' @keywords internal
 #' @export
-as_ndc_mul.default <- function(lhs, rhs) {
+ndc_mul.default <- function(lhs, rhs) {
   if (all(lhs[, 4] != 0)) {
     lhs[, 1:3] <- lhs[, 1:3] / lhs[, 4]
   } else {
     rlang::warn(
-      "Skipping division by w component because `lhs` has zero values."
+      "`lhs` has zero values. Skipped normalization."
     )
   }
   lhs %*% rhs
 }
 
-#' @keywords internal
 #' @export
-as_ndc_mul.transform3d <- function(lhs, rhs) {
+ndc_mul.transform3d <- function(lhs, rhs) {
   NextMethod()
 }
 
-#' NDC multiplication
-#'
-#' @param lhs A `transform3d` object.
-#' @param rhs A `transform3d` object.
-#' @returns A `transform3d` object.
 #' @keywords internal
 #' @export
-`%!*%` <- as_ndc_mul
+#' @rdname ndc_mul
+`%!*%` <- ndc_mul
 
 #' 3D world to camera transformation
 #'
 #' @param eye A numeric vector of length 3 giving the position of the camera.
-#' @param center A numeric vector of length 3 giving the position of the target.
-#' @param up A numeric vector of length 3 giving the direction of the "up" vector.
+#' @param center A numeric vector of length 3 giving the position where the camera is looking at.
+#' @param up A numeric vector of length 3 giving the direction of the "up" vector for the camera.
 #' @param fovy A numeric scalar giving the field of view in radians.
 #' @param aspect A numeric scalar giving the aspect ratio.
 #' @param near A numeric scalar giving the distance to the near plane.
 #' @param far A numeric scalar giving the distance to the far plane.
 #' @param width,height A numeric scalar giving the width and height of the viewport.
+#' @param ox,oy A numeric scalar giving the offset of the viewport in pixels.
 #' @returns A `transform3d` object.
 #' @rdname camera
 #' @name camera
@@ -75,7 +77,7 @@ lookat3d <- function(eye, center, up = c(0, 1, 0)) {
     )
     rlang::abort(msg)
   }
-  z <- vec3_normalize(center - eye)
+  z <- vec3_normalize(eye - center)
   x <- vec3_normalize(vec3_cross(z, up))
   y <- vec3_normalize(vec3_cross(x, z))
   # fmt: skip
@@ -107,27 +109,28 @@ persp3d <- function(fovy, aspect, near = .1, far = 10) {
     c(
       f / aspect, 0, 0, 0,
       0, f, 0, 0,
-      0, 0, -1 * (far + near) / (far - near), -1,
-      0, 0, -2 * near * far / (far - near), 0
+      0, 0, -1 * (far + near) / (far - near), -2 * far * near / (far - near),
+      0, 0, -1, 0
     ),
-    nrow = 4
+    ncol = 4,
+    byrow = TRUE
   )
   as_trans3d(t(out))
 }
 
 #' @rdname camera
 #' @export
-viewport3d <- function(width, height) {
+viewport3d <- function(width, height, ox = 0, oy = 0) {
   # fmt: skip
   out <-
     matrix(
       c(
-        width / 2, 0, 0, width / 2,
-        0, -height / 2, 0, height / 2,
+        width / 2, 0, 0, width / 2 + ox,
+        0, -height / 2, 0, height / 2 + oy,
         0, 0, 0.5, 0.5,
         0, 0, 0, 1
       ),
-      nrow = 4,
+      ncol = 4,
       byrow = TRUE
     )
   as_trans3d(t(out))
