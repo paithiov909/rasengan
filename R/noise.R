@@ -39,72 +39,89 @@ NULL
 #' @rdname noise
 #' @export
 noise_2d <- function(
-    noise_type = c(
-      "OpenSimplex2",
-      "OpenSimplex2S",
-      "Cellular",
-      "Perlin",
-      "ValueCubic",
-      "Value"
-    ),
-    frequency = 0.01,
-    fractal_type = c(
-      "None",
-      "FBm",
-      "Rigid",
-      "PingPong"
-    ),
-    octaves = 3,
-    lacunarity = 2.0,
-    gain = 0.5,
-    weighted_strength = 0.0,
-    ping_pong_strength = 2.0,
-    distance_function = c(
-      "EuclideanSq",
-      "Euclidean",
-      "Manhattan",
-      "Hybrid"
-    ),
-    return_type = c(
-      "Distance",
-      "CellValue",
-      "Distance2",
-      "Distance2Add",
-      "Distance2Sub",
-      "Distance2Mul",
-      "Distance2Div"
-    ),
-    jitter = 1.0) {
+  noise_type = c(
+    "OpenSimplex2",
+    "OpenSimplex2S",
+    "Cellular",
+    "Perlin",
+    "ValueCubic",
+    "Value"
+  ),
+  frequency = 0.01,
+  fractal_type = c(
+    "None",
+    "FBm",
+    "Rigid",
+    "PingPong"
+  ),
+  octaves = 3,
+  lacunarity = 2.0,
+  gain = 0.5,
+  weighted_strength = 0.0,
+  ping_pong_strength = 2.0,
+  distance_function = c(
+    "EuclideanSq",
+    "Euclidean",
+    "Manhattan",
+    "Hybrid"
+  ),
+  return_type = c(
+    "Distance",
+    "CellValue",
+    "Distance2",
+    "Distance2Add",
+    "Distance2Sub",
+    "Distance2Mul",
+    "Distance2Div"
+  ),
+  jitter = 1.0
+) {
   function(x, y, data = NULL, seed = sample.int(1337, 1)) {
-    noise_type <- int_match(noise_type, "noise_type", c(
-      "OpenSimplex2",
-      "OpenSimplex2S",
-      "Cellular",
-      "Perlin",
-      "ValueCubic",
-      "Value"
-    ))
-    fractal_type <- int_match(fractal_type, "fractal_type", c(
-      "None",
-      "FBm",
-      "Rigid",
-      "PingPong"
-    ))
-    distance_function <- int_match(distance_function, "distance_function", c(
-      "Euclidean",
-      "EuclideanSq",
-      "Manhattan",
-      "Hybrid"
-    ))
-    return_type <- int_match(return_type, "return_type", c(
-      "CellValue",
-      "Distance",
-      "Distance2",
-      "Distance2Add",
-      "Distance2Sub",
-      "Distance2Mul",
-      "Distance2Div"
-    ))
+    noise_type <- int_match(
+      noise_type,
+      "noise_type",
+      c(
+        "OpenSimplex2",
+        "OpenSimplex2S",
+        "Cellular",
+        "Perlin",
+        "ValueCubic",
+        "Value"
+      )
+    )
+    fractal_type <- int_match(
+      fractal_type,
+      "fractal_type",
+      c(
+        "None",
+        "FBm",
+        "Rigid",
+        "PingPong"
+      )
+    )
+    distance_function <- int_match(
+      distance_function,
+      "distance_function",
+      c(
+        "Euclidean",
+        "EuclideanSq",
+        "Manhattan",
+        "Hybrid"
+      )
+    )
+    return_type <- int_match(
+      return_type,
+      "return_type",
+      c(
+        "CellValue",
+        "Distance",
+        "Distance2",
+        "Distance2Add",
+        "Distance2Sub",
+        "Distance2Mul",
+        "Distance2Div"
+      )
+    )
     d <-
       if (!is.null(data)) {
         data
@@ -132,82 +149,103 @@ noise_2d <- function(
 #' @rdname noise
 #' @export
 noise_3d <- function(
-    noise_type = c(
-      "OpenSimplex2",
-      "OpenSimplex2S",
-      "Cellular",
-      "Perlin",
-      "ValueCubic",
-      "Value"
-    ),
-    frequency = 0.01,
-    fractal_type = c(
-      "None",
-      "FBm",
-      "Rigid",
-      "PingPong"
-    ),
-    octaves = 3,
-    lacunarity = 2.0,
-    gain = 0.5,
-    weighted_strength = 0.0,
-    ping_pong_strength = 2.0,
-    distance_function = c(
-      "EuclideanSq",
-      "Euclidean",
-      "Manhattan",
-      "Hybrid"
-    ),
-    return_type = c(
-      "Distance",
-      "CellValue",
-      "Distance2",
-      "Distance2Add",
-      "Distance2Sub",
-      "Distance2Mul",
-      "Distance2Div"
-    ),
-    jitter = 1.0,
-    rotation_type = c(
-      "None",
-      "ImproveXYPlanes",
-      "ImproveXZPlanes"
-    )) {
+  noise_type = c(
+    "OpenSimplex2",
+    "OpenSimplex2S",
+    "Cellular",
+    "Perlin",
+    "ValueCubic",
+    "Value"
+  ),
+  frequency = 0.01,
+  fractal_type = c(
+    "None",
+    "FBm",
+    "Rigid",
+    "PingPong"
+  ),
+  octaves = 3,
+  lacunarity = 2.0,
+  gain = 0.5,
+  weighted_strength = 0.0,
+  ping_pong_strength = 2.0,
+  distance_function = c(
+    "EuclideanSq",
+    "Euclidean",
+    "Manhattan",
+    "Hybrid"
+  ),
+  return_type = c(
+    "Distance",
+    "CellValue",
+    "Distance2",
+    "Distance2Add",
+    "Distance2Sub",
+    "Distance2Mul",
+    "Distance2Div"
+  ),
+  jitter = 1.0,
+  rotation_type = c(
+    "None",
+    "ImproveXYPlanes",
+    "ImproveXZPlanes"
+  )
+) {
   function(x, y, z, data = NULL, seed = sample.int(1337, 1)) {
-    noise_type <- int_match(noise_type, "noise_type", c(
-      "OpenSimplex2",
-      "OpenSimplex2S",
-      "Cellular",
-      "Perlin",
-      "ValueCubic",
-      "Value"
-    ))
-    fractal_type <- int_match(fractal_type, "fractal_type", c(
-      "None",
-      "FBm",
-      "Rigid",
-      "PingPong"
-    ))
-    distance_function <- int_match(distance_function, "distance_function", c(
-      "Euclidean",
-      "EuclideanSq",
-      "Manhattan",
-      "Hybrid"
-    ))
-    return_type <- int_match(return_type, "return_type", c(
-      "CellValue",
-      "Distance",
-      "Distance2",
-      "Distance2Add",
-      "Distance2Sub",
-      "Distance2Mul",
-      "Distance2Div"
-    ))
-    rotation_type <- int_match(rotation_type, "rotation_type", c(
-      "None",
-      "ImproveXYPlanes",
-      "ImproveXZPlanes"
-    ))
+    noise_type <- int_match(
+      noise_type,
+      "noise_type",
+      c(
+        "OpenSimplex2",
+        "OpenSimplex2S",
+        "Cellular",
+        "Perlin",
+        "ValueCubic",
+        "Value"
+      )
+    )
+    fractal_type <- int_match(
+      fractal_type,
+      "fractal_type",
+      c(
+        "None",
+        "FBm",
+        "Rigid",
+        "PingPong"
+      )
+    )
+    distance_function <- int_match(
+      distance_function,
+      "distance_function",
+      c(
+        "Euclidean",
+        "EuclideanSq",
+        "Manhattan",
+        "Hybrid"
+      )
+    )
+    return_type <- int_match(
+      return_type,
+      "return_type",
+      c(
+        "CellValue",
+        "Distance",
+        "Distance2",
+        "Distance2Add",
+        "Distance2Sub",
+        "Distance2Mul",
+        "Distance2Div"
+      )
+    )
+    rotation_type <- int_match(
+      rotation_type,
+      "rotation_type",
+      c(
+        "None",
+        "ImproveXYPlanes",
+        "ImproveXZPlanes"
+      )
+    )
     d <-
       if (!is.null(data)) {
         data
@@ -251,37 +289,47 @@ noise_3d <- function(
 #' noise_3d()(data = domain_warp(1:16, 1:16, 1))
 #' @export
 domain_warp <- function(
-    x, y, z = NULL,
-    seed = sample.int(1337, 1),
-    warp_type = c(
-      "OpenSimplex2",
-      "OpenSimplex2Reduced",
-      "BasicGrid"
-    ),
-    amplitude = 1.0,
-    fractal_type = c(
-      "None",
-      "DomainWarpProgressive",
-      "DomainWarpIndependent"
-    ),
-    octaves = 3,
-    lacunarity = 2.0,
-    gain = 0.5,
-    rotation_type = c(
-      "None",
-      "ImproveXYPlanes",
-      "ImproveXZPlanes"
-    )) {
-  warp_type <- int_match(warp_type, "warp_type", c(
+  x,
+  y,
+  z = NULL,
+  seed = sample.int(1337, 1),
+  warp_type = c(
     "OpenSimplex2",
     "OpenSimplex2Reduced",
     "BasicGrid"
-  ))
-  fractal_type <- rlang::arg_match(fractal_type, c(
+  ),
+  amplitude = 1.0,
+  fractal_type = c(
     "None",
     "DomainWarpProgressive",
     "DomainWarpIndependent"
-  ))
+  ),
+  octaves = 3,
+  lacunarity = 2.0,
+  gain = 0.5,
+  rotation_type = c(
+    "None",
+    "ImproveXYPlanes",
+    "ImproveXZPlanes"
+  )
+) {
+  warp_type <- int_match(
+    warp_type,
+    "warp_type",
+    c(
+      "OpenSimplex2",
+      "OpenSimplex2Reduced",
+      "BasicGrid"
+    )
+  )
+  fractal_type <- rlang::arg_match(
+    fractal_type,
+    c(
+      "None",
+      "DomainWarpProgressive",
+      "DomainWarpIndependent"
+    )
+  )
   fractal_type <-
     if (fractal_type == "DomainWarpProgressive") {
       4L
@@ -290,11 +338,15 @@ domain_warp <- function(
     } else {
       0L
     }
-  rotation_type <- int_match(rotation_type, "rotation_type", c(
-    "None",
-    "ImproveXYPlanes",
-    "ImproveXZPlanes"
-  ))
+  rotation_type <- int_match(
+    rotation_type,
+    "rotation_type",
+    c(
+      "None",
+      "ImproveXYPlanes",
+      "ImproveXZPlanes"
+    )
+  )
 
   if (is.null(z)) {
     d <- as.matrix(expand.grid(x, y))

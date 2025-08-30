@@ -1,11 +1,12 @@
 Package: rasengan
 Title: Generation of Geometric Curves
-Version: 0.0.4
+Version: 0.0.5
 Authors@R: c(
     person("Akiru", "Kato", , "paithiov909@gmail.com", role = c("aut", "cre")),
     person("Jordan", "Peck", role = "cph"),
-    person(c("Kjetil", "Olsen"), "Lye", role = "cph"),
+    person("Kjetil Olsen", "Lye", role = "cph"),
     person("Kohei", "Kumazaki", role = "cph"),
+    person("Øystein", "Myrmo", role = "cph"),
     person("Thomas Lin", "Pedersen", role = "cph")
   )
 Description: Provides functions to generate and sample geometric curves.
@@ -13,6 +14,7 @@ Description: Provides functions to generate and sample geometric curves.
     visualization or further geometric processing.
 License: MIT + file LICENSE
 Imports:
+    affiner,
     glue,
     rlang
 LinkingTo:

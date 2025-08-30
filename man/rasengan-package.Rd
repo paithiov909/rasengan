@@ -16,6 +16,7 @@ Other contributors:
   \item Jordan Peck [copyright holder]
   \item Kjetil Olsen Lye [copyright holder]
   \item Kohei Kumazaki [copyright holder]
+  \item Øystein Myrmo [copyright holder]
   \item Thomas Lin Pedersen [copyright holder]
 }
 

@@ -38,15 +38,18 @@
 #' @examples
 #' path <- path_clothoid()
 #' with(path, plot(x, y, type = "l", asp = 1))
-path_clothoid <- function(start = c(0, 0, pi / 4),
-                          end = c(25, 10, pi),
-                          max_n = 1e2,
-                          max_iter_num = 1e3,
-                          biarch = TRUE) {
+path_clothoid <- function(
+  start = c(0, 0, pi / 4),
+  end = c(25, 10, pi),
+  max_n = 1e2,
+  max_iter_num = 1e3,
+  biarch = TRUE
+) {
   stopifnot(
     length(start) == 3,
     length(end) == 3,
-    max_n > 0, max_iter_num > 0
+    max_n > 0,
+    max_iter_num > 0
   )
   if (biarch) {
     ret <- es_biarc_cpp(start, end, max_n)

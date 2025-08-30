@@ -17,9 +17,13 @@ loess <- function(x, span, ...) {
 #' @returns A data frame with columns `x` and `y`.
 #' @family curve
 #' @export
-curve_random <- function(n,
-                         power = 8, hurst_index = 0.5,
-                         smoothing = 0.4, ...) {
+curve_random <- function(
+  n,
+  power = 8,
+  hurst_index = 0.5,
+  smoothing = 0.4,
+  ...
+) {
   x_base <- fbbridge_from(power, hurst_index)(stats::runif)
   y_base <- fbbridge_from(power, hurst_index)(stats::runif)
   dat <- data.frame(t = seq_len(n) / power)
