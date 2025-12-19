@@ -5,9 +5,7 @@
 \title{Generate data with domain warping}
 \usage{
 domain_warp(
-  x,
-  y,
-  z = NULL,
+  data,
   seed = sample.int(1337, 1),
   warp_type = c("OpenSimplex2", "OpenSimplex2Reduced", "BasicGrid"),
   amplitude = 1,
@@ -19,7 +17,7 @@ domain_warp(
 )
 }
 \arguments{
-\item{x, y, z}{Passed to \code{expand.grid()}.}
+\item{data}{A numeric matrix that has just 2 or 3 columns.}
 
 \item{seed}{An integer scalar; Random seed.}
 
@@ -41,8 +39,22 @@ domain_warp(
 A double matrix.
 }
 \description{
-Warps the position passed in with the x, y(, z) parameters.
+Warps data with domain warping.
 }
 \examples{
-noise_3d()(data = domain_warp(1:16, 1:16, 1))
+if (requireNamespace("dplyr", quietly = TRUE)) {
+ nz <- expand(
+   id = seq(0, 1, length.out = 16),
+   x = seq(0, 32, by = 2),
+   y = seq(0, 32, by = 2)
+ ) |>
+   dplyr::mutate(
+     val = noise_3d()(data = cbind(id, x, y) |> domain_warp()),
+     id = dplyr::consecutive_id(id)
+   )
+}
+if (require("ggplot2", quietly = TRUE)) {
+  ggplot(nz) +
+    geom_tile(aes(x = x, y = y, fill = val))
+}
 }

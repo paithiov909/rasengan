@@ -84,6 +84,23 @@ so if you want to use the same seed for multiple calls, you need to explicitly s
 Creates a noise generator function that wraps
 \href{https://github.com/Auburn/FastNoiseLite}{FastNoiseLite}.
 }
+\examples{
+if (requireNamespace("dplyr", quietly = TRUE)) {
+  nz <- expand(
+    id = seq(0, 1, length.out = 16),
+    x = seq(0, 32, by = 2),
+    y = seq(0, 32, by = 2)
+  ) |>
+    dplyr::mutate(
+      val = noise_3d()(data = cbind(id, x, y)),
+      id = dplyr::consecutive_id(id)
+    )
+}
+if (require("ggplot2", quietly = TRUE)) {
+  ggplot(nz) +
+    geom_tile(aes(x = x, y = y, fill = val))
+}
+}
 \seealso{
 \href{https://github.com/Auburn/FastNoiseLite/wiki/Documentation}{Documentation · Auburn/FastNoiseLite Wiki}
 }

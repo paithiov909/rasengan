@@ -24,7 +24,7 @@ NULL
 #' @export
 attenuate <- function(n, init, velocity, damping = 1) {
   if (damping <= 0) {
-    rlang::warn("Damping factor must be non-negative")
+    rlang::warn("Damping factor should be non-negative")
   }
   sq <- seq_len(n)
   c(init, init + cumsum(velocity * damping^sq))
@@ -37,7 +37,7 @@ bounce_off <- function(n, init, velocity, limits, damping = -1, mass = 0) {
     rlang::abort("Mass must be less than velocity")
   }
   if (damping >= 0) {
-    rlang::warn("Damping factor must be negative")
+    rlang::warn("Damping factor should be negative")
   }
   limits <- as.double(limits)
   bounce_cpp(

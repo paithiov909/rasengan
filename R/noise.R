@@ -32,6 +32,22 @@
 #' and returns noise values.
 #' Note that `seed` is set to a random value by default,
 #' so if you want to use the same seed for multiple calls, you need to explicitly set it.
+#' @examples
+#' if (requireNamespace("dplyr", quietly = TRUE)) {
+#'   nz <- expand(
+#'     id = seq(0, 1, length.out = 16),
+#'     x = seq(0, 32, by = 2),
+#'     y = seq(0, 32, by = 2)
+#'   ) |>
+#'     dplyr::mutate(
+#'       val = noise_3d()(data = cbind(id, x, y)),
+#'       id = dplyr::consecutive_id(id)
+#'     )
+#' }
+#' if (require("ggplot2", quietly = TRUE)) {
+#'   ggplot(nz) +
+#'     geom_tile(aes(x = x, y = y, fill = val))
+#' }
 #' @rdname noise
 #' @name noise
 NULL
@@ -273,9 +289,9 @@ noise_3d <- function(
 
 #' Generate data with domain warping
 #'
-#' Warps the position passed in with the x, y(, z) parameters.
+#' Warps data with domain warping.
 #'
-#' @param x,y,z Passed to `expand.grid()`.
+#' @param data A numeric matrix that has just 2 or 3 columns.
 #' @param seed An integer scalar; Random seed.
 #' @param warp_type A string; Warp type.
 #' @param amplitude A numeric scalar; Amplitude (the maximum warp distance from original position).
@@ -286,12 +302,24 @@ noise_3d <- function(
 #' @param rotation_type A string; Rotation type for 3D noise.
 #' @returns A double matrix.
 #' @examples
-#' noise_3d()(data = domain_warp(1:16, 1:16, 1))
+#' if (requireNamespace("dplyr", quietly = TRUE)) {
+#'  nz <- expand(
+#'    id = seq(0, 1, length.out = 16),
+#'    x = seq(0, 32, by = 2),
+#'    y = seq(0, 32, by = 2)
+#'  ) |>
+#'    dplyr::mutate(
+#'      val = noise_3d()(data = cbind(id, x, y) |> domain_warp()),
+#'      id = dplyr::consecutive_id(id)
+#'    )
+#' }
+#' if (require("ggplot2", quietly = TRUE)) {
+#'   ggplot(nz) +
+#'     geom_tile(aes(x = x, y = y, fill = val))
+#' }
 #' @export
 domain_warp <- function(
-  x,
-  y,
-  z = NULL,
+  data,
   seed = sample.int(1337, 1),
   warp_type = c(
     "OpenSimplex2",
@@ -348,8 +376,7 @@ domain_warp <- function(
     )
   )
 
-  if (is.null(z)) {
-    d <- as.matrix(expand.grid(x, y))
+  if (ncol(data) == 2) {
     domain_warp_2d_cpp(
       warp_type,
       as.integer(seed),
@@ -358,10 +385,9 @@ domain_warp <- function(
       as.integer(octaves),
       as.double(lacunarity),
       as.double(gain),
-      d
+      as.matrix(data)
     )
-  } else {
-    d <- as.matrix(expand.grid(x, y, z))
+  } else if (ncol(data) == 3) {
     domain_warp_3d_cpp(
       warp_type,
       as.integer(seed),
@@ -371,7 +397,9 @@ domain_warp <- function(
       as.double(lacunarity),
       as.double(gain),
       rotation_type,
-      d
+      as.matrix(data)
     )
+  } else {
+    rlang::abort("`data` must have 2 or 3 columns")
   }
 }

@@ -6,9 +6,6 @@
 \alias{normalize}
 \alias{cap}
 \alias{pulse}
-\alias{engamma}
-\alias{bias}
-\alias{gain}
 \title{Simply value modifications}
 \usage{
 blend(x, y, mask)
@@ -18,12 +15,6 @@ normalize(x, from = range(x), to = c(0, 1))
 cap(x, lower = 0, upper = 1)
 
 pulse(x, mask)
-
-engamma(x, mask)
-
-bias(x, mask)
-
-gain(x, mask)
 }
 \arguments{
 \item{x, y}{A numeric vector.}

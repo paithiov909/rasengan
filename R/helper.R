@@ -60,6 +60,16 @@ shift.data.frame <- function(x, k) {
   rbind(tail(x, -k), head(x, k), make.row.names = FALSE)
 }
 
+#' Expand grid
+#'
+#' A thin wrapper for [expand.grid()] that returns a tibble.
+#'
+#' @param ... Arguments to be passed to [expand.grid()].
+#' @returns A tibble.
+#' @export
+expand <- function(...) {
+  entbl(expand.grid(..., stringsAsFactors = FALSE))
+}
 
 #' Argument matching helper
 #'
@@ -88,6 +98,6 @@ int_match <- function(x, arg, values) {
 #' @noRd
 entbl <- function(x) {
   x <- as.data.frame(x)
-  class(x) <- c("tbl_df", "tbl", class(x))
+  class(x) <- c("tbl_df", "tbl", "data.frame")
   x
 }

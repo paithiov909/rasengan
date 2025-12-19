@@ -46,23 +46,3 @@ pulse <- function(x, mask) {
   x <- normalize(x)
   step(x, mask) - step(x, 1 - mask)
 }
-
-#' @rdname modifications
-#' @export
-engamma <- function(x, mask) {
-  x^(1 / mask)
-}
-
-#' @rdname modifications
-#' @export
-bias <- function(x, mask) {
-  mask <- cap(mask, upper = Inf)
-  x^(log(mask) / log(0.5))
-}
-
-#' @rdname modifications
-#' @export
-gain <- function(x, mask) {
-  mask <- 1 - cap(mask)
-  ifelse(x < .5, bias(2 * x, mask) / 2, 1 - bias(2 - 2 * x, mask) / 2)
-}
