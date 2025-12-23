@@ -56,6 +56,7 @@
 #' @param byrow Logical; whether to interpret the implicit grid in row-major
 #'  (`TRUE`) or column-major (`FALSE`) order.
 #' @param step Integer stride size for `stride()` and `stride_index()`.
+#' @param n An integer scalar; the length of the index vector to generate.
 #' @returns
 #' A reordered object of the same type as the input (`x`), or an integer vector
 #' of indices for functions ending in `_index`.
@@ -283,6 +284,7 @@ stride.data.frame <- function(x, step = 2L) {
   x[stride_index(nrow(x), step = step), , drop = FALSE]
 }
 
+#' @rdname reorder
 #' @export
 zigzag_index <- function(nrow, ncol, byrow = FALSE) {
   mat <- matrix(seq_len(nrow * ncol), nrow = nrow, ncol = ncol, byrow = byrow)

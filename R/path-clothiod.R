@@ -49,8 +49,8 @@ path_clothoid <- function(
   if (length(start) != 3 || length(end) != 3) {
     rlang::abort("start and end must be vectors of length 3.")
   }
-  if (max < 0) {
-    rlang::abort("max must be non-negative.")
+  if (max_n < 0) {
+    rlang::abort("max_n must be non-negative.")
   }
   if (max_iter_num < 0) {
     rlang::abort("max_iter_num must be non-negative.")

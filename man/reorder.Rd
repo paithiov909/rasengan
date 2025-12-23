@@ -21,6 +21,7 @@
 \alias{stride}
 \alias{stride.default}
 \alias{stride.data.frame}
+\alias{zigzag_index}
 \alias{zigzag}
 \alias{zigzag.default}
 \alias{zigzag.data.frame}
@@ -64,6 +65,8 @@ stride(x, step = 2L)
 
 \method{stride}{data.frame}(x, step = 2L)
 
+zigzag_index(nrow, ncol, byrow = FALSE)
+
 zigzag(x, nrow = NULL, ncol = NULL, byrow = FALSE)
 
 \method{zigzag}{default}(x, nrow = NULL, ncol = NULL, byrow = FALSE)
@@ -81,6 +84,8 @@ If one of them is \code{NULL}, it is inferred from the length of \code{x}.}
 \item{x}{A vector or data frame to be reordered.}
 
 \item{k}{An integer shift amount for \code{shift()}.}
+
+\item{n}{An integer scalar; the length of the index vector to generate.}
 
 \item{step}{Integer stride size for \code{stride()} and \code{stride_index()}.}
 }
