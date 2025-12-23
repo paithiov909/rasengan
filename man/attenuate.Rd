@@ -16,9 +16,11 @@ bounce_off(n, init, velocity, limits, damping = -1, mass = 0)
 
 \item{velocity}{A numeric scalar. The velocity or change rate for each step.}
 
-\item{damping}{A numeric scalar. The damping factor applied to the velocity at each step.}
+\item{damping}{A numeric scalar.
+The damping factor applied to the velocity at each step.}
 
-\item{limits}{A numeric vector of length 2. The minimum and maximum values allowed in the sequence.}
+\item{limits}{A numeric vector of length 2.
+The minimum and maximum values allowed in the sequence.}
 
 \item{mass}{A numeric scalar. The mass of the object bouncing.}
 }

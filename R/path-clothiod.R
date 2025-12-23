@@ -14,20 +14,21 @@
 #' in some configurations.
 #'
 #' @param start A numeric vector of length 3
-#' specifying the starting point and heading direction:
-#' `c(x, y, theta)`, where `theta` is the orientation angle in radians.
+#'  specifying the starting point and heading direction:
+#'  `c(x, y, theta)`, where `theta` is the orientation angle in radians.
 #' @param end A numeric vector of length 3
-#' specifying the goal point and heading direction:
-#' `c(x, y, theta)`, where `theta` is the orientation angle in radians.
+#'  specifying the goal point and heading direction:
+#'  `c(x, y, theta)`, where `theta` is the orientation angle in radians.
 #' @param max_n A numric scalar;
-#' Maximum number of points to sample along the path.
+#'  Maximum number of points to sample along the path.
 #' @param max_iter_num A numric scalar;
-#' Maximum number of iterations used in the internal parameter estimation algorithm
-#' (used only when `biarch = FALSE`).
+#'  Maximum number of iterations used in the internal parameter estimation algorithm
+#'  (used only when `biarch = FALSE`).
 #' @param biarch A logical scalar; If `TRUE`,
-#' use a biarc approximation consisting of two Euler spiral segments.
-#' If `FALSE`, compute a single spiral curve via numerical estimation.
-#' @returns A data frame with columns `x`, `y`, and `theta`,
+#'  use a biarc approximation consisting of two Euler spiral segments.
+#'  If `FALSE`, compute a single spiral curve via numerical estimation.
+#' @returns
+#' A data frame with columns `x`, `y`, and `theta`,
 #' giving the sampled positions and orientations along the generated path.
 #' If the parameter estimation fails,
 #' the returned data may contain missing values, which are automatically removed.
@@ -45,12 +46,15 @@ path_clothoid <- function(
   max_iter_num = 1e3,
   biarch = TRUE
 ) {
-  stopifnot(
-    length(start) == 3,
-    length(end) == 3,
-    max_n > 0,
-    max_iter_num > 0
-  )
+  if (length(start) != 3 || length(end) != 3) {
+    rlang::abort("start and end must be vectors of length 3.")
+  }
+  if (max < 0) {
+    rlang::abort("max must be non-negative.")
+  }
+  if (max_iter_num < 0) {
+    rlang::abort("max_iter_num must be non-negative.")
+  }
   if (biarch) {
     ret <- es_biarc_cpp(start, end, max_n)
   } else {

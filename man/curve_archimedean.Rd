@@ -11,7 +11,8 @@ curve_archimedean(n, a = 0, b = 1, c = 1, base = exp(1))
 
 \item{a, b, c}{Numeric scalars; Parameters of the general Archimedean spiral.}
 
-\item{base}{A numeric scalar; Base of the logarithm used to compute the spacing between points.}
+\item{base}{A numeric scalar;
+Base of the logarithm used to compute the spacing between points.}
 }
 \value{
 A data frame with columns \code{x} and \code{y}.
@@ -26,7 +27,8 @@ r = a + b \cdot \theta^\frac{1}{c}
 \details{
 According to the \href{https://en.wikipedia.org/wiki/Archimedean_spiral}{Wikipedia article},
 the normal Archimedean spiral occurs when \code{c = 1}.
-Other spirals falling into this group include the hyperbolic spiral (\code{c = -1}),
+Other spirals falling into this group include
+the hyperbolic spiral (\code{c = -1}),
 Fermat's spiral (\code{c = 2}), and the lituus (\verb{c = −2}).
 }
 \seealso{

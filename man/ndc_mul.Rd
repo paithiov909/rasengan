@@ -10,7 +10,7 @@ ndc_mul(lhs, rhs)
 lhs \%!*\% rhs
 }
 \arguments{
-\item{lhs, rhs}{Numeric matrices.}
+\item{lhs, rhs}{A numeric matrix.}
 }
 \value{
 A numeric matrix.
@@ -18,4 +18,6 @@ A numeric matrix.
 \description{
 Multiplication of two matrices after normalizing the first one.
 }
-\keyword{internal}
+\seealso{
+camera
+}

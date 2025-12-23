@@ -38,3 +38,6 @@ A \code{transform3d} object.
 \description{
 3D world to camera transformation
 }
+\seealso{
+ndc_mul
+}

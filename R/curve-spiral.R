@@ -8,12 +8,14 @@
 #'
 #' According to the [Wikipedia article](https://en.wikipedia.org/wiki/Archimedean_spiral),
 #' the normal Archimedean spiral occurs when `c = 1`.
-#' Other spirals falling into this group include the hyperbolic spiral (`c = -1`),
+#' Other spirals falling into this group include
+#' the hyperbolic spiral (`c = -1`),
 #' Fermat's spiral (`c = 2`), and the lituus (`c = −2`).
 #'
 #' @param n An integer scalar; Number of points to sample along the curve.
 #' @param a,b,c Numeric scalars; Parameters of the general Archimedean spiral.
-#' @param base A numeric scalar; Base of the logarithm used to compute the spacing between points.
+#' @param base A numeric scalar;
+#'  Base of the logarithm used to compute the spacing between points.
 #' @returns A data frame with columns `x` and `y`.
 #' @family curve
 #' @export
@@ -34,7 +36,8 @@ curve_archimedean <- function(n, a = 0, b = 1, c = 1, base = exp(1)) {
 #' @param n An integer scalar; Number of points to sample along the curve.
 #' @param k,m Numeric scalars; Parameters of the balance spring curve.
 #' @param scale A numeric scalar; Scaling factor for the curve.
-#' @param base A numeric scalar; Base of the logarithm used to compute the spacing between points.
+#' @param base A numeric scalar;
+#'  Base of the logarithm used to compute the spacing between points.
 #' @returns A data frame with columns `x` and `y`.
 #' @family curve
 #' @export
@@ -57,7 +60,8 @@ curve_spring <- function(n, k = 1, m = .1, scale = 1, base = exp(1)) {
 #'
 #' @param n An integer scalar; Number of points to sample along the curve.
 #' @param scale A numeric scalar; Scaling factor for the curve.
-#' @param base A numeric scalar; Base of the logarithm used to compute the spacing between points.
+#' @param base A numeric scalar;
+#'  Base of the logarithm used to compute the spacing between points.
 #' @returns A data frame with columns `x` and `y`.
 #' @family curve
 #' @export

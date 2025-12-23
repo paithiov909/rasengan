@@ -11,7 +11,7 @@ loess <- function(x, span, ...) {
 #'
 #' @param n An integer scalar. The number of points to generate.
 #' @param smoothing An numeric scalar.
-#' Smoothing parameter to be passed to [stats::loess()] as `span`.
+#'  Smoothing parameter to be passed to [stats::loess()] as `span`.
 #' @param ... Additional arguments to be passed to [stats::loess()].
 #' @inheritParams fbbridge_from
 #' @returns A data frame with columns `x` and `y`.

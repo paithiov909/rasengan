@@ -23,9 +23,9 @@ as_trans3d <- function(m) {
 #'
 #' Multiplication of two matrices after normalizing the first one.
 #'
-#' @param lhs,rhs Numeric matrices.
+#' @param lhs,rhs A numeric matrix.
 #' @returns A numeric matrix.
-#' @keywords internal
+#' @seealso camera
 #' @export
 #' @rdname ndc_mul
 ndc_mul <- function(lhs, rhs) UseMethod("ndc_mul")
@@ -42,14 +42,14 @@ ndc_mul.default <- function(lhs, rhs) {
   lhs[ok, ] %*% rhs
 }
 
+#' @keywords internal
 #' @export
 ndc_mul.transform3d <- function(lhs, rhs) {
   rlang::abort("`lhs` must be a numeric matrix")
 }
 
-#' @keywords internal
-#' @export
 #' @rdname ndc_mul
+#' @export
 `%!*%` <- ndc_mul
 
 #' 3D world to camera transformation
@@ -64,6 +64,8 @@ ndc_mul.transform3d <- function(lhs, rhs) {
 #' @param width,height A numeric scalar giving the width and height of the viewport.
 #' @param ox,oy A numeric scalar giving the offset of the viewport in pixels.
 #' @returns A `transform3d` object.
+#'
+#' @seealso ndc_mul
 #' @rdname camera
 #' @name camera
 NULL

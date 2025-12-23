@@ -163,3 +163,19 @@ es_biarc_cpp <- function(start, end, max_n) {
 wind_mouse_cpp <- function(start, end, gravity, wind, min_wait, max_wait, max_step, target_area, mouse_speed, seed) {
   .Call(`_rasengan_wind_mouse_cpp`, start, end, gravity, wind, min_wait, max_wait, max_step, target_area, mouse_speed, seed)
 }
+
+genidx_rings_cpp <- function(mat) {
+  .Call(`_rasengan_genidx_rings_cpp`, mat)
+}
+
+genidx_spiral_cpp <- function(mat) {
+  .Call(`_rasengan_genidx_spiral_cpp`, mat)
+}
+
+genidx_stride_cpp <- function(n, step) {
+  .Call(`_rasengan_genidx_stride_cpp`, n, step)
+}
+
+genidx_zigzag_cpp <- function(mat) {
+  .Call(`_rasengan_genidx_zigzag_cpp`, mat)
+}

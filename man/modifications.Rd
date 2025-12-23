@@ -21,11 +21,15 @@ pulse(x, mask)
 
 \item{mask}{A numeric scalar, typically between \code{0} and \code{1}.}
 
-\item{from}{A numeric vector of length 2. The range of \code{x} to use for normalization.}
+\item{from}{A numeric vector of length 2.
+The range of \code{x} to use for normalization.}
 
 \item{to}{A numeric vector of length 2. The output domain to normalize to.}
 
 \item{lower, upper}{A numeric scalar. The lower and upper bounds to cap to.}
+}
+\value{
+A numeric vector.
 }
 \description{
 Some of these functions are copied

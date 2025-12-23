@@ -1,12 +1,11 @@
 #include <cpp11.hpp>
 #include "es/euler_spiral.hpp"
 
-using namespace cpp11;
-
 [[cpp11::register]]
-doubles_matrix<> es_spiral_cpp(const doubles start,  // 長さ3: [startX, startY, theta]
-                               const doubles end,    // 長さ3: [endX, endY, theta]
-                               const std::size_t num_iter, double max_n) {
+cpp11::doubles_matrix<> es_spiral_cpp(
+    const cpp11::doubles start,  // 長さ3: [startX, startY, theta]
+    const cpp11::doubles end,    // 長さ3: [endX, endY, theta]
+    const std::size_t num_iter, double max_n) {
   const es::SpiralPoint st{start[0], start[1], start[2]};
   const es::SpiralPoint ed{end[0], end[1], end[2]};
 
@@ -19,8 +18,8 @@ doubles_matrix<> es_spiral_cpp(const doubles start,  // 長さ3: [startX, startY
     points.emplace_back(std::array<double, 3>{pos.x, pos.y, pos.t});
   }
 
-  writable::doubles_matrix<> result(points.size(), 3);
-  for (size_t i = 0; i < points.size(); ++i) {
+  cpp11::writable::doubles_matrix<> result(points.size(), 3);
+  for (std::size_t i = 0; i < points.size(); ++i) {
     result(i, 0) = points[i][0];
     result(i, 1) = points[i][1];
     result(i, 2) = points[i][2];
@@ -29,9 +28,10 @@ doubles_matrix<> es_spiral_cpp(const doubles start,  // 長さ3: [startX, startY
 }
 
 [[cpp11::register]]
-doubles_matrix<> es_biarc_cpp(const doubles start,  // 長さ3: [startX, startY, theta]
-                              const doubles end,    // 長さ3: [endX, endY, theta]
-                              double max_n) {
+cpp11::doubles_matrix<> es_biarc_cpp(
+    const cpp11::doubles start,  // 長さ3: [startX, startY, theta]
+    const cpp11::doubles end,    // 長さ3: [endX, endY, theta]
+    double max_n) {
   const es::SpiralPoint st{start[0], start[1], start[2]};
   const es::SpiralPoint ed{end[0], end[1], end[2]};
 
@@ -66,8 +66,8 @@ doubles_matrix<> es_biarc_cpp(const doubles start,  // 長さ3: [startX, startY,
     points.emplace_back(std::array<double, 3>{pos.x, pos.y, pos.t});
   }
 
-  writable::doubles_matrix<> result(points.size(), 3);
-  for (size_t i = 0; i < points.size(); ++i) {
+  cpp11::writable::doubles_matrix<> result(points.size(), 3);
+  for (std::size_t i = 0; i < points.size(); ++i) {
     result(i, 0) = points[i][0];
     result(i, 1) = points[i][1];
     result(i, 2) = points[i][2];
@@ -76,12 +76,11 @@ doubles_matrix<> es_biarc_cpp(const doubles start,  // 長さ3: [startX, startY,
 }
 
 [[cpp11::register]]
-doubles_matrix<> wind_mouse_cpp(const doubles start,  // 長さ2: [startX, startY]
-                                const doubles end,    // 長さ2: [endX, endY]
-                                double gravity, double wind, double min_wait,
-                                double max_wait, double max_step,
-                                double target_area, double mouse_speed,
-                                int seed) {
+cpp11::doubles_matrix<> wind_mouse_cpp(
+    const cpp11::doubles start,  // 長さ2: [startX, startY]
+    const cpp11::doubles end,    // 長さ2: [endX, endY]
+    double gravity, double wind, double min_wait, double max_wait,
+    double max_step, double target_area, double mouse_speed, int seed) {
   double startX = start[0], startY = start[1];
   double endX = end[0], endY = end[1];
 
@@ -167,8 +166,8 @@ doubles_matrix<> wind_mouse_cpp(const doubles start,  // 長さ2: [startX, start
     points.push_back({finalX, finalY, current_wait});
   }
 
-  writable::doubles_matrix<> result(points.size(), 3);
-  for (size_t i = 0; i < points.size(); ++i) {
+  cpp11::writable::doubles_matrix<> result(points.size(), 3);
+  for (std::size_t i = 0; i < points.size(); ++i) {
     result(i, 0) = points[i][0];
     result(i, 1) = points[i][1];
     result(i, 2) = points[i][2];

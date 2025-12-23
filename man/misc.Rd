@@ -6,6 +6,7 @@
 \alias{rad2deg}
 \alias{fract}
 \alias{mag}
+\alias{pingpong}
 \title{Miscellaneous functions}
 \usage{
 deg2rad(x)
@@ -15,11 +16,13 @@ rad2deg(x)
 fract(x)
 
 mag(mat, origin = c(0, 0))
+
+pingpong(x)
 }
 \arguments{
 \item{x}{A numeric vector.}
 
-\item{mat}{A numeric matrix or data frame.}
+\item{mat}{A numeric matrix or a data frame.}
 
 \item{origin}{A numeric vector to be subtracted from \code{mat}.}
 }

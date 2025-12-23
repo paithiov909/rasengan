@@ -78,7 +78,8 @@ A function that takes arguments:
 
 and returns noise values.
 Note that \code{seed} is set to a random value by default,
-so if you want to use the same seed for multiple calls, you need to explicitly set it.
+so if you want to use the same seed for multiple calls,
+you need to explicitly set it.
 }
 \description{
 Creates a noise generator function that wraps

@@ -5,11 +5,16 @@
 #'
 #' @param x,y A numeric vector.
 #' @param mask A numeric scalar, typically between `0` and `1`.
-#' @param from A numeric vector of length 2. The range of `x` to use for normalization.
+#' @param from A numeric vector of length 2.
+#'  The range of `x` to use for normalization.
 #' @param to A numeric vector of length 2. The output domain to normalize to.
 #' @param lower,upper A numeric scalar. The lower and upper bounds to cap to.
+#' @returns A numeric vector.
 #'
+#' @rdname modifications
 #' @name modifications
+NULL
+
 #' @rdname modifications
 #' @export
 blend <- function(x, y, mask) {

@@ -13,7 +13,8 @@ curve_spring(n, k = 1, m = 0.1, scale = 1, base = exp(1))
 
 \item{scale}{A numeric scalar; Scaling factor for the curve.}
 
-\item{base}{A numeric scalar; Base of the logarithm used to compute the spacing between points.}
+\item{base}{A numeric scalar;
+Base of the logarithm used to compute the spacing between points.}
 }
 \value{
 A data frame with columns \code{x} and \code{y}.

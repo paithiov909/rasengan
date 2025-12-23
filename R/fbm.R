@@ -1,15 +1,22 @@
-#' Create a 1D fractional Brownian motion generator
+#' Generators for FBM and FBB
+#'
+#' Creates a function that generates a fractional Brownian motion (FBM) or
+#' fractional Brownian bridge (FBB) time series with a given Hurst index.
 #'
 #' @param power Integer.
 #' @param hurst_index Numeric in range `(0, 1)`.
 #' @returns
 #' A function that takes a function `func` as its first argument
-#' and returns a time series.
+#' and returns a time series (for `fbm_from()` and `fbbridge_from()`)
+#' or a matrix (for `fbm_2d_from()`).
 #' `func` is expected to take `n` as its first argument
 #' and return a numeric vector of length `n`.
+#' @rdname fbm
+#' @name fbm
+NULL
+
+#' @rdname fbm
 #' @export
-#' @examples
-#' fbm_from()(runif, min = -1, max = 1)
 fbm_from <- function(power = 4, hurst_index = 0.5) {
   function(func, ...) {
     n <- 2^power
@@ -18,18 +25,8 @@ fbm_from <- function(power = 4, hurst_index = 0.5) {
   }
 }
 
-#' Create a 1D fractional Brownian bridge generator
-#'
-#' @param power Integer.
-#' @param hurst_index Numeric in range `(0, 1)`.
-#' @returns
-#' A function that takes a function `func` as its first argument
-#' and returns a time series.
-#' `func` is expected to take `n` as its first argument
-#' and return a numeric vector of length `n`.
+#' @rdname fbm
 #' @export
-#' @examples
-#' fbbridge_from()(runif, min = -1, max = 1)
 fbbridge_from <- function(power = 4, hurst_index = 0.5) {
   function(func, ...) {
     n <- 2^power
@@ -38,18 +35,8 @@ fbbridge_from <- function(power = 4, hurst_index = 0.5) {
   }
 }
 
-#' Create a 2D fractional Brownian bridge generator
-#'
-#' @param power Integer.
-#' @param hurst_index Numeric in range `(0, 1)`.
-#' @returns
-#' A function that takes a function `func` as its first argument
-#' and returns a matrix.
-#' `func` is expected to take `n` as its first argument
-#' and return a numeric vector of length `n`.
+#' @rdname fbm
 #' @export
-#' @examples
-#' fbbridge_2d_from()(runif, min = -1, max = 1)
 fbbridge_2d_from <- function(power = 4, hurst_index = 0.5) {
   function(func, ...) {
     n <- 2^power

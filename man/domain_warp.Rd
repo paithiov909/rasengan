@@ -23,15 +23,18 @@ domain_warp(
 
 \item{warp_type}{A string; Warp type.}
 
-\item{amplitude}{A numeric scalar; Amplitude (the maximum warp distance from original position).}
+\item{amplitude}{A numeric scalar;
+Amplitude (the maximum warp distance from original position).}
 
 \item{fractal_type}{A string; Fractal type.}
 
 \item{octaves}{A numeric scalar; Number of octaves.}
 
-\item{lacunarity}{A numeric scalar; Lacunarity (the frequency multiplier between each octave).}
+\item{lacunarity}{A numeric scalar;
+Lacunarity (the frequency multiplier between each octave).}
 
-\item{gain}{A numeric scalar; Gain (the relative strength of noise from each layer when compared to the last).}
+\item{gain}{A numeric scalar;
+Gain (the relative strength of noise from each layer when compared to the last).}
 
 \item{rotation_type}{A string; Rotation type for 3D noise.}
 }

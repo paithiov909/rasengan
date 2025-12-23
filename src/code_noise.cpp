@@ -1,13 +1,12 @@
 #include "FastNoiseLite.h"
 #include <cpp11.hpp>
 
-using namespace cpp11;
-
 [[cpp11::register]]
-doubles noise_2d_cpp(int type, int seed, float freq, int fractals, int octaves,
-                     float lacunarity, float gain, float weighted_strength,
-                     float ping_pong_strength, int distance_function,
-                     int return_type, float jitter, doubles_matrix<> d) {
+cpp11::doubles noise_2d_cpp(int type, int seed, float freq, int fractals,
+                            int octaves, float lacunarity, float gain,
+                            float weighted_strength, float ping_pong_strength,
+                            int distance_function, int return_type,
+                            float jitter, cpp11::doubles_matrix<> d) {
   FastNoiseLite gen(seed);
   gen.SetNoiseType(static_cast<FastNoiseLite::NoiseType>(type));
   gen.SetFrequency(freq);
@@ -26,7 +25,7 @@ doubles noise_2d_cpp(int type, int seed, float freq, int fractals, int octaves,
     gen.SetFractalPingPongStrength(ping_pong_strength);
   }
 
-  writable::doubles result(d.nrow());
+  cpp11::writable::doubles result(d.nrow());
   for (int i = 0; i < d.nrow(); i++) {
     result[i] = gen.GetNoise(d(i, 0), d(i, 1));
   }
@@ -34,11 +33,12 @@ doubles noise_2d_cpp(int type, int seed, float freq, int fractals, int octaves,
 }
 
 [[cpp11::register]]
-doubles noise_3d_cpp(int type, int seed, float freq, int fractals, int octaves,
-                     float lacunarity, float gain, float weighted_strength,
-                     float ping_pong_strength, int distance_function,
-                     int return_type, float jitter, int rotation_type,
-                     doubles_matrix<> d) {
+cpp11::doubles noise_3d_cpp(int type, int seed, float freq, int fractals,
+                            int octaves, float lacunarity, float gain,
+                            float weighted_strength, float ping_pong_strength,
+                            int distance_function, int return_type,
+                            float jitter, int rotation_type,
+                            cpp11::doubles_matrix<> d) {
   FastNoiseLite gen(seed);
   gen.SetNoiseType(static_cast<FastNoiseLite::NoiseType>(type));
   gen.SetRotationType3D(
@@ -59,7 +59,7 @@ doubles noise_3d_cpp(int type, int seed, float freq, int fractals, int octaves,
     gen.SetFractalPingPongStrength(ping_pong_strength);
   }
 
-  writable::doubles result(d.nrow());
+  cpp11::writable::doubles result(d.nrow());
   for (int i = 0; i < d.nrow(); i++) {
     result[i] = gen.GetNoise(d(i, 0), d(i, 1), d(i, 2));
   }
@@ -67,9 +67,10 @@ doubles noise_3d_cpp(int type, int seed, float freq, int fractals, int octaves,
 }
 
 [[cpp11::register]]
-doubles_matrix<> domain_warp_2d_cpp(int dtype, int seed, float amplitude,
-                                    int fractals, int octaves, float lacunarity,
-                                    float gain, doubles_matrix<> d) {
+cpp11::doubles_matrix<> domain_warp_2d_cpp(int dtype, int seed, float amplitude,
+                                           int fractals, int octaves,
+                                           float lacunarity, float gain,
+                                           cpp11::doubles_matrix<> d) {
   FastNoiseLite gen(seed);
   gen.SetDomainWarpType(static_cast<FastNoiseLite::DomainWarpType>(dtype));
   gen.SetDomainWarpAmp(amplitude);
@@ -81,7 +82,7 @@ doubles_matrix<> domain_warp_2d_cpp(int dtype, int seed, float amplitude,
     gen.SetFractalGain(gain);
   }
 
-  writable::doubles_matrix<> result(d.nrow(), 2);
+  cpp11::writable::doubles_matrix<> result(d.nrow(), 2);
   double x, y;
   for (int i = 0; i < d.nrow(); i++) {
     x = d(i, 0);
@@ -94,13 +95,16 @@ doubles_matrix<> domain_warp_2d_cpp(int dtype, int seed, float amplitude,
 }
 
 [[cpp11::register]]
-doubles_matrix<> domain_warp_3d_cpp(int dtype, int seed, float amplitude,
-                                    int fractals, int octaves, float lacunarity,
-                                    float gain, int rotation_type, doubles_matrix<> d) {
+cpp11::doubles_matrix<> domain_warp_3d_cpp(int dtype, int seed, float amplitude,
+                                           int fractals, int octaves,
+                                           float lacunarity, float gain,
+                                           int rotation_type,
+                                           cpp11::doubles_matrix<> d) {
   FastNoiseLite gen(seed);
   gen.SetDomainWarpType(static_cast<FastNoiseLite::DomainWarpType>(dtype));
   gen.SetDomainWarpAmp(amplitude);
-  gen.SetRotationType3D(static_cast<FastNoiseLite::RotationType3D>(rotation_type));
+  gen.SetRotationType3D(
+      static_cast<FastNoiseLite::RotationType3D>(rotation_type));
 
   if (fractals != 0) {
     gen.SetFractalType(static_cast<FastNoiseLite::FractalType>(fractals));
@@ -109,7 +113,7 @@ doubles_matrix<> domain_warp_3d_cpp(int dtype, int seed, float amplitude,
     gen.SetFractalGain(gain);
   }
 
-  writable::doubles_matrix<> result(d.nrow(), 3);
+  cpp11::writable::doubles_matrix<> result(d.nrow(), 3);
   double x, y, z;
   for (int i = 0; i < d.nrow(); i++) {
     x = d(i, 0);

@@ -11,14 +11,14 @@
 #' @param fractal_type A string; Fractal type.
 #' @param octaves A numeric scalar; Number of octaves.
 #' @param lacunarity A numeric scalar;
-#' Lacunarity (the frequency multiplier between each octave).
+#'  Lacunarity (the frequency multiplier between each octave).
 #' @param gain A numeric scalar;
-#' Gain (the relative strength of noise from each layer when compared to the last).
+#'  Gain (the relative strength of noise from each layer when compared to the last).
 #' @param weighted_strength A numeric scalar;
-#' Weighted strength for fractal noise.
-#' Keep between `0` and `1` to maintain `[-1, 1]` output bounding.
+#'  Weighted strength for fractal noise.
+#'  Keep between `0` and `1` to maintain `[-1, 1]` output bounding.
 #' @param ping_pong_strength A numeric scalar;
-#' Ping-pong strength for 'PingPong' fractal noise.
+#'  Ping-pong strength for 'PingPong' fractal noise.
 #' @param distance_function A string; Distance function for cellular noise.
 #' @param return_type A string; Return type for cellular noise.
 #' @param jitter A numeric scalar; Jitter for cellular noise.
@@ -31,7 +31,8 @@
 #'
 #' and returns noise values.
 #' Note that `seed` is set to a random value by default,
-#' so if you want to use the same seed for multiple calls, you need to explicitly set it.
+#' so if you want to use the same seed for multiple calls,
+#' you need to explicitly set it.
 #' @examples
 #' if (requireNamespace("dplyr", quietly = TRUE)) {
 #'   nz <- expand(
@@ -294,11 +295,14 @@ noise_3d <- function(
 #' @param data A numeric matrix that has just 2 or 3 columns.
 #' @param seed An integer scalar; Random seed.
 #' @param warp_type A string; Warp type.
-#' @param amplitude A numeric scalar; Amplitude (the maximum warp distance from original position).
+#' @param amplitude A numeric scalar;
+#'  Amplitude (the maximum warp distance from original position).
 #' @param fractal_type A string; Fractal type.
 #' @param octaves A numeric scalar; Number of octaves.
-#' @param lacunarity A numeric scalar; Lacunarity (the frequency multiplier between each octave).
-#' @param gain A numeric scalar; Gain (the relative strength of noise from each layer when compared to the last).
+#' @param lacunarity A numeric scalar;
+#'  Lacunarity (the frequency multiplier between each octave).
+#' @param gain A numeric scalar;
+#'  Gain (the relative strength of noise from each layer when compared to the last).
 #' @param rotation_type A string; Rotation type for 3D noise.
 #' @returns A double matrix.
 #' @examples

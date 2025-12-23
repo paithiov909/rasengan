@@ -1,7 +1,7 @@
 #' Miscellaneous functions
 #'
 #' @param x A numeric vector.
-#' @param mat A numeric matrix or data frame.
+#' @param mat A numeric matrix or a data frame.
 #' @param origin A numeric vector to be subtracted from `mat`.
 #' @returns A numeric vector.
 #' @rdname misc
@@ -29,35 +29,16 @@ fract <- function(x) {
 #' @rdname misc
 #' @export
 mag <- function(mat, origin = c(0, 0)) {
+  if (ncol(mat) != length(origin)) {
+    rlang::abort("The length of `origin` must equal the number of columns of `mat`.")
+  }
   sqrt(rowSums((mat - origin)^2))
 }
 
-#' Circular shift
-#'
-#' @param x A data.frame or vector.
-#' @param k An integer to shift `x` by.
-#' @importFrom utils head tail
+#' @rdname misc
 #' @export
-shift <- function(x, k) {
-  UseMethod("shift")
-}
-
-#' @export
-shift.default <- function(x, k) {
-  k <- as.integer(k %% length(x))
-  if (identical(k, 0L)) {
-    return(x)
-  }
-  c(tail(x, -k), head(x, k))
-}
-
-#' @export
-shift.data.frame <- function(x, k) {
-  k <- as.integer(k %% nrow(x))
-  if (identical(k, 0L)) {
-    return(x)
-  }
-  rbind(tail(x, -k), head(x, k), make.row.names = FALSE)
+pingpong <- function(x) {
+  c(x, rev(x[-length(x)]))
 }
 
 #' Expand grid

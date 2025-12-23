@@ -10,21 +10,24 @@
 #' @param start A numeric vector of length 2 giving the starting coordinates (x, y).
 #' @param end A numeric vector of length 2 giving the target coordinates (x, y).
 #' @param mouse_speed A numeric scalar.
-#' The base speed factor that affects the dynamics of movement.
+#'  The base speed factor that affects the dynamics of movement.
 #' @param gravity A numeric scalar
-#' that controls the strength of "pull" toward the target.
+#'  that controls the strength of "pull" toward the target.
 #' @param wind A numeric scalar
-#' that controls the random "wind-like" movement during the motion.
+#'  that controls the random "wind-like" movement during the motion.
 #' @param min_wait A numeric scalar. Minimum wait time (ms) per step, affects timestamp `t`.
 #' @param max_wait A numeric scalar. Maximum wait time (ms) per step.
 #' @param max_step A numeric scalar. Maximum movement length per iteration.
 #' @param target_area A numeric scalar.
-#' Radius within which the movement slows down and stabilizes.
+#'  Radius within which the movement slows down and stabilizes.
 #' @param seed An integer scalar. Random seed for reproducible paths.
-#' @returns A data frame with columns:
+#' @returns
+#' A data frame with columns:
+#'
 #' * `x`: X coordinate of the cursor.
 #' * `y`: Y coordinate of the cursor.
 #' * `t`: Cumulative time in milliseconds since the start.
+#'
 #' @family path
 #' @export
 #' @examples
@@ -42,10 +45,9 @@ path_mouse <- function(
   target_area = 10,
   seed = sample.int(1337, 1)
 ) {
-  stopifnot(
-    length(start) == 2,
-    length(end) == 2
-  )
+  if (length(start) != 2 || length(end) != 2) {
+    rlang::abort("`start` and `end` must be vectors of length 2.")
+  }
   ret <-
     wind_mouse_cpp(
       start,

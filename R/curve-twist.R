@@ -20,19 +20,19 @@
 #' @param n An integer scalar.
 #' Number of points to generate along the curve.
 #' @param amplitude A numeric scalar.
-#' Amplitude of the radial modulation in the 3D spiral.
-#' Controls how tightly the loop twists.
+#'  Amplitude of the radial modulation in the 3D spiral.
+#'  Controls how tightly the loop twists.
 #' @param frequency A numeric scalar.
-#' Frequency of the radial modulation (i.e., number of bumps per revolution).
+#'  Frequency of the radial modulation (i.e., number of bumps per revolution).
 #' @param origin A numeric vector of length 2.
-#' The desired starting position of the curve in 2D space.
+#'  The desired starting position of the curve in 2D space.
 #' @param direction A numeric vector of length 2.
-#' A target point indicating the overall orientation and extent of the curve.
-#' The curve will be transformed to point
-#' approximately from `origin` toward this vector.
+#'  A target point indicating the overall orientation and extent of the curve.
+#'  The curve will be transformed to point
+#'  approximately from `origin` toward this vector.
 #' @param t_range A numeric vector of length 2.
-#' The range of the parameter `t`, which controls how far along the spiral to travel.
-#' Larger ranges yield longer, more twisted curves.
+#'  The range of the parameter `t`, which controls how far along the spiral to travel.
+#'  Larger ranges yield longer, more twisted curves.
 #' @returns A data frame with columns `x` and `y`.
 #' @family curve
 #' @export

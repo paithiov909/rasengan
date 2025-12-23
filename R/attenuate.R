@@ -12,8 +12,10 @@
 #' @param n An integer scalar. The number of steps in the sequence.
 #' @param init A numeric scalar. The initial value of the sequence.
 #' @param velocity A numeric scalar. The velocity or change rate for each step.
-#' @param limits A numeric vector of length 2. The minimum and maximum values allowed in the sequence.
-#' @param damping A numeric scalar. The damping factor applied to the velocity at each step.
+#' @param limits A numeric vector of length 2.
+#'  The minimum and maximum values allowed in the sequence.
+#' @param damping A numeric scalar.
+#'  The damping factor applied to the velocity at each step.
 #' @param mass A numeric scalar. The mass of the object bouncing.
 #' @returns A numeric vector.
 #' @rdname attenuate
@@ -23,9 +25,6 @@ NULL
 #' @rdname attenuate
 #' @export
 attenuate <- function(n, init, velocity, damping = 1) {
-  if (damping <= 0) {
-    rlang::warn("Damping factor should be non-negative")
-  }
   sq <- seq_len(n)
   c(init, init + cumsum(velocity * damping^sq))
 }
@@ -35,9 +34,6 @@ attenuate <- function(n, init, velocity, damping = 1) {
 bounce_off <- function(n, init, velocity, limits, damping = -1, mass = 0) {
   if (mass > velocity) {
     rlang::abort("Mass must be less than velocity")
-  }
-  if (damping >= 0) {
-    rlang::warn("Damping factor should be negative")
   }
   limits <- as.double(limits)
   bounce_cpp(
