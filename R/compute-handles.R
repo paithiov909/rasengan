@@ -86,7 +86,7 @@ compute_handles <- function(
 #' @noRd
 normalise <- function(v) {
   d <- sqrt(sum(v * v))
-  if (d == 0) v else v / d
+  if (is.na(d) || d == 0) v else v / d
 }
 
 compute_handles_catmull <- function(points) {

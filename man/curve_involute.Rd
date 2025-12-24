@@ -24,7 +24,6 @@ Generates a 2D curve that is an involute curve.
 Other curve: 
 \code{\link{bezier}},
 \code{\link{curve_archimedean}()},
-\code{\link{curve_random}()},
 \code{\link{curve_spring}()},
 \code{\link{curve_twist}()}
 }

@@ -43,7 +43,7 @@ curve_archimedean <- function(n, a = 0, b = 1, c = 1, base = exp(1)) {
 #' @export
 curve_spring <- function(n, k = 1, m = .1, scale = 1, base = exp(1)) {
   if (scale < 0) {
-    rlang::abort("`scale` must be greater than 0")
+    rlang::abort("`scale` must be greater than 0.")
   }
   theta <- seq(0, by = pi / log(n, base = base), length.out = n)
   rd <- scale / (1 + k * exp(1)^(m * theta))
@@ -67,7 +67,7 @@ curve_spring <- function(n, k = 1, m = .1, scale = 1, base = exp(1)) {
 #' @export
 curve_involute <- function(n, scale = 1, base = exp(1)) {
   if (scale < 0) {
-    rlang::abort("`scale` must be greater than 0")
+    rlang::abort("`scale` must be greater than 0.")
   }
   theta <- seq(0, by = pi / log(n, base = base), length.out = n)
   ret <- data.frame(

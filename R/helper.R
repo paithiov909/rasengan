@@ -62,7 +62,7 @@ int_match <- function(x, arg, values) {
     msg <- glue::glue(
       "`{arg}` must be one of {paste0(values, collapse = ', ')}. Got '{x}'."
     )
-    rlang::abort(msg)
+    rlang::abort(msg, call = rlang::caller_env())
   }
   tmp
 }

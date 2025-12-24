@@ -52,8 +52,8 @@ path_mouse <- function(
   }
   ret <-
     wind_mouse_cpp(
-      start,
-      end,
+      as.double(start),
+      as.double(end),
       gravity,
       wind,
       min_wait,

@@ -27,7 +27,6 @@ Other curve:
 \code{\link{bezier}},
 \code{\link{curve_archimedean}()},
 \code{\link{curve_involute}()},
-\code{\link{curve_random}()},
 \code{\link{curve_twist}()}
 }
 \concept{curve}
