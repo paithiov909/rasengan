@@ -5,6 +5,34 @@
 #include "cpp11/declarations.hpp"
 #include <R_ext/Visibility.h>
 
+// code_bezier.cpp
+cpp11::doubles_matrix<> bezier_value_at_cpp(const cpp11::doubles_matrix<>& pts, const cpp11::doubles& t);
+extern "C" SEXP _rasengan_bezier_value_at_cpp(SEXP pts, SEXP t) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(bezier_value_at_cpp(cpp11::as_cpp<cpp11::decay_t<const cpp11::doubles_matrix<>&>>(pts), cpp11::as_cpp<cpp11::decay_t<const cpp11::doubles&>>(t)));
+  END_CPP11
+}
+// code_bezier.cpp
+cpp11::doubles_matrix<> bezier_derivative_at_cpp(const cpp11::doubles_matrix<>& pts, const cpp11::doubles& t);
+extern "C" SEXP _rasengan_bezier_derivative_at_cpp(SEXP pts, SEXP t) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(bezier_derivative_at_cpp(cpp11::as_cpp<cpp11::decay_t<const cpp11::doubles_matrix<>&>>(pts), cpp11::as_cpp<cpp11::decay_t<const cpp11::doubles&>>(t)));
+  END_CPP11
+}
+// code_bezier.cpp
+cpp11::doubles_matrix<> bezier_normal_at_cpp(const cpp11::doubles_matrix<>& pts, const cpp11::doubles& t);
+extern "C" SEXP _rasengan_bezier_normal_at_cpp(SEXP pts, SEXP t) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(bezier_normal_at_cpp(cpp11::as_cpp<cpp11::decay_t<const cpp11::doubles_matrix<>&>>(pts), cpp11::as_cpp<cpp11::decay_t<const cpp11::doubles&>>(t)));
+  END_CPP11
+}
+// code_bezier.cpp
+cpp11::doubles_matrix<> bezier_tangent_at_cpp(const cpp11::doubles_matrix<>& pts, const cpp11::doubles& t);
+extern "C" SEXP _rasengan_bezier_tangent_at_cpp(SEXP pts, SEXP t) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(bezier_tangent_at_cpp(cpp11::as_cpp<cpp11::decay_t<const cpp11::doubles_matrix<>&>>(pts), cpp11::as_cpp<cpp11::decay_t<const cpp11::doubles&>>(t)));
+  END_CPP11
+}
 // code_bounce.cpp
 cpp11::doubles bounce_cpp(int n, double init, double velocity, double damping, double mass, double min, double max);
 extern "C" SEXP _rasengan_bounce_cpp(SEXP n, SEXP init, SEXP velocity, SEXP damping, SEXP mass, SEXP min, SEXP max) {
@@ -323,51 +351,55 @@ extern "C" SEXP _rasengan_genidx_zigzag_cpp(SEXP mat) {
 
 extern "C" {
 static const R_CallMethodDef CallEntries[] = {
-    {"_rasengan_bounce_cpp",         (DL_FUNC) &_rasengan_bounce_cpp,          7},
-    {"_rasengan_domain_warp_2d_cpp", (DL_FUNC) &_rasengan_domain_warp_2d_cpp,  8},
-    {"_rasengan_domain_warp_3d_cpp", (DL_FUNC) &_rasengan_domain_warp_3d_cpp,  9},
-    {"_rasengan_es_biarc_cpp",       (DL_FUNC) &_rasengan_es_biarc_cpp,        3},
-    {"_rasengan_es_spiral_cpp",      (DL_FUNC) &_rasengan_es_spiral_cpp,       4},
-    {"_rasengan_fbm_1d_cpp",         (DL_FUNC) &_rasengan_fbm_1d_cpp,          2},
-    {"_rasengan_fbr_1d_cpp",         (DL_FUNC) &_rasengan_fbr_1d_cpp,          2},
-    {"_rasengan_fbr_2d_cpp",         (DL_FUNC) &_rasengan_fbr_2d_cpp,          2},
-    {"_rasengan_genidx_rings_cpp",   (DL_FUNC) &_rasengan_genidx_rings_cpp,    1},
-    {"_rasengan_genidx_spiral_cpp",  (DL_FUNC) &_rasengan_genidx_spiral_cpp,   1},
-    {"_rasengan_genidx_stride_cpp",  (DL_FUNC) &_rasengan_genidx_stride_cpp,   2},
-    {"_rasengan_genidx_zigzag_cpp",  (DL_FUNC) &_rasengan_genidx_zigzag_cpp,   1},
-    {"_rasengan_in_back",            (DL_FUNC) &_rasengan_in_back,             1},
-    {"_rasengan_in_bounce",          (DL_FUNC) &_rasengan_in_bounce,           1},
-    {"_rasengan_in_circ",            (DL_FUNC) &_rasengan_in_circ,             1},
-    {"_rasengan_in_cubic",           (DL_FUNC) &_rasengan_in_cubic,            1},
-    {"_rasengan_in_elastic",         (DL_FUNC) &_rasengan_in_elastic,          1},
-    {"_rasengan_in_exp",             (DL_FUNC) &_rasengan_in_exp,              1},
-    {"_rasengan_in_out_back",        (DL_FUNC) &_rasengan_in_out_back,         1},
-    {"_rasengan_in_out_bounce",      (DL_FUNC) &_rasengan_in_out_bounce,       1},
-    {"_rasengan_in_out_circ",        (DL_FUNC) &_rasengan_in_out_circ,         1},
-    {"_rasengan_in_out_cubic",       (DL_FUNC) &_rasengan_in_out_cubic,        1},
-    {"_rasengan_in_out_elastic",     (DL_FUNC) &_rasengan_in_out_elastic,      1},
-    {"_rasengan_in_out_exp",         (DL_FUNC) &_rasengan_in_out_exp,          1},
-    {"_rasengan_in_out_quad",        (DL_FUNC) &_rasengan_in_out_quad,         1},
-    {"_rasengan_in_out_quart",       (DL_FUNC) &_rasengan_in_out_quart,        1},
-    {"_rasengan_in_out_quint",       (DL_FUNC) &_rasengan_in_out_quint,        1},
-    {"_rasengan_in_out_sine",        (DL_FUNC) &_rasengan_in_out_sine,         1},
-    {"_rasengan_in_quad",            (DL_FUNC) &_rasengan_in_quad,             1},
-    {"_rasengan_in_quart",           (DL_FUNC) &_rasengan_in_quart,            1},
-    {"_rasengan_in_quint",           (DL_FUNC) &_rasengan_in_quint,            1},
-    {"_rasengan_in_sine",            (DL_FUNC) &_rasengan_in_sine,             1},
-    {"_rasengan_noise_2d_cpp",       (DL_FUNC) &_rasengan_noise_2d_cpp,       13},
-    {"_rasengan_noise_3d_cpp",       (DL_FUNC) &_rasengan_noise_3d_cpp,       14},
-    {"_rasengan_out_back",           (DL_FUNC) &_rasengan_out_back,            1},
-    {"_rasengan_out_bounce",         (DL_FUNC) &_rasengan_out_bounce,          1},
-    {"_rasengan_out_circ",           (DL_FUNC) &_rasengan_out_circ,            1},
-    {"_rasengan_out_cubic",          (DL_FUNC) &_rasengan_out_cubic,           1},
-    {"_rasengan_out_elastic",        (DL_FUNC) &_rasengan_out_elastic,         1},
-    {"_rasengan_out_exp",            (DL_FUNC) &_rasengan_out_exp,             1},
-    {"_rasengan_out_quad",           (DL_FUNC) &_rasengan_out_quad,            1},
-    {"_rasengan_out_quart",          (DL_FUNC) &_rasengan_out_quart,           1},
-    {"_rasengan_out_quint",          (DL_FUNC) &_rasengan_out_quint,           1},
-    {"_rasengan_out_sine",           (DL_FUNC) &_rasengan_out_sine,            1},
-    {"_rasengan_wind_mouse_cpp",     (DL_FUNC) &_rasengan_wind_mouse_cpp,     10},
+    {"_rasengan_bezier_derivative_at_cpp", (DL_FUNC) &_rasengan_bezier_derivative_at_cpp,  2},
+    {"_rasengan_bezier_normal_at_cpp",     (DL_FUNC) &_rasengan_bezier_normal_at_cpp,      2},
+    {"_rasengan_bezier_tangent_at_cpp",    (DL_FUNC) &_rasengan_bezier_tangent_at_cpp,     2},
+    {"_rasengan_bezier_value_at_cpp",      (DL_FUNC) &_rasengan_bezier_value_at_cpp,       2},
+    {"_rasengan_bounce_cpp",               (DL_FUNC) &_rasengan_bounce_cpp,                7},
+    {"_rasengan_domain_warp_2d_cpp",       (DL_FUNC) &_rasengan_domain_warp_2d_cpp,        8},
+    {"_rasengan_domain_warp_3d_cpp",       (DL_FUNC) &_rasengan_domain_warp_3d_cpp,        9},
+    {"_rasengan_es_biarc_cpp",             (DL_FUNC) &_rasengan_es_biarc_cpp,              3},
+    {"_rasengan_es_spiral_cpp",            (DL_FUNC) &_rasengan_es_spiral_cpp,             4},
+    {"_rasengan_fbm_1d_cpp",               (DL_FUNC) &_rasengan_fbm_1d_cpp,                2},
+    {"_rasengan_fbr_1d_cpp",               (DL_FUNC) &_rasengan_fbr_1d_cpp,                2},
+    {"_rasengan_fbr_2d_cpp",               (DL_FUNC) &_rasengan_fbr_2d_cpp,                2},
+    {"_rasengan_genidx_rings_cpp",         (DL_FUNC) &_rasengan_genidx_rings_cpp,          1},
+    {"_rasengan_genidx_spiral_cpp",        (DL_FUNC) &_rasengan_genidx_spiral_cpp,         1},
+    {"_rasengan_genidx_stride_cpp",        (DL_FUNC) &_rasengan_genidx_stride_cpp,         2},
+    {"_rasengan_genidx_zigzag_cpp",        (DL_FUNC) &_rasengan_genidx_zigzag_cpp,         1},
+    {"_rasengan_in_back",                  (DL_FUNC) &_rasengan_in_back,                   1},
+    {"_rasengan_in_bounce",                (DL_FUNC) &_rasengan_in_bounce,                 1},
+    {"_rasengan_in_circ",                  (DL_FUNC) &_rasengan_in_circ,                   1},
+    {"_rasengan_in_cubic",                 (DL_FUNC) &_rasengan_in_cubic,                  1},
+    {"_rasengan_in_elastic",               (DL_FUNC) &_rasengan_in_elastic,                1},
+    {"_rasengan_in_exp",                   (DL_FUNC) &_rasengan_in_exp,                    1},
+    {"_rasengan_in_out_back",              (DL_FUNC) &_rasengan_in_out_back,               1},
+    {"_rasengan_in_out_bounce",            (DL_FUNC) &_rasengan_in_out_bounce,             1},
+    {"_rasengan_in_out_circ",              (DL_FUNC) &_rasengan_in_out_circ,               1},
+    {"_rasengan_in_out_cubic",             (DL_FUNC) &_rasengan_in_out_cubic,              1},
+    {"_rasengan_in_out_elastic",           (DL_FUNC) &_rasengan_in_out_elastic,            1},
+    {"_rasengan_in_out_exp",               (DL_FUNC) &_rasengan_in_out_exp,                1},
+    {"_rasengan_in_out_quad",              (DL_FUNC) &_rasengan_in_out_quad,               1},
+    {"_rasengan_in_out_quart",             (DL_FUNC) &_rasengan_in_out_quart,              1},
+    {"_rasengan_in_out_quint",             (DL_FUNC) &_rasengan_in_out_quint,              1},
+    {"_rasengan_in_out_sine",              (DL_FUNC) &_rasengan_in_out_sine,               1},
+    {"_rasengan_in_quad",                  (DL_FUNC) &_rasengan_in_quad,                   1},
+    {"_rasengan_in_quart",                 (DL_FUNC) &_rasengan_in_quart,                  1},
+    {"_rasengan_in_quint",                 (DL_FUNC) &_rasengan_in_quint,                  1},
+    {"_rasengan_in_sine",                  (DL_FUNC) &_rasengan_in_sine,                   1},
+    {"_rasengan_noise_2d_cpp",             (DL_FUNC) &_rasengan_noise_2d_cpp,             13},
+    {"_rasengan_noise_3d_cpp",             (DL_FUNC) &_rasengan_noise_3d_cpp,             14},
+    {"_rasengan_out_back",                 (DL_FUNC) &_rasengan_out_back,                  1},
+    {"_rasengan_out_bounce",               (DL_FUNC) &_rasengan_out_bounce,                1},
+    {"_rasengan_out_circ",                 (DL_FUNC) &_rasengan_out_circ,                  1},
+    {"_rasengan_out_cubic",                (DL_FUNC) &_rasengan_out_cubic,                 1},
+    {"_rasengan_out_elastic",              (DL_FUNC) &_rasengan_out_elastic,               1},
+    {"_rasengan_out_exp",                  (DL_FUNC) &_rasengan_out_exp,                   1},
+    {"_rasengan_out_quad",                 (DL_FUNC) &_rasengan_out_quad,                  1},
+    {"_rasengan_out_quart",                (DL_FUNC) &_rasengan_out_quart,                 1},
+    {"_rasengan_out_quint",                (DL_FUNC) &_rasengan_out_quint,                 1},
+    {"_rasengan_out_sine",                 (DL_FUNC) &_rasengan_out_sine,                  1},
+    {"_rasengan_wind_mouse_cpp",           (DL_FUNC) &_rasengan_wind_mouse_cpp,           10},
     {NULL, NULL, 0}
 };
 }

@@ -1,6 +1,7 @@
 #' Smoothing functions
 #'
 #' @param t A numeric vector.
+#' @param x1,y1,x2,y2 Numeric scalars for bezier easing.
 #' @param type A string. The type of easing function to use.
 #' @returns A numeric vector.
 #' @rdname smoothing
@@ -13,6 +14,13 @@ smoothstep <- function(t) {
 #' @export
 smootherstep <- function(t) {
   t * t * t * (t * (t * 6.0 - 15.0) + 10.0)
+}
+
+#' @rdname smoothing
+#' @export
+ease_bezier <- function(t, x1, y1, x2, y2) {
+  t <- as.double(t)
+  bezier_value_at_cpp(t, matrix(c(0, 0, x1, y1, x2, y2, 1, 1), ncol = 8))
 }
 
 #' @rdname smoothing

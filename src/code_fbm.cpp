@@ -1,6 +1,6 @@
-#include <cpp11.hpp>
 #include "fbm/fbm.hpp"
 #include "fbm/generate_normal_random.hpp"
+#include <cpp11.hpp>
 
 [[cpp11::register]]
 cpp11::doubles fbm_1d_cpp(double hurst_idx, const std::vector<double>& X) {

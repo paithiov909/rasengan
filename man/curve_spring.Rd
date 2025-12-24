@@ -24,6 +24,7 @@ Generates a 2D curve that is a balance spring curve.
 }
 \seealso{
 Other curve: 
+\code{\link{bezier}},
 \code{\link{curve_archimedean}()},
 \code{\link{curve_involute}()},
 \code{\link{curve_random}()},

@@ -33,7 +33,7 @@
 #' If the parameter estimation fails,
 #' the returned data may contain missing values, which are automatically removed.
 #' @seealso
-#' [CoffeeKumazaki/euler_spiral: The c++ implementation for Euler spiral (clothoid).](https://github.com/CoffeeKumazaki/euler_spiral)
+#' [CoffeeKumazaki/euler_spiral](https://github.com/CoffeeKumazaki/euler_spiral)
 #' @export
 #' @family path
 #' @examples

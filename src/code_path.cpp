@@ -1,5 +1,5 @@
-#include <cpp11.hpp>
 #include "es/euler_spiral.hpp"
+#include <cpp11.hpp>
 
 [[cpp11::register]]
 cpp11::doubles_matrix<> es_spiral_cpp(

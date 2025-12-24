@@ -58,7 +58,7 @@ with(path, plot(x, y, type = "l", asp = 1))
 }
 }
 \seealso{
-\href{https://github.com/CoffeeKumazaki/euler_spiral}{CoffeeKumazaki/euler_spiral: The c++ implementation for Euler spiral (clothoid).}
+\href{https://github.com/CoffeeKumazaki/euler_spiral}{CoffeeKumazaki/euler_spiral}
 
 Other path: 
 \code{\link{path_mouse}()}

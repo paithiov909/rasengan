@@ -29,9 +29,6 @@ fract <- function(x) {
 #' @rdname misc
 #' @export
 mag <- function(mat, origin = c(0, 0)) {
-  if (ncol(mat) != length(origin)) {
-    rlang::abort("The length of `origin` must equal the number of columns of `mat`.")
-  }
   sqrt(rowSums((mat - origin)^2))
 }
 
@@ -58,7 +55,6 @@ expand <- function(...) {
 #' @param arg Argument name.
 #' @param values Possible values.
 #' @returns An integer scalar.
-#' @keywords internal
 #' @noRd
 int_match <- function(x, arg, values) {
   tmp <- match(x[1], values) - 1L
@@ -75,7 +71,6 @@ int_match <- function(x, arg, values) {
 #'
 #' @param x A matrix.
 #' @returns A data frame.
-#' @keywords internal
 #' @noRd
 entbl <- function(x) {
   x <- as.data.frame(x)

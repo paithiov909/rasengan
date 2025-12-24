@@ -126,7 +126,7 @@ shift <- function(x, k) {
 #' @export
 shift.default <- function(x, k) {
   k <- as.integer(k %% length(x))
-  if (identical(k, 0L)) {
+  if (k == 0L) {
     return(x)
   }
   c(tail(x, -k), head(x, k))
@@ -136,7 +136,7 @@ shift.default <- function(x, k) {
 #' @export
 shift.data.frame <- function(x, k) {
   k <- as.integer(k %% nrow(x))
-  if (identical(k, 0L)) {
+  if (k == 0L) {
     return(x)
   }
   temp <- x

@@ -3,6 +3,7 @@
 \name{smoothstep}
 \alias{smoothstep}
 \alias{smootherstep}
+\alias{ease_bezier}
 \alias{ease_in}
 \alias{ease_out}
 \alias{ease_in_out}
@@ -11,6 +12,8 @@
 smoothstep(t)
 
 smootherstep(t)
+
+ease_bezier(t, x1, y1, x2, y2)
 
 ease_in(
   t,
@@ -32,6 +35,8 @@ ease_in_out(
 }
 \arguments{
 \item{t}{A numeric vector.}
+
+\item{x1, y1, x2, y2}{Numeric scalars for bezier easing.}
 
 \item{type}{A string. The type of easing function to use.}
 }
