@@ -3,12 +3,15 @@
 \name{modifications}
 \alias{modifications}
 \alias{blend}
+\alias{normalise}
 \alias{normalize}
 \alias{cap}
 \alias{pulse}
 \title{Simply value modifications}
 \usage{
 blend(x, y, mask)
+
+normalise(x)
 
 normalize(x, from = range(x), to = c(0, 1))
 

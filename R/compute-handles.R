@@ -83,12 +83,6 @@ compute_handles <- function(
   entbl(out)
 }
 
-#' @noRd
-normalise <- function(v) {
-  d <- sqrt(sum(v * v))
-  if (is.na(d) || d == 0) v else v / d
-}
-
 compute_handles_catmull <- function(points) {
   k <- nrow(points) %||% 0
   if (k < 4) {

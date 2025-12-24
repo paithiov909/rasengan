@@ -24,6 +24,13 @@ blend <- function(x, y, mask) {
 
 #' @rdname modifications
 #' @export
+normalise <- function(x) {
+  d <- sqrt(sum(x * x, na.rm = TRUE))
+  if (d == 0) x else x / d
+}
+
+#' @rdname modifications
+#' @export
 normalize <- function(x, from = range(x), to = c(0, 1)) {
   x <- (x - from[1]) / (from[2] - from[1])
   if (!identical(to, c(0, 1))) {
