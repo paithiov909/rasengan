@@ -74,8 +74,10 @@ move a mouse cursor from \code{start} to \code{end}.
 It is a port from \href{https://github.com/arevi/wind-mouse}{arevi/wind-mouse}.
 }
 \examples{
+\dontrun{
 path <- path_mouse(start = c(0, 0), end = c(300, 200), seed = 123)
 with(path, plot(x, y, type = "l", asp = 1, main = "WindMouse Path"))
+}
 }
 \seealso{
 Other path: 

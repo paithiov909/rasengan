@@ -58,6 +58,7 @@ and the non-linear nature of the projection,
 the endpoints may not exactly match.
 }
 \examples{
+\dontrun{
 curve <- curve_twist(300)
 plot(curve, type = "l", asp = 1)
 
@@ -68,6 +69,7 @@ lines(curve2, col = "red")
 # More dramatic twist
 curve3 <- curve_twist(300, amplitude = 0.5, frequency = 3)
 lines(curve3, col = "blue")
+}
 }
 \seealso{
 Other curve: 

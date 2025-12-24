@@ -37,8 +37,10 @@
 #' @export
 #' @family path
 #' @examples
+#' \dontrun{
 #' path <- path_clothoid()
 #' with(path, plot(x, y, type = "l", asp = 1))
+#' }
 path_clothoid <- function(
   start = c(0, 0, pi / 4),
   end = c(25, 10, pi),

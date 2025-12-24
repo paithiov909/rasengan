@@ -39,5 +39,7 @@ A \code{transform3d} object.
 3D world to camera transformation
 }
 \seealso{
-ndc_mul
+Other camera: 
+\code{\link{ndc_mul}()}
 }
+\concept{camera}

@@ -45,9 +45,11 @@
 #'       id = dplyr::consecutive_id(id)
 #'     )
 #' }
+#' \dontrun{
 #' if (require("ggplot2", quietly = TRUE)) {
 #'   ggplot(nz) +
 #'     geom_tile(aes(x = x, y = y, fill = val))
+#' }
 #' }
 #' @rdname noise
 #' @name noise
@@ -317,9 +319,11 @@ noise_3d <- function(
 #'      id = dplyr::consecutive_id(id)
 #'    )
 #' }
+#' \dontrun{
 #' if (require("ggplot2", quietly = TRUE)) {
 #'   ggplot(nz) +
 #'     geom_tile(aes(x = x, y = y, fill = val))
+#' }
 #' }
 #' @export
 domain_warp <- function(

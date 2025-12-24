@@ -25,8 +25,8 @@ as_trans3d <- function(m) {
 #'
 #' @param lhs,rhs A numeric matrix.
 #' @returns A numeric matrix.
-#' @seealso camera
 #' @export
+#' @family camera
 #' @rdname ndc_mul
 ndc_mul <- function(lhs, rhs) UseMethod("ndc_mul")
 
@@ -64,8 +64,8 @@ ndc_mul.transform3d <- function(lhs, rhs) {
 #' @param width,height A numeric scalar giving the width and height of the viewport.
 #' @param ox,oy A numeric scalar giving the offset of the viewport in pixels.
 #' @returns A `transform3d` object.
+#' @family camera
 #'
-#' @seealso ndc_mul
 #' @rdname camera
 #' @name camera
 NULL

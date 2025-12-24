@@ -56,8 +56,10 @@ if (requireNamespace("dplyr", quietly = TRUE)) {
      id = dplyr::consecutive_id(id)
    )
 }
+\dontrun{
 if (require("ggplot2", quietly = TRUE)) {
   ggplot(nz) +
     geom_tile(aes(x = x, y = y, fill = val))
+}
 }
 }

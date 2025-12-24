@@ -19,5 +19,7 @@ A numeric matrix.
 Multiplication of two matrices after normalizing the first one.
 }
 \seealso{
-camera
+Other camera: 
+\code{\link{camera}}
 }
+\concept{camera}

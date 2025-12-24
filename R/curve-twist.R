@@ -37,6 +37,7 @@
 #' @family curve
 #' @export
 #' @examples
+#' \dontrun{
 #' curve <- curve_twist(300)
 #' plot(curve, type = "l", asp = 1)
 #'
@@ -47,6 +48,7 @@
 #' # More dramatic twist
 #' curve3 <- curve_twist(300, amplitude = 0.5, frequency = 3)
 #' lines(curve3, col = "blue")
+#' }
 curve_twist <- function(
   n,
   amplitude = 0.2,

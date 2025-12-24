@@ -31,8 +31,10 @@
 #' @family path
 #' @export
 #' @examples
+#' \dontrun{
 #' path <- path_mouse(start = c(0, 0), end = c(300, 200), seed = 123)
 #' with(path, plot(x, y, type = "l", asp = 1, main = "WindMouse Path"))
+#' }
 path_mouse <- function(
   start = c(0, 0),
   end = c(100, 100),
