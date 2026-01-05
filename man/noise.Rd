@@ -93,7 +93,7 @@ if (requireNamespace("dplyr", quietly = TRUE)) {
     y = seq(0, 32, by = 2)
   ) |>
     dplyr::mutate(
-      val = noise_3d()(data = cbind(id, x, y)),
+      val = noise_3d()(data = dplyr::pick(id, x, y)),
       id = dplyr::consecutive_id(id)
     )
 }

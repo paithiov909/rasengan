@@ -40,13 +40,16 @@ pingpong <- function(x) {
 
 #' Expand grid
 #'
-#' A thin wrapper for [expand.grid()] that returns a tibble.
+#' A thin wrapper for [expand.grid()] that returns a tibble
+#' while converting numeric columns to double.
 #'
 #' @param ... Arguments to be passed to [expand.grid()].
 #' @returns A tibble.
 #' @export
 expand <- function(...) {
-  entbl(expand.grid(..., stringsAsFactors = FALSE))
+  expand.grid(..., stringsAsFactors = FALSE) |>
+    lapply(function(x) if (is.numeric(x)) as.double(x) else x) |>
+    entbl()
 }
 
 #' Argument matching helper

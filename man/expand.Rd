@@ -13,5 +13,6 @@ expand(...)
 A tibble.
 }
 \description{
-A thin wrapper for \code{\link[=expand.grid]{expand.grid()}} that returns a tibble.
+A thin wrapper for \code{\link[=expand.grid]{expand.grid()}} that returns a tibble
+while converting numeric columns to double.
 }

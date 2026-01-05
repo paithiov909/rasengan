@@ -41,7 +41,7 @@
 #'     y = seq(0, 32, by = 2)
 #'   ) |>
 #'     dplyr::mutate(
-#'       val = noise_3d()(data = cbind(id, x, y)),
+#'       val = noise_3d()(data = dplyr::pick(id, x, y)),
 #'       id = dplyr::consecutive_id(id)
 #'     )
 #' }
@@ -143,9 +143,9 @@ noise_2d <- function(
     )
     d <-
       if (!is.null(data)) {
-        data
+        as.matrix(data)
       } else {
-        as.double(as.matrix(expand.grid(x, y)))
+        as.matrix(expand(x, y))
       }
     noise_2d_cpp(
       noise_type,
@@ -267,9 +267,9 @@ noise_3d <- function(
     )
     d <-
       if (!is.null(data)) {
-        data
+        as.matrix(data)
       } else {
-        as.double(as.matrix(expand.grid(x, y, z)))
+        as.matrix(expand(x, y, z))
       }
     noise_3d_cpp(
       noise_type,
@@ -294,7 +294,7 @@ noise_3d <- function(
 #'
 #' Warps data with domain warping.
 #'
-#' @param data A numeric matrix that has just 2 or 3 columns.
+#' @param data A matrix or data frame that has just 2 or 3 numeric columns.
 #' @param seed An integer scalar; Random seed.
 #' @param warp_type A string; Warp type.
 #' @param amplitude A numeric scalar;
@@ -315,7 +315,7 @@ noise_3d <- function(
 #'    y = seq(0, 32, by = 2)
 #'  ) |>
 #'    dplyr::mutate(
-#'      val = noise_3d()(data = cbind(id, x, y) |> domain_warp()),
+#'      val = noise_3d()(data = dplyr::pick(id, x, y) |> domain_warp()),
 #'      id = dplyr::consecutive_id(id)
 #'    )
 #' }

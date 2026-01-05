@@ -17,7 +17,7 @@ domain_warp(
 )
 }
 \arguments{
-\item{data}{A numeric matrix that has just 2 or 3 columns.}
+\item{data}{A matrix or data frame that has just 2 or 3 numeric columns.}
 
 \item{seed}{An integer scalar; Random seed.}
 
@@ -52,7 +52,7 @@ if (requireNamespace("dplyr", quietly = TRUE)) {
    y = seq(0, 32, by = 2)
  ) |>
    dplyr::mutate(
-     val = noise_3d()(data = cbind(id, x, y) |> domain_warp()),
+     val = noise_3d()(data = dplyr::pick(id, x, y) |> domain_warp()),
      id = dplyr::consecutive_id(id)
    )
 }
