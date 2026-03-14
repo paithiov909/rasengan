@@ -88,19 +88,19 @@ Creates a noise generator function that wraps
 \examples{
 if (requireNamespace("dplyr", quietly = TRUE)) {
   nz <- expand(
-    id = seq(0, 1, length.out = 16),
+    id = seq_len(4),
     x = seq(0, 32, by = 2),
     y = seq(0, 32, by = 2)
   ) |>
     dplyr::mutate(
-      val = noise_3d()(data = dplyr::pick(id, x, y)),
-      id = dplyr::consecutive_id(id)
+      val = noise_3d()(data = dplyr::pick(id, x, y))
     )
 }
 \dontrun{
 if (require("ggplot2", quietly = TRUE)) {
   ggplot(nz) +
-    geom_tile(aes(x = x, y = y, fill = val))
+    geom_tile(aes(x = x, y = y, fill = val)) +
+    facet_wrap(~ id)
 }
 }
 }

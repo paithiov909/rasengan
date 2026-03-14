@@ -32,9 +32,6 @@ attenuate <- function(n, init, velocity, damping = 1) {
 #' @rdname attenuate
 #' @export
 bounce_off <- function(n, init, velocity, limits, damping = -1, mass = 0) {
-  if (mass > velocity) {
-    rlang::abort("`mass` must be less than `velocity`.")
-  }
   limits <- as.double(limits)
   bounce_cpp(
     as.integer(n),

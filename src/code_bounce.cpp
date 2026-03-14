@@ -8,10 +8,10 @@ cpp11::doubles bounce_cpp(int n, double init, double velocity, double damping,
   for (int i = 0; i < n; i++) {
     result[i] = pos;
     pos += velocity;
-    if (pos + mass > max) {
+    if ((pos + mass) > max) {
       pos = max;
       velocity *= damping;
-    } else if (pos - mass < min) {
+    } else if ((pos - mass) < min) {
       pos = min;
       velocity *= damping;
     }
