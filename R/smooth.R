@@ -124,3 +124,55 @@ ease_in_out <- function(
     bounce = in_out_bounce(t)
   )
 }
+
+#' Interpolate between two values
+#'
+#' Adapted from
+#' [coolbutuseless/displease](https://github.com/coolbutuseless/displease).
+#'
+#' @param x1,x2 Numeric scalars.
+#' @param col1,col2 Character scalars. The colors to interpolate between.
+#' @param n `length.out` parameter for [base::seq()].
+#' @param ease A function to ease the sequence.
+#' @param colorspace A string. Color space in which to do the interpolation.
+#'  See [farver::convert_colour()] for details.
+#' @returns
+#'  * For `seq_ease()`, a numeric vector.
+#'  * For `seq_color()`, a character vector.
+#' @rdname seq-ease
+#' @export
+seq_ease <- function(
+  x1,
+  x2,
+  n = 100,
+  ease = \(t) ease_in_out(t, "cubic")
+) {
+  t <- seq(0, 1, length.out = n)
+  blend(x2, x1, ease(t))
+}
+
+#' @rdname seq-ease
+#' @export
+seq_color <- function(
+  col1,
+  col2,
+  n = 100,
+  ease = \(t) ease_in_out(t, "cubic"),
+  colorspace = "hcl"
+) {
+  if (!requireNamespace("farver", quietly = TRUE)) {
+    rlang::abort(glue::glue("The farver package is required."))
+  }
+  rgb <- farver::decode_colour(c(col1, col2))
+  cs <- farver::convert_colour(rgb, from = "rgb", to = colorspace)
+
+  columns <- lapply(
+    seq_len(ncol(cs)),
+    function(idx) {
+      seq_ease(cs[1, idx], cs[2, idx], n = n, ease = ease)
+    }
+  )
+  do.call(cbind, columns) |>
+    farver::convert_colour(from = colorspace, to = "rgb") |>
+    farver::encode_colour()
+}
