@@ -48,7 +48,7 @@ path_mouse <- function(
   seed = sample.int(1337, 1)
 ) {
   if (length(start) != 2 || length(end) != 2) {
-    rlang::abort("`start` and `end` must be vectors of length 2.")
+    cli::cli_abort("`start` and `end` must be vectors of length 2.")
   }
   ret <-
     wind_mouse_cpp(

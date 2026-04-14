@@ -86,7 +86,7 @@ compute_handles <- function(
 compute_handles_catmull <- function(points) {
   k <- nrow(points) %||% 0
   if (k < 4) {
-    rlang::abort(
+    cli::cli_abort(
       "`points` must have at least 4 rows.",
       call = rlang::caller_env()
     )
@@ -109,7 +109,7 @@ compute_handles_catmull <- function(points) {
 compute_handles_linear <- function(points, tension) {
   k <- nrow(points) %||% 0
   if (k < 2) {
-    rlang::abort(
+    cli::cli_abort(
       "`points` must have at least 2 rows.",
       call = rlang::caller_env()
     )
@@ -140,7 +140,7 @@ compute_handles_normal <- function(
 ) {
   k <- nrow(points) %||% 0
   if (k < 2) {
-    rlang::abort(
+    cli::cli_abort(
       "`points` must have at least 2 rows.",
       call = rlang::caller_env()
     )
@@ -178,7 +178,7 @@ compute_handles_normal <- function(
 compute_handles_tangent <- function(points, scale) {
   k <- nrow(points) %||% 0
   if (k < 2) {
-    rlang::abort(
+    cli::cli_abort(
       "`points` must have at least 2 rows.",
       call = rlang::caller_env()
     )

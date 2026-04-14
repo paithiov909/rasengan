@@ -161,7 +161,7 @@ seq_color <- function(
   colorspace = "hcl"
 ) {
   if (!requireNamespace("farver", quietly = TRUE)) {
-    rlang::abort(glue::glue("The farver package is required."))
+    cli::cli_abort("The farver package is required.")
   }
   rgb <- farver::decode_colour(c(col1, col2))
   cs <- farver::convert_colour(rgb, from = "rgb", to = colorspace)

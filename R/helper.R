@@ -32,10 +32,25 @@ mag <- function(mat, origin = c(0, 0)) {
   sqrt(rowSums((mat - origin)^2))
 }
 
-#' @rdname misc
+#' Ping-pong sequence
+#'
+#' Repeats `x` in a ping-pong fashion.
+#'
+#' @param x An object to repeat.
+#' @param ... Arguments to be passed to methods.
 #' @export
-pingpong <- function(x) {
+pingpong <- function(x, ...) {
+  UseMethod("pingpong")
+}
+
+#' @export
+pingpong.default <- function(x, ...) {
   c(x, rev(x[-length(x)]))
+}
+
+#' @export
+pingpong.data.frame <- function(x, ...) {
+  x[pingpong(seq_len(nrow(x))), , drop = FALSE]
 }
 
 #' Expand grid
@@ -62,10 +77,10 @@ expand <- function(...) {
 int_match <- function(x, arg, values) {
   tmp <- match(x[1], values) - 1L
   if (is.na(tmp)) {
-    msg <- glue::glue(
-      "`{arg}` must be one of {paste0(values, collapse = ', ')}. Got '{x}'."
+    cli::cli_abort(
+      "`{arg}` must be one of {paste0(values, collapse = ', ')}. Got '{x}'.",
+      call = rlang::caller_env()
     )
-    rlang::abort(msg, call = rlang::caller_env())
   }
   tmp
 }

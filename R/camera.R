@@ -35,7 +35,9 @@ ndc_mul.default <- function(lhs, rhs) {
   w <- lhs[, 4]
   ok <- w != 0 & is.finite(w)
   if (!all(ok)) {
-    rlang::warn("Some points had invalid w (0, NA, or Inf). They were dropped.")
+    cli::cli_warn(
+      "Some points had invalid w (0, NA, or Inf). They were dropped."
+    )
   }
   lhs[ok, 1:3] <- lhs[ok, 1:3] / w[ok]
   lhs[ok, 4] <- 1
@@ -45,7 +47,7 @@ ndc_mul.default <- function(lhs, rhs) {
 #' @keywords internal
 #' @export
 ndc_mul.transform3d <- function(lhs, rhs) {
-  rlang::abort("`lhs` must be a numeric matrix")
+  cli::cli_abort("`lhs` must be a numeric matrix")
 }
 
 #' @rdname ndc_mul
@@ -74,10 +76,9 @@ NULL
 #' @export
 lookat3d <- function(eye, center, up = c(0, 1, 0)) {
   if (!all(eye != center)) {
-    msg <- glue::glue(
+    cli::cli_abort(
       "`center` must be different from `eye` for all dimensions. Found same values at positions: {paste0(which(eye == center), collapse = ', ')}"
     )
-    rlang::abort(msg)
   }
   z <- vec3_normalize(center - eye)
   x <- vec3_normalize(vec3_cross(z, up))
@@ -100,10 +101,10 @@ lookat3d <- function(eye, center, up = c(0, 1, 0)) {
 #' @export
 persp3d <- function(fovy, aspect, near = 0.1, far = 10) {
   if (far <= near) {
-    rlang::abort("`far` must be greater than `near`")
+    cli::cli_abort("`far` must be greater than `near`")
   }
   if (near <= 0) {
-    rlang::abort("`near` must be greater than 0")
+    cli::cli_abort("`near` must be greater than 0")
   }
   f <- 1 / tan(fovy * .5)
   # fmt: skip

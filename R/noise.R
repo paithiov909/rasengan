@@ -408,6 +408,6 @@ domain_warp <- function(
       as.matrix(data)
     )
   } else {
-    rlang::abort("`data` must have 2 or 3 columns")
+    cli::cli_abort("`data` must have 2 or 3 columns")
   }
 }

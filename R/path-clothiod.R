@@ -49,13 +49,13 @@ path_clothoid <- function(
   biarch = TRUE
 ) {
   if (length(start) != 3 || length(end) != 3) {
-    rlang::abort("start and end must be vectors of length 3.")
+    cli::cli_abort("start and end must be vectors of length 3.")
   }
   if (max_n < 0) {
-    rlang::abort("max_n must be non-negative.")
+    cli::cli_abort("max_n must be non-negative.")
   }
   if (max_iter_num < 0) {
-    rlang::abort("max_iter_num must be non-negative.")
+    cli::cli_abort("max_iter_num must be non-negative.")
   }
   if (biarch) {
     ret <- es_biarc_cpp(start, end, max_n)

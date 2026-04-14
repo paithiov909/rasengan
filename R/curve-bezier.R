@@ -42,7 +42,7 @@ NULL
 
 coerce_control_pts <- function(pts) {
   if (rlang::is_empty(pts) || ncol(pts) != 8) {
-    rlang::abort(
+    cli::cli_abort(
       "`control_pts` must have 8 columns.",
       call = rlang::caller_env()
     )
