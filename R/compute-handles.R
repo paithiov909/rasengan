@@ -161,7 +161,7 @@ compute_handles_normal <- function(
     p3 <- P[i + 1, ]
 
     t <- segtan(i)
-    n <- normalize(perp(t))
+    n <- normalise(perp(t))
     if (side == "right") {
       n <- -n
     }
