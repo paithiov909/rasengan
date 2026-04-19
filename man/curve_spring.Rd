@@ -26,7 +26,6 @@ Generates a 2D curve that is a balance spring curve.
 Other curve: 
 \code{\link{bezier}},
 \code{\link{curve_archimedean}()},
-\code{\link{curve_involute}()},
-\code{\link{curve_twist}()}
+\code{\link{curve_involute}()}
 }
 \concept{curve}
