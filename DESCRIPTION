@@ -17,11 +17,12 @@ Depends:
     R (>= 4.1.0)
 Imports:
     affiner,
+    dplyr,
     cli,
     glue,
+    purrr,
     rlang
 Suggests:
-    dplyr,
     farver,
     ggplot2,
     grDevices,
