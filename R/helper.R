@@ -64,7 +64,7 @@ pingpong.data.frame <- function(x, ...) {
 expand <- function(...) {
   expand.grid(..., stringsAsFactors = FALSE) |>
     lapply(function(x) if (is.numeric(x)) as.double(x) else x) |>
-    entbl()
+    dplyr::as_tibble()
 }
 
 #' Argument matching helper
@@ -83,15 +83,4 @@ int_match <- function(x, arg, values) {
     )
   }
   tmp
-}
-
-#' Convert a matrix into a 'tbl_df'
-#'
-#' @param x A matrix.
-#' @returns A data frame.
-#' @noRd
-entbl <- function(x) {
-  x <- as.data.frame(x)
-  class(x) <- c("tbl_df", "tbl", "data.frame")
-  x
 }

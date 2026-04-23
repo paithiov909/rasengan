@@ -64,7 +64,7 @@ path_mouse <- function(
       seed
     )
   colnames(ret) <- c("x", "y", "t")
-  entbl(ret)
+  dplyr::as_tibble(ret)
 }
 
 #' @rdname path_mouse

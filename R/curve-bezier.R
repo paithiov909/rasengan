@@ -57,7 +57,7 @@ curve_bezier <- function(n, control_pts) {
   t <- seq(0, 1, length.out = n)
   ret <- bezier_value_at_cpp(control_pts, t)
   colnames(ret) <- c("id", "t", "x", "y")
-  entbl(ret)
+  dplyr::as_tibble(ret)
 }
 
 #' @rdname bezier
@@ -67,7 +67,7 @@ bezier_derivative <- function(n, control_pts) {
   t <- seq(0, 1, length.out = n)
   ret <- bezier_derivative_at_cpp(control_pts, t)
   colnames(ret) <- c("id", "t", "dx", "dy")
-  entbl(ret)
+  dplyr::as_tibble(ret)
 }
 
 #' @rdname bezier
@@ -77,7 +77,7 @@ bezier_normal <- function(n, control_pts) {
   t <- seq(0, 1, length.out = n)
   ret <- bezier_normal_at_cpp(control_pts, t)
   colnames(ret) <- c("id", "t", "nx", "ny")
-  entbl(ret)
+  dplyr::as_tibble(ret)
 }
 
 #' @rdname bezier
@@ -87,5 +87,5 @@ bezier_tangent <- function(n, control_pts) {
   t <- seq(0, 1, length.out = n)
   ret <- bezier_tangent_at_cpp(control_pts, t)
   colnames(ret) <- c("id", "t", "tx", "ty")
-  entbl(ret)
+  dplyr::as_tibble(ret)
 }

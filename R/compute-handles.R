@@ -80,7 +80,7 @@ compute_handles <- function(
     tangent = compute_handles_tangent(points, scale)
   )
   colnames(out) <- c("x0", "y0", "x1", "y1", "x2", "y2", "x3", "y3")
-  entbl(out)
+  dplyr::as_tibble(out)
 }
 
 compute_handles_catmull <- function(points) {

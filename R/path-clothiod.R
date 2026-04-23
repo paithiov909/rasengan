@@ -64,5 +64,5 @@ path_clothoid <- function(
   }
   colnames(ret) <- c("x", "y", "theta")
   ret <- ret[is.finite(ret[, "x"]) & is.finite(ret[, "y"]), ]
-  entbl(ret)
+  dplyr::as_tibble(ret)
 }

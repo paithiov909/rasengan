@@ -26,7 +26,7 @@ curve_archimedean <- function(n, a = 0, b = 1, c = 1, base = exp(1)) {
     x = rd * cos(theta),
     y = rd * sin(theta)
   )
-  entbl(ret)
+  dplyr::as_tibble(ret)
 }
 
 #' Generate a balance spring curve
@@ -51,7 +51,7 @@ curve_spring <- function(n, k = 1, m = .1, scale = 1, base = exp(1)) {
     x = rd * cos(theta),
     y = rd * sin(theta)
   )
-  entbl(ret)
+  dplyr::as_tibble(ret)
 }
 
 #' Generate an involute
@@ -74,5 +74,5 @@ curve_involute <- function(n, scale = 1, base = exp(1)) {
     x = scale * (cos(theta) + theta * sin(theta)),
     y = scale * (sin(theta) - theta * cos(theta))
   )
-  entbl(ret)
+  dplyr::as_tibble(ret)
 }
