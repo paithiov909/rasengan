@@ -101,8 +101,11 @@ as_field.data.frame <- function(field) {
     }
     data.frame(step = step, x = x, y = y)
   }
-  NextMethod(object = f)
+  as_field(f)
 }
+
+# To make R CMD check happy
+utils::globalVariables("params")
 
 #' Trace trajectories through a field
 #'

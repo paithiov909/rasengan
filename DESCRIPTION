@@ -19,13 +19,14 @@ Imports:
     affiner,
     dplyr,
     cli,
-    glue,
     purrr,
     rlang
 Suggests:
+    carrier (>= 0.3.0),
     farver,
     ggplot2,
     grDevices,
+    mirai (>= 2.5.1),
     testthat (>= 3.0.0),
     vdiffr
 LinkingTo:
