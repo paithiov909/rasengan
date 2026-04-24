@@ -1,178 +1,125 @@
-#' Coerce an object to a field function
+# To make R CMD check happy
+utils::globalVariables("params")
+
+#' Trace trajectories through a flow
 #'
 #' @description
-#' `as_field()` converts various representations of a vector field or
-#' field-like object into a *field function* (a function of class
-#' `"field_fn"`). A field function takes a seed point and tracing
-#' parameters, and returns a trajectory as a data frame.
-#'
-#' The returned function must have the signature:
-#' `function(seed, n_steps, step_size, params)`, where `seed` is a data frame
-#' with columns `x` and `y`, and the return value is a data frame with
-#' columns `step`, `x`, and `y`.
+#' Generates trajectories from a set of seed points using a
+#' user-supplied *flow function*. Each seed is passed to `flow_fn`, which is
+#' responsible for producing a trajectory of length `n_steps`.
 #'
 #' @details
-#' For data frame inputs, `as_field()` constructs a simple trajectory
-#' generator that iteratively advances a point by looking up the nearest
-#' vector `(vx, vy)` and applying a fixed step size.
+#' `trace_flow()` applies `flow_fn` independently to each seed group. The
+#' grouping is defined by the `id` argument. For each group, `flow_fn` is
+#' called once and is expected to return a full trajectory.
 #'
-#' More advanced behaviors (e.g., vectorized evaluation, custom integration
-#' schemes, or compiled implementations) can be achieved by supplying a
-#' user-defined function directly.
+#' The design places full control of trajectory generation in `flow_fn`,
+#' allowing implementations that are vectorized, iterative, or backed by
+#' compiled code. This makes it possible to express a wide range of flow-like
+#' behaviors, including vector fields, noise-driven updates, and custom
+#' dynamical systems.
 #'
-#' @param field An object representing a field. Supported inputs include:
-#'  * A function with signature `function(seed, n_steps, step_size, params)`, returning a trajectory.
-#'  * A data frame with columns `x`, `y`, `vx`, and `vy`, interpreted as a discrete vector field.
+#' Evaluation of seeds is parallelized via [purrr::in_parallel()].
 #'
-#' @returns A function of class `"field_fn"` that generates trajectories
-#'  from seed points.
+#' @param seeds A data frame containing seed points.
+#' @param flow_fn A function that generates trajectories. It must have the
+#'   signature `function(seed, n_steps, step_size, params)`, where:
 #'
-#' @seealso [trace_field()]
-#' @export
+#'   * `seed` is a data frame containing the rows corresponding to
+#'      a single seed group,
+#'   * `n_steps` is an integer giving the number of steps,
+#'   * `step_size` is a numeric scalar controlling step size, and
+#'   * `params` is a list of additional parameters.
+#'
+#'   The function must return a data frame with columns `step`, `x`, and `y`.
+#' @param x,y <[`data-masking`][rlang::args_data_masking]> Expressions
+#'   specifying the x and y coordinates of the seeds.
+#' @param id <[`data-masking`][rlang::args_data_masking]> Expression
+#'   specifying grouping of seeds. Each group is treated as a single seed
+#'   and passed to `flow_fn`. Defaults to `row_number()`.
+#' @param n_steps Integer scalar giving the number of steps in each trajectory.
+#' @param step_size Numeric scalar controlling the step size passed to
+#'   `flow_fn`.
+#' @param ... Additional parameters passed to `flow_fn`. These are collected
+#'   into a list and supplied as the `params` argument.
+#'
+#' @returns A tibble with columns:
+#'   * `seed`: integer identifier for each seed group,
+#'   * `step`: step index within each trajectory,
+#'   * `x`, `y`: coordinates of the trajectory.
+#'
 #' @examples
-#' # Using a custom field function
-#' f <- function(seed, n_steps, step_size, params) {
+#' # Simple flow: constant drift
+#' flow_fn <- function(seed, n_steps, step_size, params) {
 #'   x <- numeric(n_steps)
 #'   y <- numeric(n_steps)
 #'   cur <- as.matrix(seed[, c("x", "y"), drop = FALSE])
 #'   for (i in seq_len(n_steps)) {
 #'     x[i] <- cur[, 1]
 #'     y[i] <- cur[, 2]
-#'     cur <- cur + step_size * c(1, 0)
+#'     cur <- cur + step_size * c(0.1, 0)
 #'   }
 #'   data.frame(step = seq_len(n_steps), x = x, y = y)
 #' }
 #'
-#' as_field(f)
-#'
-#' # Using a data frame as a vector field
-#' df <- data.frame(
-#'   x = runif(10),
-#'   y = runif(10),
-#'   vx = runif(10, -1, 1),
-#'   vy = runif(10, -1, 1)
-#' )
-#'
-#' as_field(df)
-as_field <- function(field) {
-  UseMethod("as_field")
-}
-
-#' @export
-as_field.default <- function(field) {
-  cli::cli_abort("There is no 'as_field' method for class {class(field)}")
-}
-
-#' @export
-as_field.function <- function(field) {
-  if (
-    !identical(
-      c("seed", "n_steps", "step_size", "params"),
-      names(formals(field))
-    )
-  ) {
-    cli::cli_abort(
-      "`field` must take arguments 'seed', 'n_steps', 'step_size', and 'params'."
-    )
-  }
-  structure(field, class = "field_fn")
-}
-
-#' @export
-as_field.data.frame <- function(field) {
-  if (!all(c("x", "y", "vx", "vy") %in% names(field))) {
-    cli::cli_abort(
-      "`field` must contain columns named 'x', 'y', 'vx', and 'vy'."
-    )
-  }
-  f <- function(seed, n_steps, step_size, params) {
-    pts <- field[, c("x", "y"), drop = FALSE]
-    step <- x <- y <- numeric(n_steps)
-    cur_point <- as.matrix(seed[, c("x", "y"), drop = FALSE])
-    for (idx in seq_len(n_steps)) {
-      step[idx] <- idx
-      x[idx] <- cur_point[, 1]
-      y[idx] <- cur_point[, 2]
-      nn <-
-        rasengan::mag(pts, origin = cur_point) |>
-        which.min()
-      v <- field[nn, c("vx", "vy"), drop = FALSE]
-      cur_point <- cur_point + step_size * as.double(v)
-    }
-    data.frame(step = step, x = x, y = y)
-  }
-  as_field(f)
-}
-
-# To make R CMD check happy
-utils::globalVariables("params")
-
-#' Trace trajectories through a field
-#'
-#' Generates trajectories from a set of seed points using
-#' a field function. Each seed is passed to the field function, which is
-#' responsible for producing a trajectory of length `n_steps`.
-#'
-#' @details
-#' `trace_field()` standardizes the input `field` via [as_field()] and
-#' applies it to each seed independently. The field function is expected
-#' to return a data frame describing the trajectory for a single seed.
-#'
-#' The design allows flexible implementations of field behavior, including
-#' vectorized or compiled trajectory generators.
-#'
-#' @param seeds A data frame containing seed points.
-#' @param field A field object. This can be:
-#'  * A function with signature `function(seed, n_steps, step_size, params)`, or
-#'  * Any object supported by [as_field()].
-#' @param x,y <[`data-masking`][rlang::args_data_masking]> Expressions
-#'  specifying the x and y coordinates of the seeds.
-#' @param n_steps Integer scalar giving the number of steps in each
-#'  trajectory.
-#' @param step_size Numeric scalar controlling the step size used by the
-#'  field function.
-#' @param ... Additional arguments passed to the field function
-#'  as a named list `params`.
-#'
-#' @returns A tibble with columns:
-#'  * `seed`: integer identifier for each input seed
-#'  * `step`: step index within each trajectory
-#'  * `x`, `y`: coordinates of the trajectory
-#'
-#' @export
-#' @examples
 #' seeds <- data.frame(
 #'   x = runif(5),
 #'   y = runif(5)
 #' )
 #'
-#' field <- function(seed, n_steps, step_size, params) {
+#' trace_flow(seeds, flow_fn, x = x, y = y, n_steps = 20, step_size = 0.05)
+#'
+#' # Using additional parameters
+#' flow_noise <- function(seed, n_steps, step_size, params) {
 #'   x <- numeric(n_steps)
 #'   y <- numeric(n_steps)
 #'   cur <- as.matrix(seed[, c("x", "y"), drop = FALSE])
 #'   for (i in seq_len(n_steps)) {
 #'     x[i] <- cur[, 1]
 #'     y[i] <- cur[, 2]
-#'     cur <- cur + step_size * c(0.1, 0.1)
+#'     cur[, 1] <- cur[, 1] +
+#'       params$nx(cur[, 1], cur[, 2]) * step_size
+#'     cur[, 2] <- cur[, 2] +
+#'       params$ny(cur[, 1], cur[, 2]) * step_size
 #'   }
 #'   data.frame(step = seq_len(n_steps), x = x, y = y)
 #' }
 #'
-#' trace_field(seeds, field, x = x, y = y, n_steps = 10, step_size = 0.1)
-trace_field <- function(
+#' trace_flow(
+#'   seeds,
+#'   flow_noise,
+#'   x = x,
+#'   y = y,
+#'   n_steps = 50,
+#'   step_size = 0.02,
+#'   nx = function(x, y) sin(x + y),
+#'   ny = function(x, y) cos(x - y)
+#' )
+#' @export
+trace_flow <- function(
   seeds,
-  field,
+  flow_fn,
   x = x,
   y = y,
+  id = dplyr::row_number(),
   n_steps = 10,
   step_size = 1,
   ...
 ) {
-  if (!inherits(field, "field_fn")) {
-    field <- as_field(field)
+  if (
+    !is.function(flow_fn) ||
+      !identical(
+        c("seed", "n_steps", "step_size", "params"),
+        names(formals(flow_fn))
+      )
+  ) {
+    cli::cli_abort(
+      "`flow_fn` must be a function that takes 'seed', 'n_steps', 'step_size', and 'params'"
+    )
   }
   x <- rlang::enquo(x)
   y <- rlang::enquo(y)
+  id <- rlang::enquo(id)
 
   ret <- seeds |>
     dplyr::mutate(
@@ -180,27 +127,19 @@ trace_field <- function(
       y = {{ y }},
       .keep = "unused"
     ) |>
-    rlang::as_function(~ split(., seq_len(nrow(.))))() |>
-    purrr::imap(
+    dplyr::group_by({{ id }}) |>
+    dplyr::group_split() |>
+    purrr::map(
       purrr::in_parallel(
-        function(seed, .seed_idx) {
-          rlang::try_fetch(
-            field(seed, n_steps, step_size, params), # nolint
-            error = function(e) {
-              cli::cli_abort(
-                "'field_fn' failed for seed at {.val .seed_idx}.",
-                parent = e
-              )
-            }
-          )
+        function(seed) {
+          flow_fn(seed, n_steps, step_size, params) # nolint
         },
-        field = field,
+        flow_fn = flow_fn,
         n_steps = n_steps,
         step_size = step_size,
         params = rlang::list2(...)
       )
     ) |>
-    unname() |> # remove names, otherwise "seed" becomes characters
     purrr::list_rbind(names_to = "seed")
 
   dplyr::as_tibble(ret)
