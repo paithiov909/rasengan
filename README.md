@@ -36,22 +36,6 @@ par(op)
 ```
 
 ``` r
-op <- par(mfrow = c(1, 3), mar = c(2, 2, 2, 2))
-
-# `curve_twist()` creates a smooth, looped 2D curve
-plot(curve_twist(300, amplitude = 0.1), type = "l", asp = 1, col = "blue", main = "Amplitude = 0.1")
-plot(curve_twist(300, amplitude = 0.4), type = "l", asp = 1, col = "darkgreen", main = "Amplitude = 0.4")
-plot(curve_twist(300, amplitude = 0.4, frequency = 6), type = "l", asp = 1, col = "red", main = "Amp=0.4 Freq=6")
-```
-
-<img src="man/figures/README-curve-twist-1.png" style="width:100.0%" />
-
-``` r
-
-par(op)
-```
-
-``` r
 # `path_mouse()` creates a human-like mouse trajectory between two points
 path <-
   rbind(
