@@ -31,12 +31,13 @@ utils::globalVariables("params")
 #'   * `step_size` is a numeric scalar controlling step size, and
 #'   * `params` is a list of additional parameters.
 #'
-#'   The function must return a data frame with columns `step`, `x`, and `y`.
+#'   The function should return a data frame
+#'   at least with columns `step`, `x`, and `y`.
 #' @param x,y <[`data-masking`][rlang::args_data_masking]> Expressions
 #'   specifying the x and y coordinates of the seeds.
 #' @param id <[`data-masking`][rlang::args_data_masking]> Expression
 #'   specifying grouping of seeds. Each group is treated as a single seed
-#'   and passed to `flow_fn`. Defaults to `row_number()`.
+#'   and passed to `flow_fn`. Defaults to `dplyr::row_number()`.
 #' @param n_steps Integer scalar giving the number of steps in each trajectory.
 #' @param step_size Numeric scalar controlling the step size passed to
 #'   `flow_fn`.

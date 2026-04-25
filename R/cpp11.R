@@ -16,8 +16,20 @@ bezier_tangent_at_cpp <- function(pts, t) {
   .Call(`_rasengan_bezier_tangent_at_cpp`, pts, t)
 }
 
-bounce_cpp <- function(n, init, velocity, damping, mass, min, max) {
-  .Call(`_rasengan_bounce_cpp`, n, init, velocity, damping, mass, min, max)
+new_bouncing_pts_cpp <- function(x, y, vx, vy, xmin, xmax, ymin, ymax, restitution) {
+  .Call(`_rasengan_new_bouncing_pts_cpp`, x, y, vx, vy, xmin, xmax, ymin, ymax, restitution)
+}
+
+proceed_bouncing_pts_cpp <- function(state, dt, n_steps) {
+  invisible(.Call(`_rasengan_proceed_bouncing_pts_cpp`, state, dt, n_steps))
+}
+
+reset_bouncing_pts_cpp <- function(state) {
+  invisible(.Call(`_rasengan_reset_bouncing_pts_cpp`, state))
+}
+
+bouncing_pts_as_list_cpp <- function(state) {
+  .Call(`_rasengan_bouncing_pts_as_list_cpp`, state)
 }
 
 in_quad <- function(time) {
