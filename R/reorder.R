@@ -1,8 +1,9 @@
 #' Reorder objects by cyclic shifts or scanning patterns
 #'
 #' @description
-#' A collection of functions for reordering one-dimensional vectors or the rows
-#' of data frames by simple index manipulations.
+#' A collection of functions for reordering one-dimensional vectors,
+#' native rasters,
+#' or the rows of data frames by simple index manipulations.
 #'
 #' These operations are designed for creative coding workflows,
 #' where controlling the traversal order of grids or sequences is useful
@@ -55,8 +56,11 @@
 #'  If one of them is `NULL`, it is inferred from the length of `x`.
 #' @param byrow Logical; whether to interpret the implicit grid in row-major
 #'  (`TRUE`) or column-major (`FALSE`) order.
+#'  For native rasters, `byrow` is interpreted as `!byrow`.
 #' @param step Integer stride size for `stride()` and `stride_index()`.
 #' @param n An integer scalar; the length of the index vector to generate.
+#' @param decreasing Logical; whether to sort in descending order.
+#' @param ... Additional arguments to be passed to underlying functions.
 #' @returns
 #' A reordered object of the same type as the input (`x`), or an integer vector
 #' of indices for functions ending in `_index`.
@@ -118,6 +122,25 @@ rings.data.frame <- function(x, nrow = NULL, ncol = NULL, byrow = FALSE) {
 
 #' @rdname reorder
 #' @export
+rings.nativeRaster <- function(x, nrow = NULL, ncol = NULL, byrow = FALSE) {
+  if (rlang::is_empty(x)) {
+    return(x)
+  }
+  len <- length(x)
+  if (is.null(nrow) && is.null(ncol)) {
+    nrow <- floor(sqrt(len))
+    ncol <- ceiling(len / nrow)
+  } else if (is.null(nrow)) {
+    nrow <- ceiling(len / ncol)
+  } else if (is.null(ncol)) {
+    ncol <- ceiling(len / nrow)
+  }
+  idx <- rings_index(nrow = nrow, ncol = ncol, byrow = !byrow)
+  structure(x[idx[idx <= len]], class = "nativeRaster", dim = dim(x))
+}
+
+#' @rdname reorder
+#' @export
 shift <- function(x, k) {
   UseMethod("shift")
 }
@@ -143,6 +166,19 @@ shift.data.frame <- function(x, k) {
   x <- seq_len(nrow(temp))
   idx <- NextMethod()
   temp[idx, , drop = FALSE]
+}
+
+#' @rdname reorder
+#' @export
+shift.nativeRaster <- function(x, k) {
+  k <- as.integer(k %% length(x))
+  if (k == 0L) {
+    return(x)
+  }
+  temp <- x
+  x <- seq_along(temp)
+  idx <- NextMethod()
+  structure(temp[idx], class = "nativeRaster", dim = dim(temp))
 }
 
 #' @rdname reorder
@@ -208,6 +244,35 @@ snake.data.frame <- function(x, nrow = NULL, ncol = NULL, byrow = FALSE) {
 
 #' @rdname reorder
 #' @export
+snake.nativeRaster <- function(x, nrow = NULL, ncol = NULL, byrow = FALSE) {
+  if (rlang::is_empty(x)) {
+    return(x)
+  }
+  len <- length(x)
+  if (is.null(nrow) && is.null(ncol)) {
+    nrow <- floor(sqrt(len))
+    ncol <- ceiling(len / nrow)
+  } else if (is.null(nrow)) {
+    nrow <- ceiling(len / ncol)
+  } else if (is.null(ncol)) {
+    ncol <- ceiling(len / nrow)
+  }
+  idx <- snake_index(nrow = nrow, ncol = ncol, byrow = !byrow)
+  structure(x[idx[idx <= len]], class = "nativeRaster", dim = dim(x))
+}
+
+#' @rdname reorder
+#' @export
+sort.nativeRaster <- function(x, decreasing = FALSE, ...) {
+  structure(
+    NextMethod(),
+    class = "nativeRaster",
+    dim = dim(x)
+  )
+}
+
+#' @rdname reorder
+#' @export
 spiral_index <- function(nrow, ncol, byrow = FALSE) {
   mat <- matrix(seq_len(nrow * ncol), nrow = nrow, ncol = ncol, byrow = byrow)
   genidx_spiral_cpp(mat)
@@ -259,6 +324,25 @@ spiral.data.frame <- function(x, nrow = NULL, ncol = NULL, byrow = FALSE) {
 
 #' @rdname reorder
 #' @export
+spiral.nativeRaster <- function(x, nrow = NULL, ncol = NULL, byrow = FALSE) {
+  if (rlang::is_empty(x)) {
+    return(x)
+  }
+  len <- length(x)
+  if (is.null(nrow) && is.null(ncol)) {
+    nrow <- floor(sqrt(len))
+    ncol <- ceiling(len / nrow)
+  } else if (is.null(nrow)) {
+    nrow <- ceiling(len / ncol)
+  } else if (is.null(ncol)) {
+    ncol <- ceiling(len / nrow)
+  }
+  idx <- spiral_index(nrow = nrow, ncol = ncol, byrow = !byrow)
+  structure(x[idx[idx <= len]], class = "nativeRaster", dim = dim(x))
+}
+
+#' @rdname reorder
+#' @export
 stride_index <- function(n, step = 2L) {
   if (step <= 1 || step >= n) {
     return(seq_len(n))
@@ -282,6 +366,16 @@ stride.default <- function(x, step = 2L) {
 #' @export
 stride.data.frame <- function(x, step = 2L) {
   x[stride_index(nrow(x), step = step), , drop = FALSE]
+}
+
+#' @rdname reorder
+#' @export
+stride.nativeRaster <- function(x, step = 2L) {
+  structure(
+    x[stride_index(length(x), step = step)],
+    class = "nativeRaster",
+    dim = dim(x)
+  )
 }
 
 #' @rdname reorder
@@ -333,4 +427,23 @@ zigzag.data.frame <- function(x, nrow = NULL, ncol = NULL, byrow = FALSE) {
   }
   idx <- zigzag_index(nrow = nrow, ncol = ncol, byrow = byrow)
   x[idx[idx <= len], , drop = FALSE]
+}
+
+#' @rdname reorder
+#' @export
+zigzag.nativeRaster <- function(x, nrow = NULL, ncol = NULL, byrow = FALSE) {
+  if (rlang::is_empty(x)) {
+    return(x)
+  }
+  len <- length(x)
+  if (is.null(nrow) && is.null(ncol)) {
+    nrow <- floor(sqrt(len))
+    ncol <- ceiling(len / nrow)
+  } else if (is.null(nrow)) {
+    nrow <- ceiling(len / ncol)
+  } else if (is.null(ncol)) {
+    ncol <- ceiling(len / nrow)
+  }
+  idx <- zigzag_index(nrow = nrow, ncol = ncol, byrow = !byrow)
+  structure(x[idx[idx <= len]], class = "nativeRaster", dim = dim(x))
 }

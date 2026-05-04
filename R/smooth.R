@@ -166,12 +166,14 @@ seq_color <- function(
   rgb <- farver::decode_colour(c(col1, col2))
   cs <- farver::convert_colour(rgb, from = "rgb", to = colorspace)
 
-  columns <- lapply(
-    seq_len(ncol(cs)),
-    function(idx) {
-      seq_ease(cs[1, idx], cs[2, idx], n = n, ease = ease)
-    }
-  )
+  columns <-
+    lapply(
+      seq_len(ncol(cs)),
+      function(idx) {
+        seq_ease(cs[1, idx], cs[2, idx], n = n, ease = ease)
+      }
+    )
+
   do.call(cbind, columns) |>
     farver::convert_colour(from = colorspace, to = "rgb") |>
     farver::encode_colour()

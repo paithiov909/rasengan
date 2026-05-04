@@ -11,12 +11,16 @@
 #' @returns
 #'  An external pointer that represents the state of `n` bouncing points.
 #' @export
-state_bouncing_pts <- function(n,
-                               bbox = c(-1, -1, 1, 1),
-                               speed = 1,
-                               restitution = 1,
-                               seed = NULL) {
-  if (!is.null(seed)) set.seed(seed)
+state_bouncing_pts <- function(
+  n,
+  bbox = c(-1, -1, 1, 1),
+  speed = 1,
+  restitution = 1,
+  seed = NULL
+) {
+  if (!is.null(seed)) {
+    set.seed(seed)
+  }
 
   x <- runif(n, bbox[1], bbox[3])
   y <- runif(n, bbox[2], bbox[4])
@@ -27,8 +31,14 @@ state_bouncing_pts <- function(n,
 
   exptr <-
     new_bouncing_pts_cpp(
-      x = x, y = y, vx = vx, vy = vy,
-      xmin = bbox[1], xmax = bbox[3], ymin = bbox[2], ymax = bbox[4],
+      x = x,
+      y = y,
+      vx = vx,
+      vy = vy,
+      xmin = bbox[1],
+      xmax = bbox[3],
+      ymin = bbox[2],
+      ymax = bbox[4],
       restitution = restitution
     )
   structure(exptr, class = c("bouncing_pts", "chakra", class(exptr)))

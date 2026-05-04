@@ -7,6 +7,7 @@
 \alias{normalize}
 \alias{cap}
 \alias{pulse}
+\alias{wrap}
 \title{Simply value modifications}
 \usage{
 blend(x, y, mask)
@@ -18,6 +19,8 @@ normalize(x, from = range(x), to = c(0, 1))
 cap(x, lower = 0, upper = 1)
 
 pulse(x, mask)
+
+wrap(x, lower, upper)
 }
 \arguments{
 \item{x, y}{A numeric vector.}

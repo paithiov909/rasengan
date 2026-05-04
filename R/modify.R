@@ -58,3 +58,9 @@ pulse <- function(x, mask) {
   x <- normalize(x)
   step(x, mask) - step(x, 1 - mask)
 }
+
+#' @rdname modifications
+#' @export
+wrap <- function(x, lower, upper) {
+  floor((x - lower) %% (upper - lower + 1) + lower)
+}

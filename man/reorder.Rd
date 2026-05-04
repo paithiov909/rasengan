@@ -6,25 +6,32 @@
 \alias{rings}
 \alias{rings.default}
 \alias{rings.data.frame}
+\alias{rings.nativeRaster}
 \alias{shift}
 \alias{shift.default}
 \alias{shift.data.frame}
+\alias{shift.nativeRaster}
 \alias{snake_index}
 \alias{snake}
 \alias{snake.default}
 \alias{snake.data.frame}
+\alias{snake.nativeRaster}
+\alias{sort.nativeRaster}
 \alias{spiral_index}
 \alias{spiral}
 \alias{spiral.default}
 \alias{spiral.data.frame}
+\alias{spiral.nativeRaster}
 \alias{stride_index}
 \alias{stride}
 \alias{stride.default}
 \alias{stride.data.frame}
+\alias{stride.nativeRaster}
 \alias{zigzag_index}
 \alias{zigzag}
 \alias{zigzag.default}
 \alias{zigzag.data.frame}
+\alias{zigzag.nativeRaster}
 \title{Reorder objects by cyclic shifts or scanning patterns}
 \usage{
 rings_index(nrow, ncol, byrow = FALSE)
@@ -35,11 +42,15 @@ rings(x, nrow = NULL, ncol = NULL, byrow = FALSE)
 
 \method{rings}{data.frame}(x, nrow = NULL, ncol = NULL, byrow = FALSE)
 
+\method{rings}{nativeRaster}(x, nrow = NULL, ncol = NULL, byrow = FALSE)
+
 shift(x, k)
 
 \method{shift}{default}(x, k)
 
 \method{shift}{data.frame}(x, k)
+
+\method{shift}{nativeRaster}(x, k)
 
 snake_index(nrow, ncol, byrow = FALSE)
 
@@ -49,6 +60,10 @@ snake(x, nrow = NULL, ncol = NULL, byrow = FALSE)
 
 \method{snake}{data.frame}(x, nrow = NULL, ncol = NULL, byrow = FALSE)
 
+\method{snake}{nativeRaster}(x, nrow = NULL, ncol = NULL, byrow = FALSE)
+
+\method{sort}{nativeRaster}(x, decreasing = FALSE, ...)
+
 spiral_index(nrow, ncol, byrow = FALSE)
 
 spiral(x, nrow = NULL, ncol = NULL, byrow = FALSE)
@@ -56,6 +71,8 @@ spiral(x, nrow = NULL, ncol = NULL, byrow = FALSE)
 \method{spiral}{default}(x, nrow = NULL, ncol = NULL, byrow = FALSE)
 
 \method{spiral}{data.frame}(x, nrow = NULL, ncol = NULL, byrow = FALSE)
+
+\method{spiral}{nativeRaster}(x, nrow = NULL, ncol = NULL, byrow = FALSE)
 
 stride_index(n, step = 2L)
 
@@ -65,6 +82,8 @@ stride(x, step = 2L)
 
 \method{stride}{data.frame}(x, step = 2L)
 
+\method{stride}{nativeRaster}(x, step = 2L)
+
 zigzag_index(nrow, ncol, byrow = FALSE)
 
 zigzag(x, nrow = NULL, ncol = NULL, byrow = FALSE)
@@ -72,6 +91,8 @@ zigzag(x, nrow = NULL, ncol = NULL, byrow = FALSE)
 \method{zigzag}{default}(x, nrow = NULL, ncol = NULL, byrow = FALSE)
 
 \method{zigzag}{data.frame}(x, nrow = NULL, ncol = NULL, byrow = FALSE)
+
+\method{zigzag}{nativeRaster}(x, nrow = NULL, ncol = NULL, byrow = FALSE)
 }
 \arguments{
 \item{nrow, ncol}{Integers giving the conceptual number of rows and columns
@@ -79,11 +100,16 @@ for grid-based scanning patterns.
 If one of them is \code{NULL}, it is inferred from the length of \code{x}.}
 
 \item{byrow}{Logical; whether to interpret the implicit grid in row-major
-(\code{TRUE}) or column-major (\code{FALSE}) order.}
+(\code{TRUE}) or column-major (\code{FALSE}) order.
+For native rasters, \code{byrow} is interpreted as \code{!byrow}.}
 
 \item{x}{A vector or data frame to be reordered.}
 
 \item{k}{An integer shift amount for \code{shift()}.}
+
+\item{decreasing}{Logical; whether to sort in descending order.}
+
+\item{...}{Additional arguments to be passed to underlying functions.}
 
 \item{n}{An integer scalar; the length of the index vector to generate.}
 
@@ -94,8 +120,9 @@ A reordered object of the same type as the input (\code{x}), or an integer vecto
 of indices for functions ending in \verb{_index}.
 }
 \description{
-A collection of functions for reordering one-dimensional vectors or the rows
-of data frames by simple index manipulations.
+A collection of functions for reordering one-dimensional vectors,
+native rasters,
+or the rows of data frames by simple index manipulations.
 
 These operations are designed for creative coding workflows,
 where controlling the traversal order of grids or sequences is useful

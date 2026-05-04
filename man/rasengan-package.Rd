@@ -18,6 +18,7 @@ Other contributors:
   \item Kohei Kumazaki [copyright holder]
   \item Øystein Myrmo [copyright holder]
   \item Thomas Lin Pedersen [copyright holder]
+  \item Wollnashorn [copyright holder]
 }
 
 }
