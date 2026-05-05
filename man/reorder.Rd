@@ -16,7 +16,6 @@
 \alias{snake.default}
 \alias{snake.data.frame}
 \alias{snake.nativeRaster}
-\alias{sort.nativeRaster}
 \alias{spiral_index}
 \alias{spiral}
 \alias{spiral.default}
@@ -62,8 +61,6 @@ snake(x, nrow = NULL, ncol = NULL, byrow = FALSE)
 
 \method{snake}{nativeRaster}(x, nrow = NULL, ncol = NULL, byrow = FALSE)
 
-\method{sort}{nativeRaster}(x, decreasing = FALSE, ...)
-
 spiral_index(nrow, ncol, byrow = FALSE)
 
 spiral(x, nrow = NULL, ncol = NULL, byrow = FALSE)
@@ -106,10 +103,6 @@ For native rasters, \code{byrow} is interpreted as \code{!byrow}.}
 \item{x}{A vector or data frame to be reordered.}
 
 \item{k}{An integer shift amount for \code{shift()}.}
-
-\item{decreasing}{Logical; whether to sort in descending order.}
-
-\item{...}{Additional arguments to be passed to underlying functions.}
 
 \item{n}{An integer scalar; the length of the index vector to generate.}
 

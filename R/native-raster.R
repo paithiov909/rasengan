@@ -1,3 +1,12 @@
+#' Cast a vector into a native raster
+#'
+#' Casts a vector of pixel values into a native raster.
+#' The vector must be of length `width * height`
+#'
+#' @param x A vector to be cast into a native raster.
+#' @param width,height Integer scalars giving the width and height of the image.
+#' @param ... Additional arguments.
+#' @returns A `nativeRaster` object.
 #' @export
 as_pattern <- function(x, width, height, ...) {
   UseMethod("as_pattern")

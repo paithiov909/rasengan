@@ -59,8 +59,6 @@
 #'  For native rasters, `byrow` is interpreted as `!byrow`.
 #' @param step Integer stride size for `stride()` and `stride_index()`.
 #' @param n An integer scalar; the length of the index vector to generate.
-#' @param decreasing Logical; whether to sort in descending order.
-#' @param ... Additional arguments to be passed to underlying functions.
 #' @returns
 #' A reordered object of the same type as the input (`x`), or an integer vector
 #' of indices for functions ending in `_index`.
@@ -259,16 +257,6 @@ snake.nativeRaster <- function(x, nrow = NULL, ncol = NULL, byrow = FALSE) {
   }
   idx <- snake_index(nrow = nrow, ncol = ncol, byrow = !byrow)
   structure(x[idx[idx <= len]], class = "nativeRaster", dim = dim(x))
-}
-
-#' @rdname reorder
-#' @export
-sort.nativeRaster <- function(x, decreasing = FALSE, ...) {
-  structure(
-    NextMethod(),
-    class = "nativeRaster",
-    dim = dim(x)
-  )
 }
 
 #' @rdname reorder
