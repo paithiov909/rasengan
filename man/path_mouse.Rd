@@ -80,7 +80,7 @@ with(path, plot(x, y, type = "l", asp = 1, main = "WindMouse Path"))
 }
 }
 \seealso{
-Other path: 
-\code{\link{path_clothoid}()}
+Other path:
+\code{\link[=path_clothoid]{path_clothoid()}}
 }
 \concept{path}

@@ -63,6 +63,13 @@ extern "C" SEXP _rasengan_bouncing_pts_as_list_cpp(SEXP state) {
     return cpp11::as_sexp(bouncing_pts_as_list_cpp(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<BouncingPoints>>>(state)));
   END_CPP11
 }
+// code_delaunay.cpp
+cpp11::list delaunay_cpp(const cpp11::doubles_matrix<>& pts);
+extern "C" SEXP _rasengan_delaunay_cpp(SEXP pts) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(delaunay_cpp(cpp11::as_cpp<cpp11::decay_t<const cpp11::doubles_matrix<>&>>(pts)));
+  END_CPP11
+}
 // code_ease.cpp
 doubles in_quad(const doubles time);
 extern "C" SEXP _rasengan_in_quad(SEXP time) {
@@ -379,6 +386,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rasengan_bezier_tangent_at_cpp",    (DL_FUNC) &_rasengan_bezier_tangent_at_cpp,     2},
     {"_rasengan_bezier_value_at_cpp",      (DL_FUNC) &_rasengan_bezier_value_at_cpp,       2},
     {"_rasengan_bouncing_pts_as_list_cpp", (DL_FUNC) &_rasengan_bouncing_pts_as_list_cpp,  1},
+    {"_rasengan_delaunay_cpp",             (DL_FUNC) &_rasengan_delaunay_cpp,              1},
     {"_rasengan_domain_warp_2d_cpp",       (DL_FUNC) &_rasengan_domain_warp_2d_cpp,        8},
     {"_rasengan_domain_warp_3d_cpp",       (DL_FUNC) &_rasengan_domain_warp_3d_cpp,        9},
     {"_rasengan_es_biarc_cpp",             (DL_FUNC) &_rasengan_es_biarc_cpp,              3},

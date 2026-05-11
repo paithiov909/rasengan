@@ -32,9 +32,9 @@ the hyperbolic spiral (\code{c = -1}),
 Fermat's spiral (\code{c = 2}), and the lituus (\verb{c = −2}).
 }
 \seealso{
-Other curve: 
+Other curve:
 \code{\link{bezier}},
-\code{\link{curve_involute}()},
-\code{\link{curve_spring}()}
+\code{\link[=curve_involute]{curve_involute()}},
+\code{\link[=curve_spring]{curve_spring()}}
 }
 \concept{curve}

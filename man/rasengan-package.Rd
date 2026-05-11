@@ -11,6 +11,11 @@ Provides functions to generate and sample geometric curves. Each function return
 \author{
 \strong{Maintainer}: Akiru Kato \email{paithiov909@gmail.com}
 
+Authors:
+\itemize{
+  \item Akiru Kato \email{paithiov909@gmail.com}
+}
+
 Other contributors:
 \itemize{
   \item Jordan Peck [copyright holder]

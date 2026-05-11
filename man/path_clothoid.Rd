@@ -60,7 +60,7 @@ with(path, plot(x, y, type = "l", asp = 1))
 \seealso{
 \href{https://github.com/CoffeeKumazaki/euler_spiral}{CoffeeKumazaki/euler_spiral}
 
-Other path: 
-\code{\link{path_mouse}()}
+Other path:
+\code{\link[=path_mouse]{path_mouse()}}
 }
 \concept{path}

@@ -23,9 +23,9 @@ A data frame with columns \code{x} and \code{y}.
 Generates a 2D curve that is a balance spring curve.
 }
 \seealso{
-Other curve: 
+Other curve:
 \code{\link{bezier}},
-\code{\link{curve_archimedean}()},
-\code{\link{curve_involute}()}
+\code{\link[=curve_archimedean]{curve_archimedean()}},
+\code{\link[=curve_involute]{curve_involute()}}
 }
 \concept{curve}

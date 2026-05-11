@@ -21,9 +21,9 @@ A data frame with columns \code{x} and \code{y}.
 Generates a 2D curve that is an involute curve.
 }
 \seealso{
-Other curve: 
+Other curve:
 \code{\link{bezier}},
-\code{\link{curve_archimedean}()},
-\code{\link{curve_spring}()}
+\code{\link[=curve_archimedean]{curve_archimedean()}},
+\code{\link[=curve_spring]{curve_spring()}}
 }
 \concept{curve}

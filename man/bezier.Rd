@@ -60,9 +60,9 @@ stroke-based visual effects.
 \seealso{
 \code{\link[=compute_handles]{compute_handles()}}
 
-Other curve: 
-\code{\link{curve_archimedean}()},
-\code{\link{curve_involute}()},
-\code{\link{curve_spring}()}
+Other curve:
+\code{\link[=curve_archimedean]{curve_archimedean()}},
+\code{\link[=curve_involute]{curve_involute()}},
+\code{\link[=curve_spring]{curve_spring()}}
 }
 \concept{curve}

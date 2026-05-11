@@ -32,6 +32,10 @@ bouncing_pts_as_list_cpp <- function(state) {
   .Call(`_rasengan_bouncing_pts_as_list_cpp`, state)
 }
 
+delaunay_cpp <- function(pts) {
+  .Call(`_rasengan_delaunay_cpp`, pts)
+}
+
 in_quad <- function(time) {
   .Call(`_rasengan_in_quad`, time)
 }
