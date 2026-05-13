@@ -378,6 +378,20 @@ extern "C" SEXP _rasengan_genidx_zigzag_cpp(SEXP mat) {
     return cpp11::as_sexp(genidx_zigzag_cpp(cpp11::as_cpp<cpp11::decay_t<const cpp11::integers_matrix<>>>(mat)));
   END_CPP11
 }
+// code_sph.cpp
+cpp11::doubles sph2d_cpp(int l, int m, const cpp11::doubles_matrix<>& d);
+extern "C" SEXP _rasengan_sph2d_cpp(SEXP l, SEXP m, SEXP d) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(sph2d_cpp(cpp11::as_cpp<cpp11::decay_t<int>>(l), cpp11::as_cpp<cpp11::decay_t<int>>(m), cpp11::as_cpp<cpp11::decay_t<const cpp11::doubles_matrix<>&>>(d)));
+  END_CPP11
+}
+// code_sph.cpp
+cpp11::doubles sph3d_cpp(int l, int m, const cpp11::doubles_matrix<>& d);
+extern "C" SEXP _rasengan_sph3d_cpp(SEXP l, SEXP m, SEXP d) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(sph3d_cpp(cpp11::as_cpp<cpp11::decay_t<int>>(l), cpp11::as_cpp<cpp11::decay_t<int>>(m), cpp11::as_cpp<cpp11::decay_t<const cpp11::doubles_matrix<>&>>(d)));
+  END_CPP11
+}
 
 extern "C" {
 static const R_CallMethodDef CallEntries[] = {
@@ -433,6 +447,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rasengan_out_sine",                 (DL_FUNC) &_rasengan_out_sine,                  1},
     {"_rasengan_proceed_bouncing_pts_cpp", (DL_FUNC) &_rasengan_proceed_bouncing_pts_cpp,  3},
     {"_rasengan_reset_bouncing_pts_cpp",   (DL_FUNC) &_rasengan_reset_bouncing_pts_cpp,    1},
+    {"_rasengan_sph2d_cpp",                (DL_FUNC) &_rasengan_sph2d_cpp,                 3},
+    {"_rasengan_sph3d_cpp",                (DL_FUNC) &_rasengan_sph3d_cpp,                 3},
     {"_rasengan_wind_mouse_cpp",           (DL_FUNC) &_rasengan_wind_mouse_cpp,           10},
     {NULL, NULL, 0}
 };
