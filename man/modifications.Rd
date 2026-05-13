@@ -12,7 +12,7 @@
 \usage{
 blend(x, y, mask)
 
-normalise(x)
+normalise(x, margin = 2)
 
 normalize(x, from = range(x), to = c(0, 1))
 
@@ -27,6 +27,8 @@ wrap(x, lower, upper)
 
 \item{mask}{A numeric scalar, typically between \code{0} and \code{1}.}
 
+\item{margin}{\code{margin} for \code{\link[=apply]{apply()}}. Ignored if \code{x} is not a matrix.}
+
 \item{from}{A numeric vector of length 2.
 The range of \code{x} to use for normalization.}
 
@@ -38,6 +40,6 @@ The range of \code{x} to use for normalization.}
 A numeric vector.
 }
 \description{
-Some of these functions are copied
+Some of these functions are derived
 from the \href{https://github.com/thomasp85/ambient}{ambient} package.
 }

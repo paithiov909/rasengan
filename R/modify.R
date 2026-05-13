@@ -1,6 +1,6 @@
 #' Simply value modifications
 #'
-#' Some of these functions are copied
+#' Some of these functions are derived
 #' from the [ambient](https://github.com/thomasp85/ambient) package.
 #'
 #' @param x,y A numeric vector.
@@ -9,6 +9,7 @@
 #'  The range of `x` to use for normalization.
 #' @param to A numeric vector of length 2. The output domain to normalize to.
 #' @param lower,upper A numeric scalar. The lower and upper bounds to cap to.
+#' @param margin `margin` for [apply()]. Ignored if `x` is not a matrix.
 #' @returns A numeric vector.
 #'
 #' @rdname modifications
@@ -24,7 +25,10 @@ blend <- function(x, y, mask) {
 
 #' @rdname modifications
 #' @export
-normalise <- function(x) {
+normalise <- function(x, margin = 2) {
+  if (is.matrix(x)) {
+    return(apply(x, margin, normalise))
+  }
   d <- sqrt(sum(x * x, na.rm = TRUE))
   if (d == 0) x else x / d
 }

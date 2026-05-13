@@ -22,8 +22,8 @@ Other contributors:
   \item Kjetil Olsen Lye [copyright holder]
   \item Kohei Kumazaki [copyright holder]
   \item Øystein Myrmo [copyright holder]
-  \item Thomas Lin Pedersen [copyright holder]
   \item Wollnashorn [copyright holder]
+  \item Google Inc. [copyright holder]
 }
 
 }

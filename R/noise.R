@@ -325,7 +325,7 @@ noise_3d <- function(
 #'     facet_wrap(~ id)
 #' }
 #' }
-#' @export
+#' @noRd
 domain_warp <- function(
   data,
   seed = sample.int(1337, 1),

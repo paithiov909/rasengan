@@ -127,7 +127,7 @@ ease_in_out <- function(
 
 #' Interpolate between two values
 #'
-#' Adapted from
+#' Derived from
 #' [coolbutuseless/displease](https://github.com/coolbutuseless/displease).
 #'
 #' @param x1,x2 Numeric scalars.

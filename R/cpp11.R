@@ -211,3 +211,11 @@ genidx_stride_cpp <- function(n, step) {
 genidx_zigzag_cpp <- function(mat) {
   .Call(`_rasengan_genidx_zigzag_cpp`, mat)
 }
+
+sph2d_cpp <- function(l, m, d) {
+  .Call(`_rasengan_sph2d_cpp`, l, m, d)
+}
+
+sph3d_cpp <- function(l, m, d) {
+  .Call(`_rasengan_sph3d_cpp`, l, m, d)
+}

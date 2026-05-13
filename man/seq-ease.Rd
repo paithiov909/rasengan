@@ -34,6 +34,6 @@ See \code{\link[farver:convert_colour]{farver::convert_colour()}} for details.}
 }
 }
 \description{
-Adapted from
+Derived from
 \href{https://github.com/coolbutuseless/displease}{coolbutuseless/displease}.
 }

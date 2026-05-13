@@ -1,0 +1,86 @@
+Third-party code included in rasengan
+=====================================
+
+This package contains modified or unmodified code derived from
+third-party open source projects.
+
+---
+Auburn/FastNoiseLite
+https://github.com/Auburn/FastNoiseLite
+
+Copyright:
+  Copyright (c) 2023 Jordan Peck
+  Copyright (c) 2023 Contributors
+
+License:
+  MIT License
+
+Files:
+  src/FastNoiseLite.h
+
+---
+kjetil-lye/fractional_brownian_motion
+https://github.com/kjetil-lye/fractional_brownian_motion
+
+Copyright:
+  Copyright (c) 2019 Kjetil Olsen Lye, ETH Zurich
+
+License:
+  MIT License
+
+Files:
+  src/fbm/**
+
+---
+CoffeeKumazaki/euler_spiral
+https://github.com/CoffeeKumazaki/euler_spiral
+
+Copyright:
+  Copyright (c) 2024 Kohei Kumazaki
+
+License:
+  MIT License
+
+Files:
+  src/es/euler_spiral.hpp
+  src/es/fresnel_integral.hpp
+  src/es/stdafx.hpp
+
+---
+oysteinmyrmo/bezier
+https://github.com/oysteinmyrmo/bezier
+
+Copyright:
+  Copyright (c) 2023 Øystein Myrmo
+
+License:
+  MIT License
+
+Files:
+  src/Bezier.h
+
+---
+Wollnashorn/Voronoi
+https://github.com/Wollnashorn/Voronoi
+
+Copyright:
+  Copyright (c) 2024 Wollnashorn
+
+License:
+  MIT License
+
+Files:
+  src/Voronoi.h
+
+---
+google/spherical-harmonics
+https://github.com/google/spherical-harmonics
+
+Copyright:
+  Copyright 2015 Google Inc.
+
+License:
+  Apache License 2.0
+
+Files:
+  src/code_sph.cpp

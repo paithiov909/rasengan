@@ -3,6 +3,7 @@
 #' @param x A numeric vector.
 #' @param mat A numeric matrix or a data frame.
 #' @param origin A numeric vector to be subtracted from `mat`.
+#' @param ... Additional arguments.
 #' @returns A numeric vector.
 #' @rdname misc
 #' @name misc
@@ -32,12 +33,7 @@ mag <- function(mat, origin = c(0, 0)) {
   sqrt(rowSums((mat - origin)^2))
 }
 
-#' Ping-pong sequence
-#'
-#' Repeats `x` in a ping-pong fashion.
-#'
-#' @param x An object to repeat.
-#' @param ... Arguments to be passed to methods.
+#' @rdname misc
 #' @export
 pingpong <- function(x, ...) {
   UseMethod("pingpong")
