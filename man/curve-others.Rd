@@ -10,7 +10,6 @@
 \alias{curve_heart}
 \alias{curve_hypocycloid}
 \alias{curve_hypotrochoid}
-\alias{curve_involute}
 \alias{curve_lissajous}
 \alias{curve_ranunculoid}
 \alias{curve_rose}
@@ -33,8 +32,6 @@ curve_hypocycloid(n, or = 16, ir = 3.5, scale = 1, base = exp(1))
 
 curve_hypotrochoid(n, or = 16, ir = 3.5, b = 2.4, scale = 1, base = exp(1))
 
-curve_involute(n, scale = 1, base = exp(1))
-
 curve_lissajous(n, d = 10, e = 16, scale = 1, base = exp(1))
 
 curve_ranunculoid(n, k = 6, scale = 1/k, base = exp(1))
@@ -56,7 +53,10 @@ Base of the logarithm used to compute the spacing between points.}
 \item{or, ir}{Numeric scalars; Outer and inner radius.}
 }
 \value{
-A tibble with columns \code{id}, \code{phi} or \code{theta}, \code{x}, and \code{y}.
+\itemize{
+\item For polar equations, a tibble with columns \code{id}, \code{phi}, \code{r}, \code{x}, and \code{y}.
+\item For others, a tibble with columns \code{id}, \code{theta}, \code{x}, and \code{y}.
+}
 }
 \description{
 Generates a data frame of points along a geometric curve.

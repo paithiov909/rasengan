@@ -26,7 +26,9 @@
 #' @param base A numeric scalar;
 #'  Base of the logarithm used to compute the spacing between points.
 #' @param scale A numeric scalar; Scaling factor for the curve.
-#' @returns A tibble with columns `id`, `phi` or `theta`, `x`, and `y`.
+#' @returns
+#'  * For polar equations, a tibble with columns `id`, `phi`, `r`, `x`, and `y`.
+#'  * For others, a tibble with columns `id`, `theta`, `x`, and `y`.
 #' @family curve
 #' @rdname curve-others
 #' @name curve-others
@@ -37,7 +39,13 @@ NULL
 curve_archimedean <- function(n, a = 0, b = 1, c = 1, base = exp(1)) {
   phi <- seq(0, by = pi / log(n, base = base), length.out = n)
   zz <- complex(modulus = a + b * phi^(1 / c), argument = phi)
-  dplyr::tibble(id = seq_len(n), phi = Arg(zz), x = Re(zz), y = Im(zz))
+  dplyr::tibble(
+    id = seq_len(n),
+    phi = Arg(zz),
+    r = Mod(zz),
+    x = Re(zz),
+    y = Im(zz)
+  )
 }
 
 #' @rdname curve-others
@@ -52,7 +60,13 @@ curve_cyclic_harmonic <- function(
 ) {
   phi <- seq(0, by = pi / log(n, base = base), length.out = n)
   zz <- complex(modulus = scale * (a + b * cos(k * phi)), argument = phi)
-  dplyr::tibble(id = seq_len(n), phi = Arg(zz), x = Re(zz), y = Im(zz))
+  dplyr::tibble(
+    id = seq_len(n),
+    phi = Arg(zz),
+    r = Mod(zz),
+    x = Re(zz),
+    y = Im(zz)
+  )
 }
 
 #' @rdname curve-others
@@ -94,7 +108,13 @@ curve_gear <- function(n, k = 10, a = 1, b = 16, scale = 1, base = exp(1)) {
     modulus = scale * (a + 1 / b * tanh(b * sin(k * phi))),
     argument = phi
   )
-  dplyr::tibble(id = seq_len(n), phi = Arg(zz), x = Re(zz), y = Im(zz))
+  dplyr::tibble(
+    id = seq_len(n),
+    phi = Arg(zz),
+    r = Mod(zz),
+    x = Re(zz),
+    y = Im(zz)
+  )
 }
 
 #' @rdname curve-others
@@ -143,18 +163,6 @@ curve_hypotrochoid <- function(
 
 #' @rdname curve-others
 #' @export
-curve_involute <- function(n, scale = 1, base = exp(1)) {
-  theta <- seq(0, by = pi / log(n, base = base), length.out = n)
-  dplyr::tibble(
-    id = seq_len(n),
-    theta = theta,
-    x = scale * (cos(theta) + theta * sin(theta)),
-    y = scale * (sin(theta) - theta * cos(theta))
-  )
-}
-
-#' @rdname curve-others
-#' @export
 curve_lissajous <- function(n, d = 10, e = 16, scale = 1, base = exp(1)) {
   theta <- seq(0, by = pi / log(n, base = base), length.out = n)
   dplyr::tibble(
@@ -182,7 +190,13 @@ curve_ranunculoid <- function(n, k = 6, scale = 1 / k, base = exp(1)) {
 curve_rose <- function(n, k = 5, c = 1, scale = 1, base = exp(1)) {
   phi <- seq(0, by = pi / log(n, base = base), length.out = n)
   zz <- complex(modulus = scale * cos(k * phi / c), argument = phi)
-  dplyr::tibble(id = seq_len(n), phi = Arg(zz), x = Re(zz), y = Im(zz))
+  dplyr::tibble(
+    id = seq_len(n),
+    phi = Arg(zz),
+    r = Mod(zz),
+    x = Re(zz),
+    y = Im(zz)
+  )
 }
 
 #' @rdname curve-others
