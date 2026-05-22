@@ -6,6 +6,6 @@
 #' @importFrom affiner is_transform3d
 #' @importFrom stats runif
 #' @importFrom utils head tail
-#' @importFrom rlang .data
+#' @importFrom rlang .data .env
 ## usethis namespace: end
 NULL

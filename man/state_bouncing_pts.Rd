@@ -2,31 +2,56 @@
 % Please edit documentation in R/state-bouncing-pts.R
 \name{state_bouncing_pts}
 \alias{state_bouncing_pts}
-\title{Generate a state of bouncing points}
+\title{Generate a state for bouncing points}
 \usage{
 state_bouncing_pts(
-  n,
+  seeds,
   bbox = c(-1, -1, 1, 1),
-  speed = 1,
   restitution = 1,
-  seed = NULL
+  x = x,
+  y = y,
+  vx = vx,
+  vy = vy
 )
 }
 \arguments{
-\item{n}{An integer scalar; Number of bouncing points.}
+\item{seeds}{A data frame containing the initial point positions.}
 
 \item{bbox}{Numeric vector of length 4;
 The bounding box of the bouncing points as \code{c(xmin, ymin, xmax, ymax)}.}
 
-\item{speed}{Numeric scalar; The speed factor of the bouncing points.}
-
 \item{restitution}{Numeric scalar; The restitution of the bouncing points.}
 
-\item{seed}{Numeric scalar; Random seed for reproducibility.}
+\item{x, y, vx, vy}{<\code{\link[rlang:args_data_masking]{data-masking}}>
+Expressions specifying data columns for the initial state.}
 }
 \value{
-An external pointer that represents the state of \code{n} bouncing points.
+An external pointer.
 }
 \description{
-Generates a state of \code{n} bouncing points.
+Generates a chakra state for bouncing points.
 }
+\examples{
+seeds <-
+ dplyr::tibble(
+   x = runif(10, -1, 1),
+   y = runif(10, -1, 1),
+   angle = runif(10, -pi, pi),
+   vx = cos(angle),
+   vy = sin(angle)
+ )
+
+state <- state_bouncing_pts(seeds)
+
+observe(state)
+
+circulate(state) |>
+ observe()
+}
+\seealso{
+chakra
+
+Other state:
+\code{\link[=state_orbits]{state_orbits()}}
+}
+\concept{state}

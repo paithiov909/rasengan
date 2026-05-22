@@ -5,7 +5,7 @@
 \alias{observe}
 \alias{circulate}
 \alias{reset_state}
-\title{Methods for chakras}
+\title{Methods for chakra objects}
 \usage{
 observe(x, ...)
 
@@ -14,34 +14,58 @@ circulate(x, dt = 1, n_steps = 1, ...)
 reset_state(x, ...)
 }
 \arguments{
-\item{x}{An external pointer.}
+\item{x}{A chakra-like object.}
 
-\item{...}{Additional arguments to be passed to the underlying function.}
+\item{...}{Additional arguments passed to methods.}
 
-\item{dt}{A numeric scalar; Time step.}
+\item{dt}{A numeric scalar giving the time step.}
 
-\item{n_steps}{An integer scalar; Number of steps to simulate.}
+\item{n_steps}{An integer scalar giving the number of steps to advance.}
 }
 \value{
 \itemize{
-\item for \code{observe}: A tibble that represents the current state.
-\item for \code{circulate}: Invisibly returns \code{x} itself.
-\item for \code{reset_state}: Invisibly returns \code{x} itself.
+\item \code{observe()} returns a tibble representing the current state.
+\item \code{circulate()} returns the evolved object. Some methods may also mutate the
+underlying state in place.
+\item \code{reset_state()} returns the reset object, when supported.
 }
 }
 \description{
-A \code{chakra} in rasengan is a mutable external state (an external pointer)
-that evolves over time and can be observed as ordinary R data.
+A \code{chakra} in rasengan is an object that evolves over time and can be
+observed as ordinary R data.
 
-The methods \code{observe}, \code{circulate}, and \code{reset_state} are generic
+The methods \code{observe()}, \code{circulate()}, and \code{reset_state()} are generic
 functions that dispatch on the class of \code{x}.
-\code{chakra} is a dummy S3 class that does nothing for actual dispatch.
+The name \code{chakra} is used as a conceptual interface rather than as a
+concrete S3 class.
 }
 \details{
+Chakra objects may be implemented in different ways.
+
+Some chakras are mutable external states backed by external pointers.
+For these objects, \code{circulate()} may update the underlying state in place.
+
+Other chakras are pseudo-states. A pseudo-state stores enough parameters to
+compute its current observation, but does not necessarily mutate an external
+pointer. For these objects, \code{circulate()} usually returns a modified copy of
+\code{x}.
+
+Because implementations may differ, users should generally assign the return
+value of \code{circulate()}:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{x <- circulate(x, dt = 1 / 60)
+observe(x)
+}\if{html}{\out{</div>}}
+
 The following generics are available:
 \itemize{
 \item \code{observe(x, ...)}: Returns the current state as a tibble.
-\item \code{circulate(x, dt, n_steps, ...)}: Evolves the chakra for \code{n_steps}.
-\item \code{reset_state(x, ...)}: Resets \code{x} to its initial state.
+\item \code{circulate(x, dt, n_steps, ...)}: Evolves \code{x} for \code{n_steps}.
+\item \code{reset_state(x, ...)}: Resets \code{x} to an initial or specified state, when
+supported.
 }
+
+Not all chakra implementations need to support meaningful reset behavior.
+For pseudo-states whose state is represented directly by an R object, it may
+be simpler to recreate the object instead of calling \code{reset_state()}.
 }
