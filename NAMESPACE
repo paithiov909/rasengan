@@ -99,9 +99,13 @@ export(wrap)
 export(zigzag)
 export(zigzag_index)
 importFrom(affiner,is_transform3d)
-importFrom(rlang,.data)
-importFrom(rlang,.env)
+importFrom(rlang,
+  .data,
+  .env
+)
 importFrom(stats,runif)
-importFrom(utils,head)
-importFrom(utils,tail)
+importFrom(utils,
+  head,
+  tail
+)
 useDynLib(rasengan, .registration = TRUE)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/state-bouncing-pts.R
 \name{state_bouncing_pts}
 \alias{state_bouncing_pts}
-\title{Generate a state for bouncing points}
+\title{Create a state for bouncing points}
 \usage{
 state_bouncing_pts(
   seeds,
@@ -29,7 +29,7 @@ Expressions specifying data columns for the initial state.}
 An external pointer.
 }
 \description{
-Generates a chakra state for bouncing points.
+Creates a chakra state for bouncing points.
 }
 \examples{
 seeds <-

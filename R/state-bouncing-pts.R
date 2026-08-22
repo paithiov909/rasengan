@@ -1,6 +1,6 @@
-#' Generate a state for bouncing points
+#' Create a state for bouncing points
 #'
-#' Generates a chakra state for bouncing points.
+#' Creates a chakra state for bouncing points.
 #'
 #' @param seeds A data frame containing the initial point positions.
 #' @param bbox Numeric vector of length 4;
